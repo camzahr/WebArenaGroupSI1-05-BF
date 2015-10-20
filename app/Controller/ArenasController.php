@@ -32,7 +32,7 @@ class ArenasController extends AppController
     }
     
     /**
-     * index method : first page
+     * index method : fighter
      *
      * @return void
      */
@@ -42,17 +42,21 @@ class ArenasController extends AppController
     }
     
     /**
-     * index method : first page
+     * index method : sight
      *
      * @return void
      */
     public function sight()
     {
-        $this->set('raw',$this->Fighter->find('all'));
+        if ($this->request->is('post'))       
+{            pr($this->request->data);        }
+        $this->set('raw',$this->Fighter->findById(1));
+        
+        $this->Fighter->doMove(1, $this->request->data['Fightermove']['direction']);
     }
     
     /**
-     * index method : first page
+     * index method : diary
      *
      * @return void
      */
