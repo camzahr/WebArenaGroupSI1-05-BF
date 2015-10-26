@@ -52,41 +52,110 @@ protected function verifLimit(){
     
 }
 
-public function doMove($fighterId, $direction){
-//récupérer la position et fixer l'id de travail
-$datas = $this->read(null, $fighterId);
-debug($this);
-switch ($direction)
+protected function verifCaseOccupy($fighterId, $direction){
+    $datas = $this->read(null, $fighterId);
+    $case = array('coordinate_x' => $datas['Fighter']['coordinate_x'],
+                  'coordinate_y' => $datas['Fighter']['coordinate_y']);
+    
+    switch ($direction)
     {
     case 'north':
-        $this->set('coordinate_y', $datas['Fighter']['coordinate_y'] + 1);
+        $case = array('coordinate_x' => $datas['Fighter']['coordinate_x'],
+    'coordinate_y' => $datas['Fighter']['coordinate_y']+1);        
         break;
 
     case 'south':
-        $this->set('coordinate_y', $datas['Fighter']['coordinate_y'] - 1);
+        $case = array('coordinate_x' => $datas['Fighter']['coordinate_x'],
+    'coordinate_y' => $datas['Fighter']['coordinate_y']-1);
         break;
 
     case 'east':
-        $this->set('coordinate_x', $datas['Fighter']['coordinate_x'] + 1);
+        $case = array('coordinate_x' => $datas['Fighter']['coordinate_x']+1,
+    'coordinate_y' => $datas['Fighter']['coordinate_y']);
         break;
 
     case 'west':
-        $this->set('coordinate_x', $datas['Fighter']['coordinate_x'] - 1);
+        $case = array('coordinate_x' => $datas['Fighter']['coordinate_x']-1,
+    'coordinate_y' => $datas['Fighter']['coordinate_y']);
         break;
 
     default:
         echo "Direction inconnue";
     }
-    
-    //Empecher de sortir de l'arène
-    if($this->verifLimit()){
-        echo("Mouvement Accepté !");
+    echo "You want to move to $case[coordinate_x] / $case[coordinate_y]";
+
+    //On cherche l'ennemy sur la case attaquée
+    $ennemy = $this->find('all' , array('conditions'=> array(
+                                                        'Fighter.coordinate_x' => $case['coordinate_x'],
+                                                        'Fighter.coordinate_y' => $case['coordinate_y']
+                                                            )
+                                            )
+                             );
+
+    //On vérifie que l'ennemy existe
+    if( empty ($ennemy) )
+    {
+        echo" Nobody is currently at this position !!!!";
+        return true;
+    }
+    //Si oui, on l'attaque
+    else 
+    {
+        echo" Case occupied by someone else";
+        return false;
     }
 
-    //@todo Empecher d'entrer sur une zone occupée
-    
-    $this->save();
-    return true;
+}
+
+public function doMove($fighterId, $direction){
+    //récupérer la position et fixer l'id de travail
+    $datas = $this->read(null, $fighterId);
+    // Empecher d'entrer sur une zone occupée
+    if($this->verifCaseOccupy($fighterId, $direction))
+        {
+            echo("Free case");
+            
+            switch ($direction)
+                {
+                case 'north':
+                    $this->set('coordinate_y', $datas['Fighter']['coordinate_y'] + 1);
+                    break;
+
+                case 'south':
+                    $this->set('coordinate_y', $datas['Fighter']['coordinate_y'] - 1);
+                    break;
+
+                case 'east':
+                    $this->set('coordinate_x', $datas['Fighter']['coordinate_x'] + 1);
+                    break;
+
+                case 'west':
+                    $this->set('coordinate_x', $datas['Fighter']['coordinate_x'] - 1);
+                    break;
+
+                default:
+                    echo "Direction inconnue";
+                }
+                
+            //Empecher de sortir de l'arène
+            if($this->verifLimit())
+                {
+                    echo("Mouvement Accepté !");
+                }
+            else
+                {
+                    echo("Mouvement Invalide");
+                    return false;
+                }
+            $this->save();
+            return true;
+                
+        }
+    else
+        {
+            echo("Mouvement invalide,case occupée");
+            return false;
+        }
 }
 
 public function doAttack($fighterId, $direction){
