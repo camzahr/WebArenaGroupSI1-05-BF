@@ -55,7 +55,7 @@ protected function verifLimit(){
 public function doMove($fighterId, $direction){
 //récupérer la position et fixer l'id de travail
 $datas = $this->read(null, $fighterId);
-
+debug($this);
 switch ($direction)
     {
     case 'north':
@@ -90,11 +90,12 @@ switch ($direction)
 }
 
 public function doAttack($fighterId, $direction){
-//récupérer la position et fixer l'id de travail
-$datas = $this->read(null, $fighterId);
-$case = array('coordinate_x' => $datas['Fighter']['coordinate_x'],
-    'coordinate_y' => $datas['Fighter']['coordinate_y']);
-switch ($direction)
+    //récupérer la position et fixer l'id de travail
+    $datas = $this->read(null, $fighterId);
+    $case = array('coordinate_x' => $datas['Fighter']['coordinate_x'],
+                  'coordinate_y' => $datas['Fighter']['coordinate_y']);
+    
+    switch ($direction)
     {
     case 'north':
         $case = array('coordinate_x' => $datas['Fighter']['coordinate_x'],
@@ -120,15 +121,15 @@ switch ($direction)
         echo "Direction inconnue";
     }
     echo "Gonna attack : $case[coordinate_x] / $case[coordinate_y]";
-    
+
     //On cherche l'ennemy sur la case attaquée
     $ennemy = $this->find('all' , array('conditions'=> array(
-                                                            'Fighter.coordinate_x' => $case['coordinate_x'],
-                                                            'Fighter.coordinate_y' => $case['coordinate_y']
+                                                        'Fighter.coordinate_x' => $case['coordinate_x'],
+                                                        'Fighter.coordinate_y' => $case['coordinate_y']
                                                             )
                                             )
                              );
-    
+
     //On vérifie que l'ennemy existe
     if( empty ($ennemy) )
     {
@@ -141,23 +142,49 @@ switch ($direction)
         /*$ennemy[0]->Fighter->set('current_health',$ennemy[0]['Fighter']['current_health']-1);*/
         echo"   Your ennemy remains : {$ennemy[0]['Fighter']['current_health']}";
     }
-    
+
     $this->save();
+    
     return true;
 }
+public function increaseLevel($fighterId, $skill){
+    //récupérer la position et fixer l'id de travail
+    $datas = $this->read(null, $fighterId);
+    switch ($skill) {
+        case 'strength':
+            debug($datas);
+            $this->set('skill_strength',  $datas['Fighter']['skill_strength'] + 1);
+            $this->set('coordinate_y', $datas['Fighter']['coordinate_y'] + 1);
+            break;
+        
+        case 'sight':
+            $this->set('skill_sight',  $datas['Fighter']['skill_sight'] + 1);
+            break;
+        
+        case'life':
+            $this->set('skill_health',  $datas['Fighter']['skill_health'] + 3);
+            break;
 
+        default:
+            break;
+    }
+    
+    $this->set('current_health',  $datas['Fighter']['skill_health']);
+    
+}
 public function generate($name) {
     
     $newData = array(
         'name'              => $name,
-        'coordinate_x'      => 1,
-        'coordinate_y'      => 1,
+        'coordinate_x'      => rand(1,15),
+        'coordinate_y'      => rand(1,10),
         'level'             => 1,
         'xp'                => 0,
         'skill_sight'       => 0,
         'skill_strength'    => 1,
         'skill_health'      => 3,
-        'current_health'    => 3
+        'current_health'    => 3,
+        //'player_id'         => $this->Player['player_id'] ATTENTION PAS DE PLAYER ID :(
     );
     $this->create();
     $this->save($newData);
