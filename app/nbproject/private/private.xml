@@ -5,11 +5,13 @@
         <group>
             <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/Config/core.php</file>
             <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/Controller/AppController.php</file>
-            <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/View/Arenas/fighter.ctp</file>
-            <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/View/Arenas/index.ctp</file>
+            <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/Model/Fighter.php</file>
+            <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/Model/AppModel.php</file>
+            <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/Config/database.php</file>
             <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/Controller/PagesController.php</file>
+            <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/View/Arenas/index.ctp</file>
             <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/index.php</file>
-            <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/View/Arenas/diary.ctp</file>
+            <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/Config/database.php.default</file>
             <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/Controller/ArenasController.php</file>
             <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/View/Arenas/sight.ctp</file>
         </group>

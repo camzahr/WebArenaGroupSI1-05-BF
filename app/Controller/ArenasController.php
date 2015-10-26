@@ -52,6 +52,7 @@ class ArenasController extends AppController
 {            pr($this->request->data);        }
         $this->set('raw',$this->Fighter->findById(1));
         
+        //if($this->request->data)
         $this->Fighter->doMove(1, $this->request->data['Fightermove']['direction']);
     }
     
