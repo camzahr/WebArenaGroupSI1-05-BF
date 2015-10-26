@@ -17,7 +17,42 @@ class Fighter extends AppModel {
         ),
 
    );
-   public function doMove($fighterId, $direction){
+    
+    
+protected function verifLimit(){
+    debug($this->data['Fighter']['coordinate_y']);
+    if($this->data['Fighter']['coordinate_y']> 10)
+    {
+        echo("You pass the limits");
+        $this->set('coordinate_y', 10); 
+        return false;
+    }
+    elseif($this->data['Fighter']['coordinate_y']< 1)
+    {
+        echo("You pass the limits");
+        $this->set('coordinate_y', 1); 
+        return false;
+    }
+    
+    if($this->data['Fighter']['coordinate_x']> 15)
+    {
+        echo("You pass the limits");
+        $this->set('coordinate_x', 15);
+        return false;
+    }
+    elseif($this->data['Fighter']['coordinate_x']< 1)
+    {
+        echo("You pass the limits");
+        $this->set('coordinate_x', 1);
+        return false;
+    }
+    
+    return true;
+
+    
+}
+
+public function doMove($fighterId, $direction){
 //récupérer la position et fixer l'id de travail
 $datas = $this->read(null, $fighterId);
 
@@ -43,8 +78,11 @@ switch ($direction)
         echo "Direction inconnue";
     }
     
-    //@todo Empecher de sortir de l'arène
-    
+    //Empecher de sortir de l'arène
+    if($this->verifLimit()){
+        echo("Mouvement Accepté !");
+    }
+
     //@todo Empecher d'entrer sur une zone occupée
     
     $this->save();
@@ -54,36 +92,77 @@ switch ($direction)
 public function doAttack($fighterId, $direction){
 //récupérer la position et fixer l'id de travail
 $datas = $this->read(null, $fighterId);
-
+$case = array('coordinate_x' => $datas['Fighter']['coordinate_x'],
+    'coordinate_y' => $datas['Fighter']['coordinate_y']);
 switch ($direction)
     {
     case 'north':
-        $this->set('coordinate_y', $datas['Fighter']['coordinate_y'] + 1);
+        $case = array('coordinate_x' => $datas['Fighter']['coordinate_x'],
+    'coordinate_y' => $datas['Fighter']['coordinate_y']+1);        
         break;
 
     case 'south':
-        $this->set('coordinate_y', $datas['Fighter']['coordinate_y'] - 1);
+        $case = array('coordinate_x' => $datas['Fighter']['coordinate_x'],
+    'coordinate_y' => $datas['Fighter']['coordinate_y']-1);
         break;
 
     case 'east':
-        $this->set('coordinate_x', $datas['Fighter']['coordinate_x'] + 1);
+        $case = array('coordinate_x' => $datas['Fighter']['coordinate_x']+1,
+    'coordinate_y' => $datas['Fighter']['coordinate_y']);
         break;
 
     case 'west':
-        $this->set('coordinate_x', $datas['Fighter']['coordinate_x'] - 1);
+        $case = array('coordinate_x' => $datas['Fighter']['coordinate_x']-1,
+    'coordinate_y' => $datas['Fighter']['coordinate_y']);
         break;
 
     default:
         echo "Direction inconnue";
     }
+    echo "Gonna attack : $case[coordinate_x] / $case[coordinate_y]";
     
-    //@todo Empecher de sortir de l'arène
+    //On cherche l'ennemy sur la case attaquée
+    $ennemy = $this->find('all' , array('conditions'=> array(
+                                                            'Fighter.coordinate_x' => $case['coordinate_x'],
+                                                            'Fighter.coordinate_y' => $case['coordinate_y']
+                                                            )
+                                            )
+                             );
     
-    //@todo Empecher d'entrer sur une zone occupée
+    //On vérifie que l'ennemy existe
+    if( empty ($ennemy) )
+    {
+        echo" Nobody is currently at this position !!!!";
+    }
+    //Si oui, on l'attaque
+    else 
+    {
+        echo"  You will Attack :  {$ennemy[0]['Fighter']['name']}";
+        /*$ennemy[0]->Fighter->set('current_health',$ennemy[0]['Fighter']['current_health']-1);*/
+        echo"   Your ennemy remains : {$ennemy[0]['Fighter']['current_health']}";
+    }
     
     $this->save();
     return true;
 }
+
+public function generate($name) {
+    
+    $newData = array(
+        'name'              => $name,
+        'coordinate_x'      => 1,
+        'coordinate_y'      => 1,
+        'level'             => 1,
+        'xp'                => 0,
+        'skill_sight'       => 0,
+        'skill_strength'    => 1,
+        'skill_health'      => 3,
+        'current_health'    => 3
+    );
+    $this->create();
+    $this->save($newData);
+}
+
 
 }
 

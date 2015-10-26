@@ -19,6 +19,13 @@ class ArenasController extends AppController
     public function index()
     {
        $this->set('myname', "Jérémy Camilleri");
+       if ($this->request->is('post'))       
+{            pr($this->request->data);        }
+
+        if($this->request->data('Fightercreate'))
+        {
+            $this->Fighter->generate($this->request->data['Fightercreate']['name']);
+        }
     }
     
     /**
@@ -52,8 +59,15 @@ class ArenasController extends AppController
 {            pr($this->request->data);        }
         $this->set('raw',$this->Fighter->findById(1));
         
-        //if($this->request->data)
+        if($this->request->data('Fightermove'))
+        {
         $this->Fighter->doMove(1, $this->request->data['Fightermove']['direction']);
+        }
+        Elseif($this->request->data('Fighterattack'))
+        {
+            $this->Fighter->doAttack(1, $this->request->data['Fighterattack']['direction']);
+        }
+
     }
     
     /**
