@@ -18,16 +18,21 @@ class ArenasController extends AppController
      */
     public function index()
     {
-       $this->set('myname', "Jérémy Camilleri");
        if ($this->request->is('post'))       
         {            
            pr($this->request->data);        
         }
         
+        $playerActual = $this->Player->findById('0c3ebe52-8024-11e5-96f5-5dcadefa4980');
+        $this->set('raw',$playerActual);
+        $this->set('email', $playerActual['Player']['email']);
+       
+        
         //On affiche la liste des nom de joueurs actuellement dans l'arène
         $players = $this->Fighter->find('all');
         echo "Joueurs Actuellement dans l'Arène : ";
-        foreach ($players as $player) {
+        foreach ($players as $player) 
+        {
             echo "</br>".$player['Fighter']['name'];
         }
         
@@ -35,6 +40,13 @@ class ArenasController extends AppController
        if($this->request->data('Fightercreate'))
         {
             $this->Fighter->generate($this->request->data['Fightercreate']['name']);
+        }
+        
+        //Si on demande un nuvel avatar
+        if($this->request->data('Playernewavatar'))
+        {
+            $this->Player->newAvatar('0c3ebe52-8024-11e5-96f5-5dcadefa4980', $this->request->data['Playernewavatar']);
+            
         }
         
         
@@ -63,7 +75,8 @@ class ArenasController extends AppController
         }
         $this->set('raw',$this->Fighter->findById(1));
         
-        //Si c'est une action de mouvement
+        
+        //Si c'est une action de newLevel
         if($this->request->data('Fighternewlevel'))
         {
             $this->Fighter->increaseLevel(1, $this->request->data['Fighternewlevel']['skill']);

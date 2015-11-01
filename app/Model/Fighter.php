@@ -219,32 +219,38 @@ public function doAttack($fighterId, $direction){
 public function increaseLevel($fighterId, $skill){
     //récupérer la position et fixer l'id de travail
     $datas = $this->read(null, $fighterId);
+    $this->set('level',  ($datas['Fighter']['level'] + 1));
     switch ($skill) {
         case 'strength':
-            debug($datas);
-            $this->set('skill_strength',  $datas['Fighter']['skill_strength'] + 1);
-            $this->set('coordinate_y', $datas['Fighter']['coordinate_y'] + 1);
+            $this->set('skill_strength',  ($datas['Fighter']['skill_strength'] + 1));
+            //PV AU MAX
+            $this->set('current_health',  $datas['Fighter']['skill_health']);
             break;
         
         case 'sight':
             $this->set('skill_sight',  $datas['Fighter']['skill_sight'] + 1);
+            //PV AU MAX
+            $this->set('current_health',  $datas['Fighter']['skill_health']);
             break;
         
         case'life':
             $this->set('skill_health',  $datas['Fighter']['skill_health'] + 3);
+            //PV AU MAX
+            $this->set('current_health',  $datas['Fighter']['skill_health']+3);
             break;
 
         default:
             break;
     }
     
-    $this->set('current_health',  $datas['Fighter']['skill_health']);
+    $this->save();
     
 }
-public function generate($name) {
+public function generate($playerId,$name) {
     
     $newData = array(
         'name'              => $name,
+        'player_id'         => $playerId,
         'coordinate_x'      => rand(1,15),
         'coordinate_y'      => rand(1,10),
         'level'             => 1,
