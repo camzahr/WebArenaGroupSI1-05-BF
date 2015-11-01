@@ -1,4 +1,5 @@
-Bienvenu <?php echo $myname;?> dans WebArena
+<?php $this->assign('title', 'Acceuil');?>
+Bienvenue <?php echo $myname;?> dans WebArena
 
 <?php
     echo $this->Form->create('Fightercreate');
