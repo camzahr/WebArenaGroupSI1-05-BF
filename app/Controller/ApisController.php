@@ -1,3 +1,4 @@
+<?php ?>
 <?php
 
 App::uses('ApisController', 'Controller');
