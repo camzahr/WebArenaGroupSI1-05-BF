@@ -18,16 +18,32 @@ class ArenasController extends AppController
      */
     public function index()
     {
+<<<<<<< HEAD
        $this->set('myname', "Jérémy Camilleri");
+=======
+>>>>>>> refs/remotes/origin/master
        if ($this->request->is('post'))       
         {            
            pr($this->request->data);        
         }
         
+<<<<<<< HEAD
         //On affiche la liste des nom de joueurs actuellement dans l'arène
         $players = $this->Fighter->find('all');
         echo "Joueurs Actuellement dans l'Arène : ";
         foreach ($players as $player) {
+=======
+        $playerActual = $this->Player->findById('0c3ebe52-8024-11e5-96f5-5dcadefa4980');
+        $this->set('raw',$playerActual);
+        $this->set('email', $playerActual['Player']['email']);
+       
+        
+        //On affiche la liste des nom de joueurs actuellement dans l'arène
+        $players = $this->Fighter->find('all');
+        echo "Joueurs Actuellement dans l'Arène : ";
+        foreach ($players as $player) 
+        {
+>>>>>>> refs/remotes/origin/master
             echo "</br>".$player['Fighter']['name'];
         }
         
@@ -37,6 +53,16 @@ class ArenasController extends AppController
             $this->Fighter->generate($this->request->data['Fightercreate']['name']);
         }
         
+<<<<<<< HEAD
+=======
+        //Si on demande un nuvel avatar
+        if($this->request->data('Playernewavatar'))
+        {
+            $this->Player->newAvatar('0c3ebe52-8024-11e5-96f5-5dcadefa4980', $this->request->data['Playernewavatar']);
+            
+        }
+        
+>>>>>>> refs/remotes/origin/master
         
     }
     
@@ -63,7 +89,12 @@ class ArenasController extends AppController
         }
         $this->set('raw',$this->Fighter->findById(1));
         
+<<<<<<< HEAD
         //Si c'est une action de mouvement
+=======
+        
+        //Si c'est une action de newLevel
+>>>>>>> refs/remotes/origin/master
         if($this->request->data('Fighternewlevel'))
         {
             $this->Fighter->increaseLevel(1, $this->request->data['Fighternewlevel']['skill']);
