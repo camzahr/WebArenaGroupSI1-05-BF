@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+<?php $this->assign('title', 'Fighter');
+pr($raw); ?>
+=======
+=======
+>>>>>>> refs/remotes/origin/master
 <?php 
 
 pr($raw); 

@@ -219,45 +219,25 @@ public function doAttack($fighterId, $direction){
 public function increaseLevel($fighterId, $skill){
     //récupérer la position et fixer l'id de travail
     $datas = $this->read(null, $fighterId);
-<<<<<<< HEAD
     switch ($skill) {
         case 'strength':
             debug($datas);
             $this->set('skill_strength',  $datas['Fighter']['skill_strength'] + 1);
             $this->set('coordinate_y', $datas['Fighter']['coordinate_y'] + 1);
-=======
-    $this->set('level',  ($datas['Fighter']['level'] + 1));
-    switch ($skill) {
-        case 'strength':
-            $this->set('skill_strength',  ($datas['Fighter']['skill_strength'] + 1));
-            //PV AU MAX
-            $this->set('current_health',  $datas['Fighter']['skill_health']);
->>>>>>> refs/remotes/origin/master
             break;
         
         case 'sight':
             $this->set('skill_sight',  $datas['Fighter']['skill_sight'] + 1);
-<<<<<<< HEAD
-=======
-            //PV AU MAX
-            $this->set('current_health',  $datas['Fighter']['skill_health']);
->>>>>>> refs/remotes/origin/master
             break;
         
         case'life':
             $this->set('skill_health',  $datas['Fighter']['skill_health'] + 3);
-<<<<<<< HEAD
-=======
-            //PV AU MAX
-            $this->set('current_health',  $datas['Fighter']['skill_health']+3);
->>>>>>> refs/remotes/origin/master
             break;
 
         default:
             break;
     }
     
-<<<<<<< HEAD
     $this->set('current_health',  $datas['Fighter']['skill_health']);
     
 }
@@ -265,16 +245,6 @@ public function generate($name) {
     
     $newData = array(
         'name'              => $name,
-=======
-    $this->save();
-    
-}
-public function generate($playerId,$name) {
-    
-    $newData = array(
-        'name'              => $name,
-        'player_id'         => $playerId,
->>>>>>> refs/remotes/origin/master
         'coordinate_x'      => rand(1,15),
         'coordinate_y'      => rand(1,10),
         'level'             => 1,

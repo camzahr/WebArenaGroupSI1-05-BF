@@ -23,7 +23,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	<?php echo $this->Html->charset(); ?>
 	<title>
 		<?php echo $cakeDescription ?>:
-		<?php echo $this->fetch('title'); ?>
+		<?php echo $this->fetch('Project Web Arena'); ?>
 	</title>
 	<?php
 		echo $this->Html->meta('icon');
@@ -54,7 +54,9 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 				);
 			?>
 			<p>
-				<?php echo $cakeVersion; ?>
+				<?php echo $cakeVersion; 
+                                        echo "Project Web Arena BF by Jeremy CAMILLERI, Jalil BENAYACHI, Aurelien GUERARD, Jean-Baptiste GESNEL"
+                                ?>
 			</p>
 		</div>
 	</div>
