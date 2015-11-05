@@ -4,6 +4,7 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/View/Arenas/sight.ctp</file>
+<<<<<<< HEAD
             <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/Model/fighter.php</file>
             <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/View/Arenas/login.ctp</file>
             <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/View/Arenas/fighter.ctp</file>
@@ -20,6 +21,11 @@
             <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/Controller/ApisController.php</file>
             <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/Controller/AppController.php</file>
             <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/Model/Player.php</file>
+=======
+            <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/View/Arenas/index.ctp</file>
+            <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/View/Arenas/fighter.ctp</file>
+            <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/View/Arenas/diary.ctp</file>
+>>>>>>> refs/remotes/origin/master
         </group>
     </open-files>
 </project-private>
