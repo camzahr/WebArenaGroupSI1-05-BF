@@ -63,7 +63,7 @@ class ArenasController extends AppController
      */
     public function login()
     {
-        
+
     }
     
     /**

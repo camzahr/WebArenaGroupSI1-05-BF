@@ -7,19 +7,14 @@
  */
 
 
-
-echo $this->Form->create('connexion');
-//echo $this->Form->input('skill',array('options' => array('sight'=>'sight','strength'=>'strength','life'=>'life'), 'default' => 'strength'));
-//echo $this->Form->end('Login');
-
 ?> 
 <header >
     <form action="login.php" method='post' class="form-signin">
             <h2 class="form-signin-heading">Login</h2>
-            <label for="inputEmail" class="sr-only">Email address</label>
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+            <label for="inputEmail" class="sr-only">Username</label>
+            <input type="email" id="username" class="form-control" placeholder="Username" required autofocus>
             <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+            <input type="password" id="password" class="form-control" placeholder="Password" required>
             <div class="checkbox">
               <label>
                 <input type="checkbox" value="remember-me"> Remember me
