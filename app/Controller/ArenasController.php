@@ -54,8 +54,7 @@ class ArenasController extends AppController
             $this->Player->newAvatar('0c3ebe52-8024-11e5-96f5-5dcadefa4980', $this->request->data['Playernewavatar']);
             
         }
-        
-        
+  
     }
     
     /**

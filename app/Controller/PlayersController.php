@@ -38,6 +38,7 @@ class PlayersController extends AppController
     public function display()
     {
         $this->set('raw',$this->Player->findById('545f827c-576c-4dc5-ab6d-27c33186dc3e'));
+        $this->set('playerId','545f827c-576c-4dc5-ab6d-27c33186dc3e');
     }
     
 }

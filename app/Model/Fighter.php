@@ -158,6 +158,7 @@ public function doMove($fighterId, $direction){
         }
 }
 
+
 public function doAttack($fighterId, $direction){
     //récupérer la position et fixer l'id de travail
     $datas = $this->read(null, $fighterId);
@@ -192,13 +193,15 @@ public function doAttack($fighterId, $direction){
     echo "Gonna attack : $case[coordinate_x] / $case[coordinate_y]";
 
     //On cherche l'ennemy sur la case attaquée
-    $ennemy = $this->find('all' , array('conditions'=> array(
+    $ennemy = $this->find('first' , array('conditions'=> array(
                                                         'Fighter.coordinate_x' => $case['coordinate_x'],
                                                         'Fighter.coordinate_y' => $case['coordinate_y']
                                                             )
                                             )
                              );
-
+    
+    
+    
     //On vérifie que l'ennemy existe
     if( empty ($ennemy) )
     {
@@ -207,9 +210,34 @@ public function doAttack($fighterId, $direction){
     //Si oui, on l'attaque
     else 
     {
-        echo"  You will Attack :  {$ennemy[0]['Fighter']['name']}";
+        //$ennemy = $ennemy[0];
+        echo"  You will Attack :  {$ennemy['Fighter']['name']} ";
+        
+        $result = (10 - $datas['Fighter']['level'] + $ennemy['Fighter']['level']);
+        
+        if (rand(1,20) > $result)
+            {
+                echo"Attaque Réussie ";
+                $change = array(
+                    'current_health' => $ennemy['Fighter']['current_health'] - $datas['Fighter']['level']
+                );
+                print_r($change);
+                if ($change['current_health'] < 1){
+                    echo "DETRUIT";
+                }
+                else
+                {
+                     $ennemy->save($change);
+                }
+                $ennemy->save($change);
+                //hurt($ennemy['Fighter']['id'],$datas['Fighter']['level']);
+            }   
+        else 
+            {
+                echo"Attaque Ratée !!!";
+            }
         /*$ennemy[0]->Fighter->set('current_health',$ennemy[0]['Fighter']['current_health']-1);*/
-        echo"   Your ennemy remains : {$ennemy[0]['Fighter']['current_health']}";
+        echo"   Your ennemy remains : {$ennemy['Fighter']['current_health']}";
     }
 
     $this->save();
@@ -219,31 +247,37 @@ public function doAttack($fighterId, $direction){
 public function increaseLevel($fighterId, $skill){
     //récupérer la position et fixer l'id de travail
     $datas = $this->read(null, $fighterId);
+    
     $this->set('level',  ($datas['Fighter']['level'] + 1));
+    
     switch ($skill) {
         case 'strength':
-            $this->set('skill_strength',  ($datas['Fighter']['skill_strength'] + 1));
-            //PV AU MAX
-            $this->set('current_health',  $datas['Fighter']['skill_health']);
+            $dataChanged =array(
+                'skill_strength' => ($datas['Fighter']['skill_strength'] + 1),
+                'current_health' =>  $datas['Fighter']['skill_health']
+                );
             break;
         
         case 'sight':
-            $this->set('skill_sight',  $datas['Fighter']['skill_sight'] + 1);
-            //PV AU MAX
-            $this->set('current_health',  $datas['Fighter']['skill_health']);
+            $dataChanged =array(
+                'skill_sight'   =>  ($datas['Fighter']['skill_sight'] + 1),
+                'current_health'=>  $datas['Fighter']['skill_health']
+                );
+            
             break;
         
         case'life':
-            $this->set('skill_health',  $datas['Fighter']['skill_health'] + 3);
-            //PV AU MAX
-            $this->set('current_health',  $datas['Fighter']['skill_health']+3);
+            $dataChanged =array(
+                'skill_health'  =>  ($datas['Fighter']['skill_health'] + 3),
+                'current_health'=>  ($datas['Fighter']['skill_health'] + 3)
+                );
             break;
 
         default:
             break;
     }
     
-    $this->save();
+    $this->save($dataChanged);
     
 }
 public function generate($playerId,$name) {
@@ -266,7 +300,3 @@ public function generate($playerId,$name) {
 
 
 }
-
-
-
-?>

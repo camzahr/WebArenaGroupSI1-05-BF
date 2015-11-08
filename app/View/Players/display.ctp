@@ -7,7 +7,8 @@
  */
 
 pr($raw); 
-
+echo '<img src="webroot/img/avatars/".$playerId."jpg" border="0" /></div> ';
+//IMAGES.'avatars'.DS.$playerId.'.'.$extension
 
 ?>
 
