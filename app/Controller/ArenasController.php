@@ -9,10 +9,7 @@ App::uses('AppController', 'Controller');
  */
 class ArenasController extends AppController
 {
-<<<<<<< HEAD
-    
-=======
->>>>>>> refs/remotes/origin/master
+
     public $uses = array('Player', 'Fighter', 'Event');
     /**
      * index method : first page
@@ -78,11 +75,10 @@ class ArenasController extends AppController
      */
     public function fighter()
     {
-<<<<<<< HEAD
+
         $this->set('raw',$this->Fighter->findById(1));
 
-=======
->>>>>>> refs/remotes/origin/master
+
         if ($this->request->is('post'))       
         {            
             pr($this->request->data);        
