@@ -159,11 +159,12 @@ public function doMove($fighterId, $direction){
 
 protected function xpControl($fighterId) {
     $datas = $this->read(null, $fighterId);
-    if ($datas['Fighter']['xp'] / 4 > $datas['Fighter']['level'])
+    if ($datas['Fighter']['xp'] / 4 >= $datas['Fighter']['level'])
     {
         echo" You pass a Level ! ";
         $this->set('level', abs($datas['Fighter']['xp'] / 4) );
         $this->save();
+        //TODO : Augmenter charactéristique
     }
 }
 
@@ -174,6 +175,25 @@ protected function xpIncrease($fighterId, $level) {
     $this->save();
     
     $this->xpControl($fighterId);
+}
+
+protected function healthControl($fighterId) {
+    
+    $datas = $this->read(null, $fighterId);
+    if ($datas['Fighter']['current_health'] < 1) {
+        $this->delete();
+    }
+    
+}
+
+protected function hurt($fighterId, $level) {
+
+    $datas = $this->read(null, $fighterId);
+    $this->set('current_health', $datas['Fighter']['current_health'] - $level);
+    $this->save();
+    
+    $this->healthControl($fighterId);
+    
 }
 
 public function doAttack($fighterId, $direction){
@@ -219,7 +239,7 @@ public function doAttack($fighterId, $direction){
                              );
     
     
-    
+    debug($ennemy);
     //On vérifie que l'ennemy existe
     if( empty ($ennemy) )
     {
@@ -228,9 +248,8 @@ public function doAttack($fighterId, $direction){
     //Si oui, on l'attaque
     else 
     {
-        //$ennemy = $ennemy[0];
         echo"  You will Attack :  {$ennemy['Fighter']['name']} ";
-        
+        //$ennemyFighter = read()
         $result = (10 - $datas['Fighter']['level'] + $ennemy['Fighter']['level']);
         
         $dataEvent = array(
@@ -247,6 +266,7 @@ public function doAttack($fighterId, $direction){
                 $change = array(
                     'current_health' => $ennemy['Fighter']['current_health'] - $datas['Fighter']['level']
                 );
+                $this->hurt($ennemy['Fighter']['id'], $datas['Fighter']['level']);
                 if ($change['current_health'] < 1){
                     echo "DETRUIT";
                     $dataEvent['name'] = $datas['Fighter']['name'] . " Kills " . $ennemy['Fighter']['name'];
@@ -262,12 +282,8 @@ public function doAttack($fighterId, $direction){
                     $this->xpControl($fighterId);
                     $event->add($dataEvent);
                     
-                    //@TODO / perte de points de vie et Destruction
-                    //$ennemy->save($change);
-                    
                 }
-                //$ennemy->save($change);
-                //hurt($ennemy['Fighter']['id'],$datas['Fighter']['level']);
+               
             }   
         else 
             {
