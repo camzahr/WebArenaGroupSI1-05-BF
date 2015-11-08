@@ -9,7 +9,10 @@ App::uses('AppController', 'Controller');
  */
 class ArenasController extends AppController
 {
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/AurelienBranch
     public $uses = array('Player', 'Fighter', 'Event');
     /**
      * index method : first page
@@ -18,11 +21,16 @@ class ArenasController extends AppController
      */
     public function index()
     {
+       $this->set('myname', "Jérémy Camilleri");
        if ($this->request->is('post'))       
         {            
            pr($this->request->data);        
         }
         
+        //On affiche la liste des nom de joueurs actuellement dans l'arène
+        $players = $this->Fighter->find('all');
+        echo "Joueurs Actuellement dans l'Arène : ";
+        foreach ($players as $player) {
         $playerActual = $this->Player->findById('0c3ebe52-8024-11e5-96f5-5dcadefa4980');
         $this->set('raw',$playerActual);
         $this->set('email', $playerActual['Player']['email']);
@@ -55,7 +63,7 @@ class ArenasController extends AppController
             
         }
         
-        
+        }  
     }
     
     /**
@@ -65,7 +73,7 @@ class ArenasController extends AppController
      */
     public function login()
     {
-        
+
     }
     
     /**
@@ -75,16 +83,22 @@ class ArenasController extends AppController
      */
     public function fighter()
     {
+<<<<<<< HEAD
 
         $this->set('raw',$this->Fighter->findById(1));
 
 
+=======
+        $this->set('raw',$this->Fighter->findById(1));
+
+>>>>>>> origin/AurelienBranch
         if ($this->request->is('post'))       
         {            
             pr($this->request->data);        
         }
         $this->set('raw',$this->Fighter->findById(1));
         
+        //Si c'est une action de mouvement
         
         //Si c'est une action de newLevel
         if($this->request->data('Fighternewlevel'))
