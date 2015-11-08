@@ -38,7 +38,13 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <body>
 	<div id="container">
 		<div id="header">
-			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
+			<h1>Bienvenue dans WebArena !</h1>
+                        <?php echo $this->Html->link('Index', array('controller' => 'Arenas', 'action' => 'index')); ?>
+                        <?php echo $this->Html->link('Fighter', array('controller' => 'Arenas', 'action' => 'fighter')); ?>
+                        <?php echo $this->Html->link('Sight', array('controller' => 'Arenas', 'action' => 'sight')); ?>
+                        <?php echo $this->Html->link('Diary', array('controller' => 'Arenas', 'action' => 'diary')); ?>
+                        <?php echo $this->Html->link('My Profil', array('controller' => 'Players', 'action' => 'display')); ?>
+                        <?php echo $this->Html->link('Subscribe', array('controller' => 'Players', 'action' => 'subscribe')); ?>
 		</div>
 		<div id="content">
 
