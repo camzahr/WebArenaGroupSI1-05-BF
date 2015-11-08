@@ -39,12 +39,18 @@ class ArenasController extends AppController
         //Si on demande la création d'un nouveau personnage.
        if($this->request->data('Fightercreate'))
         {
-            $this->Fighter->generate($this->request->data['Fightercreate']['name']);
+            $this->Fighter->generate($playerActual['Player']['id'],$this->request->data['Fightercreate']['name']);
         }
         
-        //Si on demande un nuvel avatar
+        //Si on demande un nouvel avatar
         if($this->request->data('Playernewavatar'))
         {
+            /*debug($this->request->data['Playernewavatar']);
+            $this->request->data->Player->id = '0c3ebe52-8024-11e5-96f5-5dcadefa4980';
+            if(!$this->Player->save($this->request->data))
+                {
+                debug($this->Player->invalidFields()); die();
+                }*/
             $this->Player->newAvatar('0c3ebe52-8024-11e5-96f5-5dcadefa4980', $this->request->data['Playernewavatar']);
             
         }

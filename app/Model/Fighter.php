@@ -258,8 +258,7 @@ public function generate($playerId,$name) {
         'skill_sight'       => 0,
         'skill_strength'    => 1,
         'skill_health'      => 3,
-        'current_health'    => 3,
-        //'player_id'         => $this->Player['player_id'] ATTENTION PAS DE PLAYER ID :(
+        'current_health'    => 3
     );
     $this->create();
     $this->save($newData);
