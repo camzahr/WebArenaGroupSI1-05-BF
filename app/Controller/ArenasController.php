@@ -122,7 +122,7 @@ class ArenasController extends AppController
      */
     public function diary()
     {
-        $this->set('raw',$this->Event->find());
+        $this->set('raw',$this->Event->find('all'));
     }
 
 }

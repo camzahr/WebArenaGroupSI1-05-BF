@@ -1,6 +1,7 @@
 <?php
 
 App::uses('AppModel', 'Model');
+App::uses('Event', 'Model');
 
 class Fighter extends AppModel {
 
@@ -47,9 +48,7 @@ protected function verifLimit(){
         return false;
     }
     
-    return true;
-
-    
+    return true;   
 }
 
 protected function verifCaseOccupy($fighterId, $direction){
@@ -158,6 +157,24 @@ public function doMove($fighterId, $direction){
         }
 }
 
+protected function xpControl($fighterId) {
+    $datas = $this->read(null, $fighterId);
+    if ($datas['Fighter']['xp'] / 4 > $datas['Fighter']['level'])
+    {
+        echo" You pass a Level ! ";
+        $this->set('level', abs($datas['Fighter']['xp'] / 4) );
+        $this->save();
+    }
+}
+
+protected function xpIncrease($fighterId, $level) {
+
+    $datas = $this->read(null, $fighterId);
+    $this->set('xp', $datas['Fighter']['xp'] + $level);
+    $this->save();
+    
+    $this->xpControl($fighterId);
+}
 
 public function doAttack($fighterId, $direction){
     //récupérer la position et fixer l'id de travail
@@ -191,7 +208,8 @@ public function doAttack($fighterId, $direction){
         echo "Direction inconnue";
     }
     echo "Gonna attack : $case[coordinate_x] / $case[coordinate_y]";
-
+    
+    $ennemy = new Fighter();     
     //On cherche l'ennemy sur la case attaquée
     $ennemy = $this->find('first' , array('conditions'=> array(
                                                         'Fighter.coordinate_x' => $case['coordinate_x'],
@@ -215,35 +233,58 @@ public function doAttack($fighterId, $direction){
         
         $result = (10 - $datas['Fighter']['level'] + $ennemy['Fighter']['level']);
         
+        $dataEvent = array(
+            'coordinate_x' =>   $case[coordinate_x],
+            'coordinate_y' =>   $case[coordinate_y]
+        );
+        
+        $event = new Event();           
+        
         if (rand(1,20) > $result)
             {
+                $dataEvent['name'] = $datas['Fighter']['name'] . " Attack " . $ennemy['Fighter']['name'];
                 echo"Attaque Réussie ";
                 $change = array(
                     'current_health' => $ennemy['Fighter']['current_health'] - $datas['Fighter']['level']
                 );
-                print_r($change);
                 if ($change['current_health'] < 1){
                     echo "DETRUIT";
+                    $dataEvent['name'] = $datas['Fighter']['name'] . " Kills " . $ennemy['Fighter']['name'];
+                
+                    $this->xpIncrease($fighterId, $ennemy['Fighter']['level']);
+                    $event->add($dataEvent);
+                    //$ennemy->save($change);
                 }
                 else
                 {
-                     $ennemy->save($change);
+                    $this->set('xp', $datas['Fighter']['xp'] + 1);
+                    $this->save();
+                    $this->xpControl($fighterId);
+                    $event->add($dataEvent);
+                    
+                    //@TODO / perte de points de vie et Destruction
+                    //$ennemy->save($change);
+                    
                 }
-                $ennemy->save($change);
+                //$ennemy->save($change);
                 //hurt($ennemy['Fighter']['id'],$datas['Fighter']['level']);
             }   
         else 
             {
+                $dataEvent['name'] = $datas['Fighter']['name'] . " Miss " . $ennemy['Fighter']['name'];
+                $event->add($dataEvent);
+                
                 echo"Attaque Ratée !!!";
             }
         /*$ennemy[0]->Fighter->set('current_health',$ennemy[0]['Fighter']['current_health']-1);*/
-        echo"   Your ennemy remains : {$ennemy['Fighter']['current_health']}";
+        echo"   Your ennemy remains : {$ennemy['Fighter']['current_health']} Life Points";
     }
 
     $this->save();
     
     return true;
 }
+
 public function increaseLevel($fighterId, $skill){
     //récupérer la position et fixer l'id de travail
     $datas = $this->read(null, $fighterId);
