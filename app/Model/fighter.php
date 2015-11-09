@@ -304,7 +304,6 @@ public function doAttack($fighterId, $direction){
 public function increaseLevel($fighterId, $skill){
     //récupérer la position et fixer l'id de travail
     $datas = $this->read(null, $fighterId);
-<<<<<<< HEAD:app/Model/fighter.php
     switch ($skill) {
         case 'strength':
             debug($datas);
@@ -318,7 +317,7 @@ public function increaseLevel($fighterId, $skill){
         
         case'life':
             $this->set('skill_health',  $datas['Fighter']['skill_health'] + 3);
-=======
+
     
     $this->set('level',  ($datas['Fighter']['level'] + 1));
     
@@ -343,20 +342,17 @@ public function increaseLevel($fighterId, $skill){
                 'skill_health'  =>  ($datas['Fighter']['skill_health'] + 3),
                 'current_health'=>  ($datas['Fighter']['skill_health'] + 3)
                 );
->>>>>>> refs/remotes/origin/Jeremy:app/Model/Fighter.php
             break;
 
         default:
             break;
     }
     
-<<<<<<< HEAD:app/Model/fighter.php
     $this->set('current_health',  $datas['Fighter']['skill_health']);
-=======
+
     $this->save($dataChanged);
->>>>>>> refs/remotes/origin/Jeremy:app/Model/Fighter.php
     
-}
+} }
 public function generate($name) {
     
     $newData = array(

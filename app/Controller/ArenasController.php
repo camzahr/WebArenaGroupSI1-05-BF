@@ -17,17 +17,15 @@ class ArenasController extends AppController
      */
     public function index()
     {
-       $this->set('myname', "Jérémy Camilleri");
+       //$this->set('myname', "Jérémy Camilleri");
        if ($this->request->is('post'))       
         {            
            pr($this->request->data);        
         }
         
-        //On affiche la liste des nom de joueurs actuellement dans l'arène
-        $players = $this->Fighter->find('all');
-        echo "Joueurs Actuellement dans l'Arène : ";
-        foreach ($players as $player) {
-        $playerActual = $this->Player->findById('0c3ebe52-8024-11e5-96f5-5dcadefa4980');
+        $playerIdActual = $this->Session->read('Auth.User.id');
+        $playerActual = $this->Player->findById($playerIdActual);
+        debug($playerActual);
         $this->set('raw',$playerActual);
         $this->set('email', $playerActual['Player']['email']);
        
@@ -58,22 +56,9 @@ class ArenasController extends AppController
             $this->Player->newAvatar('0c3ebe52-8024-11e5-96f5-5dcadefa4980', $this->request->data['Playernewavatar']);
             
         }
-<<<<<<< HEAD
         
-        }  
-=======
+        
   
->>>>>>> refs/remotes/origin/Jeremy
-    }
-    
-    /**
-     * index method : login
-     *
-     * @return void
-     */
-    public function login()
-    {
-
     }
     
     /**

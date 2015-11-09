@@ -1,4 +1,5 @@
-<?php
+<?php 
+
 
 /* 
  * To change this license header, choose License Headers in Project Properties.
@@ -6,9 +7,13 @@
  * and open the template in the editor.
  */
 
+    echo $this->Form->create("User");
+    echo $this->Form->input("email" , array("label"=> "E-Mail"));
+    echo $this->Form->input("password");
+    echo $this->Form->end("Login");
 
 ?> 
-<header >
+<!--<header >
     <form action="login.php" method='post' class="form-signin">
             <h2 class="form-signin-heading">Login</h2>
             <label for="inputEmail" class="sr-only">Username</label>
@@ -22,4 +27,5 @@
             </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
-</header>
+</header>-->
+

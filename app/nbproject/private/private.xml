@@ -3,21 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/View/Arenas/sight.ctp</file>
             <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/Model/fighter.php</file>
+            <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/View/Arenas/index.ctp</file>
+            <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/View/Arenas/login.ctp</file>
             <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/View/Arenas/fighter.ctp</file>
             <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/View/Layouts/default.ctp</file>
-            <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/webroot/test.php</file>
-            <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/webroot/index.php</file>
-            <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/Controller/ArenasController.php</file>
-            <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/Controller/PagesController.php</file>
-            <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/Model/AppModel.php</file>
-            <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/View/Arenas/index.ctp</file>
-            <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/View/Arenas/diary.ctp</file>
-            <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/index.php</file>
             <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/webroot/css/webarena.css</file>
             <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/webroot/css/cake.generic.css</file>
-            <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/Controller/AppController.php</file>
+            <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/webroot/index.php</file>
+            <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/Controller/ArenasController.php</file>
             <file>file:/C:/wamp/www/WebArenaGroupSI1-05-BF/app/Model/Player.php</file>
         </group>
     </open-files>
