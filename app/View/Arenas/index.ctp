@@ -1,3 +1,6 @@
+Bienvenu <?php echo $myname;?> dans WebArena
+
+
 Bienvenu <?php echo $email;?> dans WebArena
 
 <?php

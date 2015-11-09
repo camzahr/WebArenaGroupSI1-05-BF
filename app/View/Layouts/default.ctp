@@ -23,12 +23,14 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	<?php echo $this->Html->charset(); ?>
 	<title>
 		<?php echo $cakeDescription ?>:
-		<?php echo $this->fetch('title'); ?>
+		<?php echo $this->fetch('Project Web Arena'); ?>
 	</title>
 	<?php
 		echo $this->Html->meta('icon');
 
 		echo $this->Html->css('cake.generic');
+		echo $this->Html->css('boostrap');
+		echo $this->Html->css('boostra.responsive');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
@@ -49,7 +51,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		<div id="content">
 
 			<?php echo $this->Flash->render(); ?>
-
+                        <?php echo $this->Html->link('Logout', array('controller'=> 'user', 'action'=> 'logout'));?>
 			<?php echo $this->fetch('content'); ?>
 		</div>
 		<div id="footer">
@@ -60,7 +62,9 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 				);
 			?>
 			<p>
-				<?php echo $cakeVersion; ?>
+				<?php echo $cakeVersion; 
+                                        echo "Project Web Arena BF by Jeremy CAMILLERI, Jalil BENAYACHI, Aurelien GUERARD, Jean-Baptiste GESNEL"
+                                ?>
 			</p>
 		</div>
 	</div>
