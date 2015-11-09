@@ -1,7 +1,4 @@
-<!-- HEADER -->
-<header>
-      <h1><strong>Hello.</strong> Welcome to WebArena.</h1>
-</header>
+<head><?php $this->assign('title', 'Acceuil');?></head>
         
 <?php
 

@@ -1,6 +1,7 @@
-<?php
+    <?php
 
 App::uses('AppModel', 'Model');
+App::uses('Event', 'Model');
 
 class Fighter extends AppModel {
 
@@ -47,9 +48,7 @@ protected function verifLimit(){
         return false;
     }
     
-    return true;
-
-    
+    return true;   
 }
 
 protected function verifCaseOccupy($fighterId, $direction){
@@ -158,6 +157,45 @@ public function doMove($fighterId, $direction){
         }
 }
 
+protected function xpControl($fighterId) {
+    $datas = $this->read(null, $fighterId);
+    if ($datas['Fighter']['xp'] / 4 >= $datas['Fighter']['level'])
+    {
+        echo" You pass a Level ! ";
+        $this->set('level', abs($datas['Fighter']['xp'] / 4) );
+        $this->save();
+        //TODO : Augmenter charactéristique
+    }
+}
+
+protected function xpIncrease($fighterId, $level) {
+
+    $datas = $this->read(null, $fighterId);
+    $this->set('xp', $datas['Fighter']['xp'] + $level);
+    $this->save();
+    
+    $this->xpControl($fighterId);
+}
+
+protected function healthControl($fighterId) {
+    
+    $datas = $this->read(null, $fighterId);
+    if ($datas['Fighter']['current_health'] < 1) {
+        $this->delete();
+    }
+    
+}
+
+protected function hurt($fighterId, $level) {
+
+    $datas = $this->read(null, $fighterId);
+    $this->set('current_health', $datas['Fighter']['current_health'] - $level);
+    $this->save();
+    
+    $this->healthControl($fighterId);
+    
+}
+
 public function doAttack($fighterId, $direction){
     //récupérer la position et fixer l'id de travail
     $datas = $this->read(null, $fighterId);
@@ -190,15 +228,18 @@ public function doAttack($fighterId, $direction){
         echo "Direction inconnue";
     }
     echo "Gonna attack : $case[coordinate_x] / $case[coordinate_y]";
-
+    
+    $ennemy = new Fighter();     
     //On cherche l'ennemy sur la case attaquée
-    $ennemy = $this->find('all' , array('conditions'=> array(
+    $ennemy = $this->find('first' , array('conditions'=> array(
                                                         'Fighter.coordinate_x' => $case['coordinate_x'],
                                                         'Fighter.coordinate_y' => $case['coordinate_y']
                                                             )
                                             )
                              );
-
+    
+    
+    debug($ennemy);
     //On vérifie que l'ennemy existe
     if( empty ($ennemy) )
     {
@@ -207,50 +248,116 @@ public function doAttack($fighterId, $direction){
     //Si oui, on l'attaque
     else 
     {
-        echo"  You will Attack :  {$ennemy[0]['Fighter']['name']}";
+        echo"  You will Attack :  {$ennemy['Fighter']['name']} ";
+        //$ennemyFighter = read()
+        $result = (10 - $datas['Fighter']['level'] + $ennemy['Fighter']['level']);
+        
+        $dataEvent = array(
+            'coordinate_x' =>   $case[coordinate_x],
+            'coordinate_y' =>   $case[coordinate_y]
+        );
+        
+        $event = new Event();
+        
+        if (rand(1,20) > $result)
+            {
+                $dataEvent['name'] = $datas['Fighter']['name'] . " Attack " . $ennemy['Fighter']['name'];
+                echo"Attaque Réussie ";
+                $change = array(
+                    'current_health' => $ennemy['Fighter']['current_health'] - $datas['Fighter']['level']
+                );
+                $this->hurt($ennemy['Fighter']['id'], $datas['Fighter']['level']);
+                //SI DESTRUCTION
+                if ($change['current_health'] < 1){
+                    echo "DETRUIT";
+                    $dataEvent['name'] = $datas['Fighter']['name'] . " Kills " . $ennemy['Fighter']['name'];
+                
+                    $this->xpIncrease($fighterId, $ennemy['Fighter']['level']);
+                    $event->add($dataEvent);
+                    //$ennemy->save($change);
+                }
+                else
+                {
+                    $this->set('xp', $datas['Fighter']['xp'] + 1);
+                    $this->save();
+                    $this->xpControl($fighterId);
+                    $event->add($dataEvent);
+                    
+                }
+               
+            }   
+        else 
+            {
+                $dataEvent['name'] = $datas['Fighter']['name'] . " Miss " . $ennemy['Fighter']['name'];
+                $event->add($dataEvent);
+                
+                echo"Attaque Ratée !!!";
+            }
         /*$ennemy[0]->Fighter->set('current_health',$ennemy[0]['Fighter']['current_health']-1);*/
-        echo"   Your ennemy remains : {$ennemy[0]['Fighter']['current_health']}";
+        echo"   Your ennemy remains : {$ennemy['Fighter']['current_health']} Life Points";
     }
 
     $this->save();
     
     return true;
 }
+
 public function increaseLevel($fighterId, $skill){
     //récupérer la position et fixer l'id de travail
     $datas = $this->read(null, $fighterId);
-    $this->set('level',  ($datas['Fighter']['level'] + 1));
     switch ($skill) {
         case 'strength':
-            $this->set('skill_strength',  ($datas['Fighter']['skill_strength'] + 1));
-            //PV AU MAX
-            $this->set('current_health',  $datas['Fighter']['skill_health']);
+            debug($datas);
+            $this->set('skill_strength',  $datas['Fighter']['skill_strength'] + 1);
+            $this->set('coordinate_y', $datas['Fighter']['coordinate_y'] + 1);
             break;
         
         case 'sight':
             $this->set('skill_sight',  $datas['Fighter']['skill_sight'] + 1);
-            //PV AU MAX
-            $this->set('current_health',  $datas['Fighter']['skill_health']);
             break;
         
         case'life':
             $this->set('skill_health',  $datas['Fighter']['skill_health'] + 3);
-            //PV AU MAX
-            $this->set('current_health',  $datas['Fighter']['skill_health']+3);
+
+    
+    $this->set('level',  ($datas['Fighter']['level'] + 1));
+    
+    switch ($skill) {
+        case 'strength':
+            $dataChanged =array(
+                'skill_strength' => ($datas['Fighter']['skill_strength'] + 1),
+                'current_health' =>  $datas['Fighter']['skill_health']
+                );
+            break;
+        
+        case 'sight':
+            $dataChanged =array(
+                'skill_sight'   =>  ($datas['Fighter']['skill_sight'] + 1),
+                'current_health'=>  $datas['Fighter']['skill_health']
+                );
+            
+            break;
+        
+        case'life':
+            $dataChanged =array(
+                'skill_health'  =>  ($datas['Fighter']['skill_health'] + 3),
+                'current_health'=>  ($datas['Fighter']['skill_health'] + 3)
+                );
             break;
 
         default:
             break;
     }
     
-    $this->save();
+    $this->set('current_health',  $datas['Fighter']['skill_health']);
+
+    $this->save($dataChanged);
     
-}
-public function generate($playerId,$name) {
+} }
+public function generate($id,$name) {
     
     $newData = array(
         'name'              => $name,
-        'player_id'         => $playerId,
         'coordinate_x'      => rand(1,15),
         'coordinate_y'      => rand(1,10),
         'level'             => 1,
@@ -259,7 +366,7 @@ public function generate($playerId,$name) {
         'skill_strength'    => 1,
         'skill_health'      => 3,
         'current_health'    => 3,
-        //'player_id'         => $this->Player['player_id'] ATTENTION PAS DE PLAYER ID :(
+        'player_id'         => $id
     );
     $this->create();
     $this->save($newData);
@@ -267,7 +374,3 @@ public function generate($playerId,$name) {
 
 
 }
-
-
-
-?>
