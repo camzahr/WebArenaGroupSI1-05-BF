@@ -11,15 +11,12 @@ class UsersController extends AppController
 {
     //public $uses = array('Player');
 
-//    public function beforeFilter() {
-//    $this->Auth->authenticate = array(
-//        'Form' => array(
-//            'userModel' => 'Player',
-//        )
-//    );
-//
-//    return parent::beforeFilter();      
-//}
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $this->Auth->allow('subscribe');
+
+         
+    }
     
         /**
      * index method : login
@@ -31,11 +28,7 @@ class UsersController extends AppController
     {
         //$this->loadModel('Player');
         
-        // A UTILISER POUR CREER UN COMPTE USER
-//        $this->User->save(array(
-//            'email'=> 'admin@admin.fr',
-//            'password'=>$this->Auth->password('admin')
-//        ));
+        
         debug($this->Session->read());
         if(!empty($this->request->data)){
             if($this->Auth->login())
@@ -65,7 +58,7 @@ class UsersController extends AppController
         //Si c'est une action de subscribe
         if($this->request->data('Playersubscribe'))
         {
-            $this->Player->subscribe($this->request->data['Playersubscribe']);
+            $this->User->subscribe($this->request->data['Playersubscribe']);
         } 
     }
     
@@ -76,7 +69,7 @@ class UsersController extends AppController
      */
     public function display()
     {
-        $this->set('raw',$this->Player->findById('545f827c-576c-4dc5-ab6d-27c33186dc3e'));
+        $this->set('raw',$this->User->findById('545f827c-576c-4dc5-ab6d-27c33186dc3e'));
         $this->set('playerId','545f827c-576c-4dc5-ab6d-27c33186dc3e');
     }
     
