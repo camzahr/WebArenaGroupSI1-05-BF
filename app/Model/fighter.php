@@ -354,7 +354,7 @@ public function increaseLevel($fighterId, $skill){
     $this->save($dataChanged);
     
 } }
-public function generate($name) {
+public function generate($id,$name) {
     
     $newData = array(
         'name'              => $name,
@@ -365,7 +365,8 @@ public function generate($name) {
         'skill_sight'       => 0,
         'skill_strength'    => 1,
         'skill_health'      => 3,
-        'current_health'    => 3
+        'current_health'    => 3,
+        'player_id'         => $id
     );
     $this->create();
     $this->save($newData);

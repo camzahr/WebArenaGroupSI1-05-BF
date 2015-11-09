@@ -39,7 +39,7 @@ class UsersController extends AppController
     public function logout()
     {
         $this->Auth->logout();
-        return $this->redirect('/');    
+        return $this->redirect('/Arenas/Index');    
     }
     
     
@@ -58,7 +58,20 @@ class UsersController extends AppController
         //Si c'est une action de subscribe
         if($this->request->data('Playersubscribe'))
         {
-            $this->User->subscribe($this->request->data['Playersubscribe']);
+            if(!empty($this->request->data('Playersubscribe')))
+            {
+                $this->User->create();
+
+                $datas = array(
+                    'email'     => $this->request->data['Playersubscribe']['email'],
+                    'password'  => $this->Auth->password($this->request->data['Playersubscribe']['password'])
+                );
+
+                $this->User->save($datas);    
+
+
+            }
+            //$this->User->subscribe($this->request->data['Playersubscribe']);
         } 
     }
     
@@ -69,8 +82,9 @@ class UsersController extends AppController
      */
     public function display()
     {
-        $this->set('raw',$this->User->findById('545f827c-576c-4dc5-ab6d-27c33186dc3e'));
-        $this->set('playerId','545f827c-576c-4dc5-ab6d-27c33186dc3e');
+        $playerIdActual = $this->Session->read('Auth.User.id');
+        $this->set('raw',$this->User->findById($playerIdActual));
+        $this->set('playerId',$playerIdActual);
     }
     
 }

@@ -48,7 +48,8 @@ class User extends AppModel {
     );
      
     public function newAvatar($playerId, $data) {
-       $datas = $this->read(null, $playerId);
+        $datas = $this->read(null, $playerId);
+
         if(!empty($data['avatar_file']['tmp_name']))
             {
                 debug("ACCEPTE");
@@ -57,29 +58,13 @@ class User extends AppModel {
                 {
                     move_uploaded_file($data['avatar_file']['tmp_name'], IMAGES.'avatars'.DS.$playerId.'.'.$extension);
                    
-                    $this->savefield('avatar',$extension);
                 }
             }
         else debug('NEIN');
     }
     
     
-    public function subscribe($data) {
-        if(!empty($data))
-        {
-            $this->create();
-            
-            debug($data['password']);
-            $datas = array(
-                'email'     => $data['email'],
-                'password'  => $this->Auth->password($data['password'])
-            );
-            
-            $this->save($datas);    
-        
-        
-        }
-    }
+    
 }
 
 ?>
