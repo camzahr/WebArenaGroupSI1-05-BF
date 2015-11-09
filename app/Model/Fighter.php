@@ -257,7 +257,7 @@ public function doAttack($fighterId, $direction){
             'coordinate_y' =>   $case[coordinate_y]
         );
         
-        $event = new Event();           
+        $event = new Event();
         
         if (rand(1,20) > $result)
             {
@@ -267,6 +267,7 @@ public function doAttack($fighterId, $direction){
                     'current_health' => $ennemy['Fighter']['current_health'] - $datas['Fighter']['level']
                 );
                 $this->hurt($ennemy['Fighter']['id'], $datas['Fighter']['level']);
+                //SI DESTRUCTION
                 if ($change['current_health'] < 1){
                     echo "DETRUIT";
                     $dataEvent['name'] = $datas['Fighter']['name'] . " Kills " . $ennemy['Fighter']['name'];

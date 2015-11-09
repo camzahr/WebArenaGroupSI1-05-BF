@@ -14,6 +14,30 @@ class Player extends AppModel {
         ),
 
    );
+    
+    public $validate = array(
+        'email' => array(
+            array(
+                'rule' => 'isUnique',
+                'message' => 'Mail déjà existant',
+
+            ),
+
+            array(
+                'rule' => 'email',
+                'required' => true,
+                'allowEmpty' => false,
+                'message' => 'Mail non valide',
+
+            )
+        ),
+        
+        'password' => array(
+            'rule' => 'notEmpty',
+            'message' => 'Vous devez entre un mot de passe',
+            'allowEmpty' => false
+        )
+    );
 /*
     public $validate = array(
         'avatar_file' => array(
@@ -89,7 +113,7 @@ class Player extends AppModel {
             'password'         => $data['password']
         );
         $this->create();
-        $this->save($newData);
+        $this->save($newData,true);
         }
     }
     
