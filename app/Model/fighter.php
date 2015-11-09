@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 App::uses('AppModel', 'Model');
 App::uses('Event', 'Model');
@@ -305,6 +305,20 @@ public function doAttack($fighterId, $direction){
 public function increaseLevel($fighterId, $skill){
     //récupérer la position et fixer l'id de travail
     $datas = $this->read(null, $fighterId);
+    switch ($skill) {
+        case 'strength':
+            debug($datas);
+            $this->set('skill_strength',  $datas['Fighter']['skill_strength'] + 1);
+            $this->set('coordinate_y', $datas['Fighter']['coordinate_y'] + 1);
+            break;
+        
+        case 'sight':
+            $this->set('skill_sight',  $datas['Fighter']['skill_sight'] + 1);
+            break;
+        
+        case'life':
+            $this->set('skill_health',  $datas['Fighter']['skill_health'] + 3);
+
     
     $this->set('level',  ($datas['Fighter']['level'] + 1));
     
@@ -335,14 +349,15 @@ public function increaseLevel($fighterId, $skill){
             break;
     }
     
+    $this->set('current_health',  $datas['Fighter']['skill_health']);
+
     $this->save($dataChanged);
     
-}
-public function generate($playerId,$name) {
+} }
+public function generate($id,$name) {
     
     $newData = array(
         'name'              => $name,
-        'player_id'         => $playerId,
         'coordinate_x'      => rand(1,15),
         'coordinate_y'      => rand(1,10),
         'level'             => 1,
@@ -350,7 +365,8 @@ public function generate($playerId,$name) {
         'skill_sight'       => 0,
         'skill_strength'    => 1,
         'skill_health'      => 3,
-        'current_health'    => 3
+        'current_health'    => 3,
+        'player_id'         => $id
     );
     $this->create();
     $this->save($newData);
