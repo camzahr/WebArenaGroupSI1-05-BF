@@ -9,12 +9,15 @@ App::uses('AppController', 'Controller');
  */
 class ArenasController extends AppController
 {
-    public $uses = array('Player', 'Fighter', 'Event');
+    public $uses = array('User', 'Fighter', 'Event');
     /**
      * index method : first page
      *
      * @return void
      */
+    
+    var $playerIdActual;
+    
     public function index()
     {
        //$this->set('myname', "Jérémy Camilleri");
@@ -24,8 +27,8 @@ class ArenasController extends AppController
         }
         
         $playerIdActual = $this->Session->read('Auth.User.id');
-        $playerActual = $this->Player->findById($playerIdActual);
-        debug($playerActual);
+        $playerActual = $this->User->findById($playerIdActual);
+   
         $this->set('raw',$playerActual);
         $this->set('email', $playerActual['Player']['email']);
        
@@ -53,7 +56,7 @@ class ArenasController extends AppController
                 {
                 debug($this->Player->invalidFields()); die();
                 }*/
-            $this->Player->newAvatar('0c3ebe52-8024-11e5-96f5-5dcadefa4980', $this->request->data['Playernewavatar']);
+            $this->User->newAvatar($playerIdActual, $this->request->data['Playernewavatar']);
             
         }
         
@@ -68,20 +71,26 @@ class ArenasController extends AppController
      */
     public function fighter()
     {
-        $this->set('raw',$this->Fighter->findById(1));
-
+        $playerIdActual = $this->Session->read('Auth.User.id');
+        
         if ($this->request->is('post'))       
         {            
             pr($this->request->data);        
         }
-        $this->set('raw',$this->Fighter->findById(1));
+        
+        $this->set('raw',$this->Fighter->find('all' , array('conditions'=> array(
+                                                        'Fighter.player_id' => $playerIdActual
+                                                            )
+                                            )
+                             ));
+        
         
         //Si c'est une action de mouvement
         
         //Si c'est une action de newLevel
         if($this->request->data('Fighternewlevel'))
         {
-            $this->Fighter->increaseLevel(1, $this->request->data['Fighternewlevel']['skill']);
+            $this->Fighter->increaseLevel($playerIdActual, $this->request->data['Fighternewlevel']['skill']);
         } 
          
     }
@@ -99,19 +108,24 @@ class ArenasController extends AppController
             $this->Session->setFlash('Une action a été réalisée.');
 
         }
-        $this->set('raw',$this->Fighter->findById(1));
+        $playerIdActual = $this->Session->read('Auth.User.id');
+        $this->set('raw',$this->Fighter->find('all' , array('conditions'=> array(
+                                                        'Fighter.player_id' => $playerIdActual
+                                                            )
+                                            )
+                             ));
         
         //Si c'est une action de mouvement
         if($this->request->data('Fightermove'))
         {
-        $this->Fighter->doMove(1, $this->request->data['Fightermove']['direction']);
+        $this->Fighter->doMove($playerIdActual, $this->request->data['Fightermove']['direction']);
         $this->Session->setFlash('Une action a été réalisée.');
 
         }
         //Si c'est une action d'attaque
         Elseif($this->request->data('Fighterattack'))
         {
-            $this->Fighter->doAttack(1, $this->request->data['Fighterattack']['direction']);
+            $this->Fighter->doAttack($playerIdActual, $this->request->data['Fighterattack']['direction']);
             $this->Session->setFlash('Une action a été réalisée.');
 
         }
@@ -126,6 +140,7 @@ class ArenasController extends AppController
      */
     public function diary()
     {
+        $playerIdActual = $this->Session->read('Auth.User.id');
         $this->set('raw',$this->Event->find('all'));
     }
 
