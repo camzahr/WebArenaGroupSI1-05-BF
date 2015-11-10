@@ -1,17 +1,48 @@
-<?php ?>
 <?php
 
-App::uses('ApisController', 'Controller');
+App::uses('AppController', 'Controller');
 
-$this->layout = 'ajax'; 
 
+
+ 
 class ApisController extends AppController
 {
-    
+    public $uses = array ('Player','Fighter','Event');
 
- public function fighterview($id)
- {
+
+  public function fighterview($id)
+ { 
+    
+      
+    $this->layout = 'ajax'; 
+    $this->set('datas', $this->Fighter->find('all', array(
+        'conditions' => array(
+            'Fighter.id' => $id
+            )
+    )));
+
+
  }
+  public function playerview($id)
+ {
+     $this->layout = 'ajax'; 
+$this->set('datas', $this->Player->find('all', array(
+        'conditions' => array(
+            'Player.id' => $id
+            )
+    ))); 
+}
+  public function eventview($id)
+ {
+     $this->layout = 'ajax'; 
+     $this->set('datas', $this->Event->find('all', array(
+        'conditions' => array(
+            'Event.id' => $id
+            )
+    )));
+ 
+ }
+ 
  
 /* 
  * To change this license header, choose License Headers in Project Properties.

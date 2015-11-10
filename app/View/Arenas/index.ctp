@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 <?php $this->assign('title', 'Acceuil');?>
-Bienvenue <?php echo $myname;?> dans WebArena
-=======
 Bienvenu <?php echo $email;?> dans WebArena
->>>>>>> refs/remotes/origin/master
 
 <?php
 pr($raw); 

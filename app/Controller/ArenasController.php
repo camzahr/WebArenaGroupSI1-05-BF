@@ -9,10 +9,7 @@ App::uses('AppController', 'Controller');
  */
 class ArenasController extends AppController
 {
-<<<<<<< HEAD
-    
-=======
->>>>>>> refs/remotes/origin/master
+
     public $uses = array('Player', 'Fighter', 'Event');
     /**
      * index method : first page
@@ -26,7 +23,7 @@ class ArenasController extends AppController
            pr($this->request->data);        
         }
         
-        $playerActual = $this->Player->findById('0c3ebe52-8024-11e5-96f5-5dcadefa4980');
+        $playerActual = $this->Player->findById('545f827c-576c-4dc5-ab6d-27c33186dc3e');
         $this->set('raw',$playerActual);
         $this->set('email', $playerActual['Player']['email']);
        
@@ -77,11 +74,7 @@ class ArenasController extends AppController
      */
     public function fighter()
     {
-<<<<<<< HEAD
         $this->set('raw',$this->Fighter->findById(1));
-
-=======
->>>>>>> refs/remotes/origin/master
         if ($this->request->is('post'))       
         {            
             pr($this->request->data);        
@@ -116,16 +109,15 @@ class ArenasController extends AppController
         if($this->request->data('Fightermove'))
         {
         $this->Fighter->doMove(1, $this->request->data['Fightermove']['direction']);
-        $this->Session->setFlash('Une action a été réalisée.');
 
         }
         //Si c'est une action d'attaque
         Elseif($this->request->data('Fighterattack'))
         {
             $this->Fighter->doAttack(1, $this->request->data['Fighterattack']['direction']);
-            $this->Session->setFlash('Une action a été réalisée.');
 
         }
+            $this->Session->setFlash('Une action a été réalisée.');
 
 
     }
