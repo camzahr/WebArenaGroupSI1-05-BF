@@ -13,7 +13,7 @@ class UsersController extends AppController
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('subscribe');
+        $this->Auth->allow('subscribe', 'mail');
 
          
     }
@@ -42,6 +42,20 @@ class UsersController extends AppController
         return $this->redirect('/Arenas/Index');    
     }
     
+    public function mail(){
+        App::uses('CakeEmail', 'Network/Email');
+        $mail = $this->Session->read('Auth.User.mail');
+        
+        $email = New CakeEmail('default');
+        $email->to($mail);
+        $email->subject('Modification of your password');    
+        
+        
+        $email->viewVars(array('mail'=>$mail));
+        $email->template('passwordForgot');
+        
+        
+    }
     
     /**
      * subscribe method : first page
