@@ -12,4 +12,9 @@ Bienvenu <?php echo $email;?> dans WebArena
     echo $this->Form->input('avatar_file',array('label' => 'Votre avatar (Jpeg ou PNG)', 'type' => 'file'));
     echo $this->Form->end('Send');
     
+    pr($fighterList);
+    echo $this->Form->create('Fighterchoice');
+    echo $this->Form->input('fighter',array('options' => $fighterList));
+    echo $this->Form->end('Valid');
+    
 ?>
