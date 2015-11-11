@@ -20,6 +20,7 @@ class Fighter extends AppModel {
    );
     
     
+//FONCTIONS DO MOVE
 protected function verifLimit(){
     debug($this->data['Fighter']['coordinate_y']);
     if($this->data['Fighter']['coordinate_y']> 10)
@@ -157,6 +158,9 @@ public function doMove($fighterId, $direction){
         }
 }
 
+//FONCTIONS DO ATTACK
+
+/*
 protected function xpControl($fighterId) {
     $datas = $this->read(null, $fighterId);
     if ($datas['Fighter']['xp'] / 4 >= $datas['Fighter']['level'])
@@ -166,15 +170,13 @@ protected function xpControl($fighterId) {
         $this->save();
         //TODO : Augmenter charactéristique
     }
-}
+}*/
 
 protected function xpIncrease($fighterId, $level) {
 
     $datas = $this->read(null, $fighterId);
     $this->set('xp', $datas['Fighter']['xp'] + $level);
     $this->save();
-    
-    $this->xpControl($fighterId);
 }
 
 protected function healthControl($fighterId) {
@@ -186,10 +188,10 @@ protected function healthControl($fighterId) {
     
 }
 
-protected function hurt($fighterId, $level) {
+protected function hurt($fighterId, $strength) {
 
     $datas = $this->read(null, $fighterId);
-    $this->set('current_health', $datas['Fighter']['current_health'] - $level);
+    $this->set('current_health', $datas['Fighter']['current_health'] - $strength);
     $this->save();
     
     $this->healthControl($fighterId);
@@ -266,7 +268,7 @@ public function doAttack($fighterId, $direction){
                 $change = array(
                     'current_health' => $ennemy['Fighter']['current_health'] - $datas['Fighter']['level']
                 );
-                $this->hurt($ennemy['Fighter']['id'], $datas['Fighter']['level']);
+                $this->hurt($ennemy['Fighter']['id'], $datas['Fighter']['skill_strength']);
                 //SI DESTRUCTION
                 if ($change['current_health'] < 1){
                     echo "DETRUIT";
@@ -302,6 +304,7 @@ public function doAttack($fighterId, $direction){
     return true;
 }
 
+//FONCTIONS AUTRES
 public function increaseLevel($fighterId, $skill){
     //récupérer la position et fixer l'id de travail
     $datas = $this->read(null, $fighterId);
@@ -352,8 +355,9 @@ public function increaseLevel($fighterId, $skill){
     $this->set('current_health',  $datas['Fighter']['skill_health']);
 
     $this->save($dataChanged);
-    
-} }
+    } 
+}
+
 public function generate($id,$name) {
     
     $newData = array(

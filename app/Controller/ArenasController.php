@@ -10,14 +10,14 @@ App::uses('AppController', 'Controller');
 class ArenasController extends AppController
 {
     public $uses = array('User', 'Fighter', 'Event');
+    
+    var $playerIdActual;
+    
     /**
      * index method : first page
      *
      * @return void
      */
-    
-    var $playerIdActual;
-    
     public function index()
     {
        //$this->set('myname', "Jérémy Camilleri");
@@ -83,9 +83,6 @@ class ArenasController extends AppController
                                                             )
                                             )
                              ));
-        
-        
-        //Si c'est une action de mouvement
         
         //Si c'est une action de newLevel
         if($this->request->data('Fighternewlevel'))

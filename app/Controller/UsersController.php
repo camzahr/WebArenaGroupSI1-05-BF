@@ -28,8 +28,6 @@ class UsersController extends AppController
     {
         //$this->loadModel('Player');
         
-        
-        debug($this->Session->read());
         if(!empty($this->request->data)){
             if($this->Auth->login())
                 return $this->redirect('/Arenas');    
