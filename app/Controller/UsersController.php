@@ -10,7 +10,7 @@ App::uses('AppController', 'Controller');
 class UsersController extends AppController
 {
     //public $uses = array('Player');
-
+    
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('subscribe');
@@ -30,7 +30,13 @@ class UsersController extends AppController
         
         if(!empty($this->request->data)){
             if($this->Auth->login())
-                return $this->redirect('/Arenas');    
+                {
+                    return $this->redirect('/Arenas/Index');  
+                }
+            Else
+                {
+                    $this->Flash->set('Email ou Password invalide');
+                }
         }
     }
     

@@ -19,8 +19,10 @@ class Fighter extends AppModel {
 
    );
     
+
     
-//FONCTIONS DO MOVE
+//FONCTIONS DO MOVE    
+
 protected function verifLimit(){
     debug($this->data['Fighter']['coordinate_y']);
     if($this->data['Fighter']['coordinate_y']> 10)
@@ -160,17 +162,6 @@ public function doMove($fighterId, $direction){
 
 //FONCTIONS DO ATTACK
 
-/*
-protected function xpControl($fighterId) {
-    $datas = $this->read(null, $fighterId);
-    if ($datas['Fighter']['xp'] / 4 >= $datas['Fighter']['level'])
-    {
-        echo" You pass a Level ! ";
-        $this->set('level', abs($datas['Fighter']['xp'] / 4) );
-        $this->save();
-        //TODO : Augmenter charactéristique
-    }
-}*/
 
 protected function xpIncrease($fighterId, $level) {
 
@@ -241,7 +232,6 @@ public function doAttack($fighterId, $direction){
                              );
     
     
-    debug($ennemy);
     //On vérifie que l'ennemy existe
     if( empty ($ennemy) )
     {
@@ -294,9 +284,11 @@ public function doAttack($fighterId, $direction){
                 $event->add($dataEvent);
                 
                 echo"Attaque Ratée !!!";
+                return false;
             }
         /*$ennemy[0]->Fighter->set('current_health',$ennemy[0]['Fighter']['current_health']-1);*/
         echo"   Your ennemy remains : {$ennemy['Fighter']['current_health']} Life Points";
+        
     }
 
     $this->save();
@@ -308,22 +300,11 @@ public function doAttack($fighterId, $direction){
 public function increaseLevel($fighterId, $skill){
     //récupérer la position et fixer l'id de travail
     $datas = $this->read(null, $fighterId);
-    switch ($skill) {
-        case 'strength':
-            debug($datas);
-            $this->set('skill_strength',  $datas['Fighter']['skill_strength'] + 1);
-            $this->set('coordinate_y', $datas['Fighter']['coordinate_y'] + 1);
-            break;
-        
-        case 'sight':
-            $this->set('skill_sight',  $datas['Fighter']['skill_sight'] + 1);
-            break;
-        
-        case'life':
-            $this->set('skill_health',  $datas['Fighter']['skill_health'] + 3);
+    if ($datas['Fighter']['xp'] > 4)
+        {
+    $this->set('xp', $datas['Fighter']['xp'] - 4);
 
-    
-    $this->set('level',  ($datas['Fighter']['level'] + 1));
+    $this->set('level', ($datas['Fighter']['level'] + 1));
     
     switch ($skill) {
         case 'strength':
@@ -355,7 +336,14 @@ public function increaseLevel($fighterId, $skill){
     $this->set('current_health',  $datas['Fighter']['skill_health']);
 
     $this->save($dataChanged);
-    } 
+
+    return true;
+    }
+    else
+    {
+        return false;
+    }
+    
 }
 
 public function generate($id,$name) {
