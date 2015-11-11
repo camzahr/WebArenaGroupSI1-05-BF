@@ -177,10 +177,10 @@ protected function healthControl($fighterId) {
     
 }
 
-protected function hurt($fighterId, $level) {
+protected function hurt($fighterId, $strength) {
 
     $datas = $this->read(null, $fighterId);
-    $this->set('current_health', $datas['Fighter']['current_health'] - $level);
+    $this->set('current_health', $datas['Fighter']['current_health'] - $strength);
     $this->save();
     
     $this->healthControl($fighterId);
@@ -256,7 +256,7 @@ public function doAttack($fighterId, $direction){
                 $change = array(
                     'current_health' => $ennemy['Fighter']['current_health'] - $datas['Fighter']['level']
                 );
-                $this->hurt($ennemy['Fighter']['id'], $datas['Fighter']['level']);
+                $this->hurt($ennemy['Fighter']['id'], $datas['Fighter']['skill_strength']);
                 //SI DESTRUCTION
                 if ($change['current_health'] < 1){
                     echo "DETRUIT";
