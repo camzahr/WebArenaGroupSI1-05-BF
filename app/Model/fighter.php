@@ -20,6 +20,8 @@ class Fighter extends AppModel {
    );
     
     
+    
+//FONCTIONS DO MOVE    
 protected function verifLimit(){
     debug($this->data['Fighter']['coordinate_y']);
     if($this->data['Fighter']['coordinate_y']> 10)
@@ -157,24 +159,13 @@ public function doMove($fighterId, $direction){
         }
 }
 
-protected function xpControl($fighterId) {
-    $datas = $this->read(null, $fighterId);
-    if ($datas['Fighter']['xp'] / 4 >= $datas['Fighter']['level'])
-    {
-        echo" You pass a Level ! ";
-        $this->set('level', abs($datas['Fighter']['xp'] / 4) );
-        $this->save();
-        //TODO : Augmenter charactéristique
-    }
-}
+//FONCTIONS DO ATTACK
 
 protected function xpIncrease($fighterId, $level) {
 
     $datas = $this->read(null, $fighterId);
     $this->set('xp', $datas['Fighter']['xp'] + $level);
     $this->save();
-    
-    $this->xpControl($fighterId);
 }
 
 protected function healthControl($fighterId) {
@@ -303,10 +294,10 @@ public function doAttack($fighterId, $direction){
     return true;
 }
 
+//FONCTIONS AUTRES
 public function increaseLevel($fighterId, $skill){
     //récupérer la position et fixer l'id de travail
     $datas = $this->read(null, $fighterId);
-    debug($fighterId);
     if ($datas['Fighter']['xp'] > 4)
         {
     $this->set('xp', $datas['Fighter']['xp'] - 4);

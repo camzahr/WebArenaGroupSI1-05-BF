@@ -98,7 +98,6 @@ class ArenasController extends AppController
     {
         $playerIdActual = $this->Session->read('Auth.User.id');
         $fighterIdActual = $this->Session->read('Fighter.id');
-        debug($fighterIdActual);
         
         if ($this->request->is('post'))       
         {            
@@ -145,7 +144,7 @@ class ArenasController extends AppController
         $playerIdActual = $this->Session->read('Auth.User.id');
         $fighterIdActual = $this->Session->read('Fighter.id');
         $this->set('raw',$this->Fighter->find('all' , array('conditions'=> array(
-                                                        'Fighter.player_id' => $fighterIdActual
+                                                        'Fighter.id' => $fighterIdActual
                                                             )
                                             )
                              ));
@@ -153,13 +152,13 @@ class ArenasController extends AppController
         //Si c'est une action de mouvement
         if($this->request->data('Fightermove'))
         {
-        $this->Fighter->doMove($playerIdActual, $this->request->data['Fightermove']['direction']);
-
+            $this->Fighter->doMove($fighterIdActual, $this->request->data['Fightermove']['direction']);
         }
+        
         //Si c'est une action d'attaque
         Elseif($this->request->data('Fighterattack'))
         {
-            if ($this->Fighter->doAttack($playerIdActual, $this->request->data['Fighterattack']['direction']))
+            if ($this->Fighter->doAttack($fighterIdActual, $this->request->data['Fighterattack']['direction']))
             {
                 
             }
