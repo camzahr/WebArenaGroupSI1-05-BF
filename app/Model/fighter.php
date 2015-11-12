@@ -272,7 +272,6 @@ public function doAttack($fighterId, $direction){
                 {
                     $this->set('xp', $datas['Fighter']['xp'] + 1);
                     $this->save();
-                    $this->xpControl($fighterId);
                     $event->add($dataEvent);
                     
                 }
@@ -287,7 +286,8 @@ public function doAttack($fighterId, $direction){
                 return false;
             }
         /*$ennemy[0]->Fighter->set('current_health',$ennemy[0]['Fighter']['current_health']-1);*/
-        echo"   Your ennemy remains : {$ennemy['Fighter']['current_health']} Life Points";
+        
+            debug("   Your ennemy remains : {$ennemy['Fighter']['current_health']} Life Points");
         
     }
 

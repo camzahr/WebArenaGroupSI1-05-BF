@@ -33,7 +33,7 @@ class ArenasController extends AppController
         $playerActual = $this->User->findById($playerIdActual);
    
         $this->set('raw',$playerActual);
-        $this->set('email', $playerActual['Player']['email']);
+        $this->set('email', $playerActual['User']['email']);
        
         
         //On affiche la liste des nom de joueurs actuellement dans l'arène
@@ -52,11 +52,10 @@ class ArenasController extends AppController
         $fightersUser = array();
 
         foreach($fightersActual as $fighter){
-            debug($fighter);
             $fightersUser[$fighter['Fighter']['id']] = $fighter['Fighter']['name'];
-            /*if (!$fighterIdActual) {
+            if (!$fighterIdActual AND $fighter['Fighter']['id']) {
                 $fighterIdActual = $fighter['Fighter']['id'];
-            }*/
+            }
         }
         
         $this->set('fighterList',$fightersUser);

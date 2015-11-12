@@ -6,10 +6,14 @@
  * and open the template in the editor.
  */
 
-pr($raw); 
-echo '<img src="webroot/img/avatars/".$playerId."jpg" border="0" /></div> ';
-//IMAGES.'avatars'.DS.$playerId.'.'.$extension
-//PHP HELPER IMAGE 
-?>
 
-Bienvenue <?php echo $raw['Player']['email'];?>
+//PHP HELPER IMAGE 
+
+echo $this->Html->image('avatars/'.$playerId.'.jpg', array(
+    'alt' => 'ProfilPicture',
+    'style' => 'width: 200px;'));
+
+
+ echo $raw['User']['email'];
+
+pr($raw); ?>

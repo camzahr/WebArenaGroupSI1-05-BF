@@ -71,8 +71,14 @@ class UsersController extends AppController
                     'password'  => $this->Auth->password($this->request->data['Playersubscribe']['password'])
                 );
 
-                $this->User->save($datas);    
-
+                if($this->User->save($datas))
+                {
+                    
+                }
+                Else
+                {
+                    $this->Flash->set('Email ou Password invalide');
+                }
 
             }
             //$this->User->subscribe($this->request->data['Playersubscribe']);
