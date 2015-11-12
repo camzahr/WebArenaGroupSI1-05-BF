@@ -13,7 +13,7 @@ class UsersController extends AppController
     
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('subscribe');
+        $this->Auth->allow('subscribe','password');
 
          
     }
@@ -97,4 +97,16 @@ class UsersController extends AppController
         $this->set('playerId',$playerIdActual);
     }
     
+    function password(){
+        if($this->request->is('post'))
+        {
+            $u= current($this->request->data);
+            $user=$this->User->find('first', array(
+                'conditions'=> array('email'=>$u['email'])
+            ));
+            
+        }
+        if (empty($user))
+            $this->Session->setFlash("Aucun utilisateur ne possède ce mail");
+    }
 }
