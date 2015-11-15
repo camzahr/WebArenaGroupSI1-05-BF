@@ -13,7 +13,7 @@ class UsersController extends AppController
     
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('subscribe','password');
+        $this->Auth->allow('subscribe','password', 'login');
 
          
     }
@@ -83,6 +83,8 @@ class UsersController extends AppController
             }
             //$this->User->subscribe($this->request->data['Playersubscribe']);
         } 
+        
+        return $this->redirect('/');    
     }
     
     /**
@@ -108,5 +110,17 @@ class UsersController extends AppController
         }
         if (empty($user))
             $this->Session->setFlash("Aucun utilisateur ne possède ce mail");
+        else {
+            App::uses('CakeEmail', 'Network/Email');
+            
+            $link = array('controller'=>'users', 'action'=>'password', 'token'=>$user['User']['id'].'-'.md5($user['User']['password']));
+            $email = New CakeEmail('default');
+            $email->to($user['User']['email']);
+            $email->emailFormat('html');
+            $email->template('mdp');
+            $email->subject('Modification of your password');    
+            $email->viewVars(array('username'=>$user['User']['username'], 'link'=>$link));
+            $email->send();
+        }
     }
 }
