@@ -1,22 +1,8 @@
-<?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+You are receiving this email because you forgot your password.
 
-
+See below your new logs:
+    Mail : <?echo $email?>
+    Password : <?echo $password?> 
     
-
-
-
-
-
-
-
-
-?>
-
-
-You are receiving this email because you forgot your password
+Thanks for playing with us ! 

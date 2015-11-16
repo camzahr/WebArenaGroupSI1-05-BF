@@ -98,28 +98,52 @@ class UsersController extends AppController
         $this->set('playerId',$playerIdActual);
     }
     
+    function newPassword() {
+
+            $chrs = 8;
+            $chaine = ""; 
+            $list = "0123456789azertyuiopqsdfghjklmwxcvbnABCDEFGHIJKLMNOPQRSTUVWXYZ*-+/";
+
+            mt_srand((double)microtime()*1000000);
+
+            $newstring="";
+
+            while( strlen( $newstring )< $chrs ) {
+                    $newstring .= $list[mt_rand(0, strlen($list)-1)];
+            }
+        return $newstring;
+    }
+    
     function password(){
+        
+        App::uses('CakeEmail', 'Network/Email');
         if($this->request->is('post'))
-        {
+        {          
             $u= current($this->request->data);
             $user=$this->User->find('first', array(
                 'conditions'=> array('email'=>$u['email'])
             ));
+            $password = $this->newPassword();
+            debug($password);
             
-        }
-        if (empty($user))
-            $this->Session->setFlash("Aucun utilisateur ne possède ce mail");
-        else {
-            App::uses('CakeEmail', 'Network/Email');
-            
-            $link = array('controller'=>'users', 'action'=>'password', 'token'=>$user['User']['id'].'-'.md5($user['User']['password']));
+            $datas = array(
+                    'password'  => $this->Auth->password($password)
+                );
+            $this->User->save($datas);
+            //$link = array('controller'=>'users', 'action'=>'password', 'token'=>$user['User']['id'].'-'.md5($user['User']['password']));
             $email = New CakeEmail('default');
             $email->to($user['User']['email']);
             $email->emailFormat('html');
             $email->template('mdp');
             $email->subject('Modification of your password');    
-            $email->viewVars(array('username'=>$user['User']['username'], 'link'=>$link));
+            $email->viewVars(array('email'=>$user['User']['email'], 'password'=>$password));
             $email->send();
         }
+        
+        else {
+            
+        }
     }
+    
+    
 }
