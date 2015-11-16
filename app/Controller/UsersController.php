@@ -84,7 +84,6 @@ class UsersController extends AppController
             //$this->User->subscribe($this->request->data['Playersubscribe']);
         } 
         
-        return $this->redirect('/');    
     }
     
     /**
