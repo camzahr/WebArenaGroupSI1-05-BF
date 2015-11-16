@@ -44,6 +44,11 @@ class ArenasController extends AppController
             echo "</br>".$player['Fighter']['name'];
         }
         
+        foreach ($Events as $event) 
+        {
+            //<td>$event['Event']['name']</td>
+        }
+        
         $fightersActual = $this->Fighter->find('all',array(
                 'conditions' => array(
                     'Fighter.player_id' => $playerIdActual
@@ -141,8 +146,19 @@ class ArenasController extends AppController
         }
         $playerIdActual = $this->Session->read('Auth.User.id');
         $fighterIdActual = $this->Session->read('Fighter.id');
-        $this->set('raw',$this->Fighter->find('all' , array('conditions'=> array(
+        $currentFighter = $this->Fighter->find('all' , array('conditions'=> array(
                                                         'Fighter.id' => $fighterIdActual
+                                                            )
+                                            )
+                             );
+        
+        $this->set('raw',$currentFighter);
+        
+        $this->set('otherFighter',$this->Fighter->find('all' , array('conditions'=> array(
+                                                        'Fighter.coordinate_x <' => $currentFighter['Fighter']['coordinate_x'] + $currentFighter['Fighter']['skill_sight'],
+                                                        'Fighter.coordinate_x >' => $currentFighter['Fighter']['coordinate_x'] - $currentFighter['Fighter']['skill_sight'],
+                                                        'Fighter.coordinate_x <' => $currentFighter['Fighter']['coordinate_x'] + $currentFighter['Fighter']['skill_sight'],
+                                                        'Fighter.coordinate_x <' => $currentFighter['Fighter']['coordinate_x'] + $currentFighter['Fighter']['skill_sight'],
                                                             )
                                             )
                              ));
@@ -179,7 +195,14 @@ class ArenasController extends AppController
     {
         $playerIdActual = $this->Session->read('Auth.User.id');
         $fighterIdActual = $this->Session->read('Fighter.id');
-        $this->set('raw',$this->Event->find('all'));
+        
+        $event = $this->Event->find('all', array(
+                'conditions' => array(
+                    'Event.date BETWEEN NOW() -INTERVAL 1 DAY AND NOW()'),
+                'order' => array('Event.date DESC'), ));
+        
+        $this->set('Events', $event);
+        
     }
 
 }
