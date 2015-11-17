@@ -10,10 +10,10 @@ App::uses('AppController', 'Controller');
 class UsersController extends AppController
 {
     //public $uses = array('Player');
-
+    
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('subscribe');
+        $this->Auth->allow('subscribe','password', 'login');
 
          
     }
@@ -28,11 +28,15 @@ class UsersController extends AppController
     {
         //$this->loadModel('Player');
         
-        
-        debug($this->Session->read());
         if(!empty($this->request->data)){
             if($this->Auth->login())
-                return $this->redirect('/Arenas');    
+                {
+                    return $this->redirect('/Arenas/Index');  
+                }
+            Else
+                {
+                    $this->Flash->set('Email ou Password invalide');
+                }
         }
     }
     
@@ -67,12 +71,19 @@ class UsersController extends AppController
                     'password'  => $this->Auth->password($this->request->data['Playersubscribe']['password'])
                 );
 
-                $this->User->save($datas);    
-
+                if($this->User->save($datas))
+                {
+                    
+                }
+                Else
+                {
+                    $this->Flash->set('Email ou Password invalide');
+                }
 
             }
             //$this->User->subscribe($this->request->data['Playersubscribe']);
         } 
+        
     }
     
     /**
@@ -87,4 +98,28 @@ class UsersController extends AppController
         $this->set('playerId',$playerIdActual);
     }
     
+    function password(){
+        if($this->request->is('post'))
+        {
+            $u= current($this->request->data);
+            $user=$this->User->find('first', array(
+                'conditions'=> array('email'=>$u['email'])
+            ));
+            
+        }
+        if (empty($user))
+            $this->Session->setFlash("Aucun utilisateur ne possède ce mail");
+        else {
+            App::uses('CakeEmail', 'Network/Email');
+            
+            $link = array('controller'=>'users', 'action'=>'password', 'token'=>$user['User']['id'].'-'.md5($user['User']['password']));
+            $email = New CakeEmail('default');
+            $email->to($user['User']['email']);
+            $email->emailFormat('html');
+            $email->template('mdp');
+            $email->subject('Modification of your password');    
+            $email->viewVars(array('username'=>$user['User']['username'], 'link'=>$link));
+            $email->send();
+        }
+    }
 }
