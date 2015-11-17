@@ -53,8 +53,8 @@ class EmailConfig {
 		'password' => 'secret',
 		'client' => null,
 		'log' => false,
-		//'charset' => 'utf-8',
-		//'headerCharset' => 'utf-8',
+		'charset' => 'utf-8',
+		'headerCharset' => 'utf-8',
 	);
 
 	public $fast = array(
@@ -84,8 +84,8 @@ class EmailConfig {
 		'password' => 'secret',
 		'client' => null,
 		'log' => true,
-		//'charset' => 'utf-8',
-		//'headerCharset' => 'utf-8',
+		'charset' => 'utf-8',
+		'headerCharset' => 'utf-8',
 	);
 
 }

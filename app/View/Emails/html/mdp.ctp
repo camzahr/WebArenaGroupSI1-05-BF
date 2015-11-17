@@ -1,16 +1,8 @@
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+You are receiving this email because you forgot your password.
 
-<p>
-    Bonjour <?php echo $username;?>
- 
- </p>
- 
- <p>You asked for a new password, click on the below link:</p>
- <p>
-     <?php echo $this->Html->link('New password', $this->Html->url($link, true))?>
- </p>
+See below your new logs:
+    Mail : <?echo $email?>
+    Password : <?echo $password?> 
+    
+Thanks for playing with us !
