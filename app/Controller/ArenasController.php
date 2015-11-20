@@ -9,10 +9,12 @@ App::uses('AppController', 'Controller');
  */
 class ArenasController extends AppController
 {
-    public $uses = array('User', 'Fighter', 'Event');
+    public $uses = array('User', 'Fighter', 'Event', 'Message', 'Guild');
     
     var $playerIdActual;
+
     var $fighterIdActual;
+
     
     /**
      * index method : first page
@@ -31,7 +33,7 @@ class ArenasController extends AppController
         $playerActual = $this->User->findById($playerIdActual);
    
         $this->set('raw',$playerActual);
-        $this->set('email', $playerActual['Player']['email']);
+        $this->set('email', $playerActual['User']['email']);
        
         
         //On affiche la liste des nom de joueurs actuellement dans l'arène
@@ -42,20 +44,27 @@ class ArenasController extends AppController
             echo "</br>".$player['Fighter']['name'];
         }
         
+        /*foreach ($Events as $event) 
+        {
+            <td>$event['Event']['name']</td>
+        }*/
+        
         $fightersActual = $this->Fighter->find('all',array(
                 'conditions' => array(
                     'Fighter.player_id' => $playerIdActual
                 )
             ));
+        
+   
         $fightersUser = array();
 
         foreach($fightersActual as $fighter){
-            debug($fighter);
             $fightersUser[$fighter['Fighter']['id']] = $fighter['Fighter']['name'];
-            /*if (!$fighterIdActual) {
-                $fighterIdActual = $fighter['Fighter']['id'];
-            }*/
+            
+            
         }
+        if(!$fighterIdActual)
+        $fighterIdActual = $fightersActual[0]['Fighter']['id'];
         
         $this->set('fighterList',$fightersUser);
         
@@ -110,9 +119,6 @@ class ArenasController extends AppController
                                             )
                              ));
         
-        
-        //Si c'est une action de mouvement
-        
         //Si c'est une action de newLevel
         if($this->request->data('Fighternewlevel'))
         {
@@ -143,8 +149,20 @@ class ArenasController extends AppController
         }
         $playerIdActual = $this->Session->read('Auth.User.id');
         $fighterIdActual = $this->Session->read('Fighter.id');
-        $this->set('raw',$this->Fighter->find('all' , array('conditions'=> array(
+        $currentFighter = $this->Fighter->find('first' , array('conditions'=> array(
                                                         'Fighter.id' => $fighterIdActual
+                                                            )
+                                            )
+                             );
+        
+        $this->set('raw',$currentFighter);
+        
+        $this->set('othersFighters',$this->Fighter->find('all' , array('conditions'=> array(
+                                                        'Fighter.coordinate_x <' => $currentFighter['Fighter']['coordinate_x'] + $currentFighter['Fighter']['skill_sight'],
+                                                        'Fighter.coordinate_x >' => $currentFighter['Fighter']['coordinate_x'] - $currentFighter['Fighter']['skill_sight'],
+                                                        'Fighter.coordinate_y <' => $currentFighter['Fighter']['coordinate_y'] + $currentFighter['Fighter']['skill_sight'],
+                                                        'Fighter.coordinate_y >' => $currentFighter['Fighter']['coordinate_y'] - $currentFighter['Fighter']['skill_sight'],
+                                                        'Fighter.id !='          => $fighterIdActual
                                                             )
                                             )
                              ));
@@ -168,6 +186,20 @@ class ArenasController extends AppController
             }
 
         }
+        
+        //Affichage des données           
+        $this->set('name', $currentFighter['Fighter']['name']);
+        $this->set('level', $currentFighter['Fighter']['level']);
+        $this->set('xp', $currentFighter['Fighter']['xp']);
+        $this->set('coordinate_x', $currentFighter['Fighter']['coordinate_x']);
+        $this->set('coordinate_y', $currentFighter['Fighter']['coordinate_y']);
+        $this->set('force', $currentFighter['Fighter']['skill_strength']);
+        $this->set('vision', $currentFighter['Fighter']['skill_sight']);
+        $this->set('vie', $currentFighter['Fighter']['skill_health']);
+
+        //Affichage des informations utilisateur
+        $this->set('email', $this->Session->read('Auth.User.email'));
+
 
 
     }
@@ -181,7 +213,121 @@ class ArenasController extends AppController
     {
         $playerIdActual = $this->Session->read('Auth.User.id');
         $fighterIdActual = $this->Session->read('Fighter.id');
-        $this->set('raw',$this->Event->find('all'));
+        
+        $event = $this->Event->find('all', array(
+                'conditions' => array(
+                    'Event.date BETWEEN NOW() -INTERVAL 1 DAY AND NOW()'),
+                'order' => array('Event.date DESC'), ));
+        
+        $this->set('Events', $event);
+        
+    }
+    
+    /**
+     * message method : first page
+     *
+     * @return void
+     */
+    public function message()
+    {
+        $playerIdActual = $this->Session->read('Auth.User.id');
+        $fighterIdActual = $this->Session->read('Fighter.id');
+        
+        $this->set('playerId',$playerIdActual);
+        
+        $messages = $this->Message->find('all', array(
+                'conditions' => array(
+                    'Message.fighter_id'    => $fighterIdActual),
+                'order' => array('Message.date DESC'), ));
+        
+        $messagesSent = $this->Message->find('all', array(
+                'conditions' => array(
+                    'Message.fighter_id_from'    => $fighterIdActual),
+                'order' => array('Message.date DESC'), ));
+        /*
+        foreach($messages as $message){
+            $message['Message']['fighter_id_from'] = $this->Fighter->find('first',array(
+                'conditions' => array(
+                    'Message.fighter_id_from'    => $message['Message']['fighter_id_from'])));
+        }*/
+        
+        //@TODO : Changer les id par les noms
+        
+        $fighters = $this->Fighter->find('all',array(
+                'conditions' => array(
+                    'Fighter.player_id !='    => $playerIdActual)));
+        
+        $fightersName = array();
+
+        foreach($fighters as $fighter){
+            $fightersName[$fighter['Fighter']['id']] = $fighter['Fighter']['name'];
+            
+            
+        }
+        
+        $this->set('fightersName',$fightersName);
+        
+        $this->set('Messages',$messages);
+        $this->set('MessagesSent',$messagesSent);
+        
+        //Si c'est une action de mouvement
+        if($this->request->data('MessageCreate'))
+        {
+            $this->Message->add($fighterIdActual, $this->request->data['MessageCreate']);
+        }
+        
+        Elseif($this->request->data('Crier'))
+        {
+            $currentFighter = $this->Fighter->find('first' , array('conditions'=> array(
+                                                        'Fighter.id' => $fighterIdActual
+                                                            )
+                                            )
+                             );
+            
+            $this->request->data['Crier']['coordinate_x'] = $currentFighter['Fighter']['coordinate_x'];
+            $this->request->data['Crier']['coordinate_y'] = $currentFighter['Fighter']['coordinate_y'];
+            $this->request->data['Crier']['name'] = $currentFighter['Fighter']['name'] . " Screams " . $this->request->data['Crier']['name'];
+            $this->Event->add($this->request->data['Crier']);
+        }
+  
+    }
+    
+     /**
+     * guild method : first page
+     *
+     * @return void
+     */
+    public function guild()
+    {
+        $playerIdActual = $this->Session->read('Auth.User.id');
+        $fighterIdActual = $this->Session->read('Fighter.id');
+        
+        $this->set('playerId',$playerIdActual);
+        
+        $guilds = $this->Guild->find('all');
+        
+        $guildsName = array();
+
+        foreach($guilds as $guild){
+            $guildsName[$guild['Guild']['id']] = $guild['Guild']['name'];
+  
+        }
+        
+        $this->set('guildsName',$guildsName);
+        
+        //Si c'est une action de mouvement
+        if($this->request->data('guildCreate'))
+        {
+            $this->Guild->add($this->request->data['guildCreate']);
+        }
+        
+        //Si c'est une action de mouvement
+        Elseif($this->request->data('guildJoin'))
+        {
+            $this->Fighter->joinGuild($fighterIdActual, $this->request->data['guildJoin']['guilds_id']);
+        }
+        
+        
     }
 
 }

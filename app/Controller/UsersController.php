@@ -13,7 +13,7 @@ class UsersController extends AppController
     
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('subscribe');
+        $this->Auth->allow('subscribe','password', 'login');
 
          
     }
@@ -31,7 +31,7 @@ class UsersController extends AppController
         if(!empty($this->request->data)){
             if($this->Auth->login())
                 {
-                    return $this->redirect('/Arenas/Index');  
+                    return $this->redirect('/Arenas/index');  
                 }
             Else
                 {
@@ -43,7 +43,7 @@ class UsersController extends AppController
     public function logout()
     {
         $this->Auth->logout();
-        return $this->redirect('/Arenas/Index');    
+        return $this->redirect('/Arenas/index');    
     }
     
     
@@ -71,12 +71,19 @@ class UsersController extends AppController
                     'password'  => $this->Auth->password($this->request->data['Playersubscribe']['password'])
                 );
 
-                $this->User->save($datas);    
-
+                if($this->User->save($datas))
+                {
+                    
+                }
+                Else
+                {
+                    $this->Flash->set('Email ou Password invalide');
+                }
 
             }
             //$this->User->subscribe($this->request->data['Playersubscribe']);
         } 
+        
     }
     
     /**
@@ -90,5 +97,55 @@ class UsersController extends AppController
         $this->set('raw',$this->User->findById($playerIdActual));
         $this->set('playerId',$playerIdActual);
     }
+    
+    function newPassword() {
+
+            $chrs = 8;
+            $chaine = ""; 
+            $list = "0123456789azertyuiopqsdfghjklmwxcvbnABCDEFGHIJKLMNOPQRSTUVWXYZ*-+/";
+
+            mt_srand((double)microtime()*1000000);
+
+            $newstring="";
+
+            while( strlen( $newstring )< $chrs ) {
+                    $newstring .= $list[mt_rand(0, strlen($list)-1)];
+            }
+        return $newstring;
+    }
+    
+    function password(){
+        
+        App::uses('CakeEmail', 'Network/Email');
+        if($this->request->is('post'))
+        {          
+            $u= current($this->request->data);
+            $user=$this->User->find('first', array(
+                'conditions'=> array('email'=>$u['email'])
+            ));
+            $password = $this->newPassword();
+            debug($password);
+            
+            $datas = array(
+                    'password'  => $this->Auth->password($password)
+                );
+            $this->User->save($datas);
+            //$link = array('controller'=>'users', 'action'=>'password', 'token'=>$user['User']['id'].'-'.md5($user['User']['password']));
+            $email = New CakeEmail('default');
+            $email->to($user['User']['email']);
+            $email->emailFormat('html');
+            $email->template('mdp');
+            $email->subject('Modification of your password');    
+            $email->viewVars(array('email'=>$user['User']['email'], 'password'=>$password));
+            $email->send();
+        }
+        
+        else {
+            
+        }
+    }
+    
+    
+    
     
 }

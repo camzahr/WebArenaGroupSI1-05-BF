@@ -6,11 +6,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+    $this->layout = 'unlogged';
+    echo $this->Html->link('Subscribe', array('controller' => 'Users', 'action' => 'subscribe'));
     echo $this->Form->create("User");
     echo $this->Form->input("email" , array("label"=> "E-Mail"));
     echo $this->Form->input("password");
+    echo $this->html->link('Mot de passe oublié ?', array('controller'=> 'users', 'action'=> 'password'));
     echo $this->Form->end("Login");
+    
 
 ?> 
 <!--<header >

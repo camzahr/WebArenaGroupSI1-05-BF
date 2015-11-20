@@ -46,14 +46,19 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                         <?php echo $this->Html->link('Sight', array('controller' => 'Arenas', 'action' => 'sight')); ?>
                         <?php echo $this->Html->link('Diary', array('controller' => 'Arenas', 'action' => 'diary')); ?>
                         <?php echo $this->Html->link('My Profil', array('controller' => 'Users', 'action' => 'display')); ?>
-                        <?php echo $this->Html->link('Subscribe', array('controller' => 'Users', 'action' => 'subscribe')); ?>
+                        <?php echo $this->Html->link('My Messages', array('controller' => 'Arenas', 'action' => 'message')); ?>
+                        <?php echo $this->Html->link('My Guild', array('controller' => 'Arenas', 'action' => 'guild')); ?>
+
+                        <?php //echo $this->Html->link('Subscribe', array('controller' => 'Users', 'action' => 'subscribe')); ?>
+
                         <?php echo $this->Html->link('Logout', array('controller'=> 'Users', 'action'=> 'logout'));?>
 		</div>
 		<div id="content">
 
 			<?php echo $this->Flash->render(); ?>
-                        
-			<?php echo $this->fetch('content'); ?>
+
+                	<?php echo $this->fetch('content'); ?>
+
 		</div>
 		<div id="footer">
 			<?php echo $this->Html->link(
