@@ -146,7 +146,7 @@ class ArenasController extends AppController
         }
         $playerIdActual = $this->Session->read('Auth.User.id');
         $fighterIdActual = $this->Session->read('Fighter.id');
-        $currentFighter = $this->Fighter->find('all' , array('conditions'=> array(
+        $currentFighter = $this->Fighter->find('first' , array('conditions'=> array(
                                                         'Fighter.id' => $fighterIdActual
                                                             )
                                             )
@@ -154,11 +154,11 @@ class ArenasController extends AppController
         
         $this->set('raw',$currentFighter);
         
-        $this->set('otherFighter',$this->Fighter->find('all' , array('conditions'=> array(
+        $this->set('othersFighters',$this->Fighter->find('all' , array('conditions'=> array(
                                                         'Fighter.coordinate_x <' => $currentFighter['Fighter']['coordinate_x'] + $currentFighter['Fighter']['skill_sight'],
                                                         'Fighter.coordinate_x >' => $currentFighter['Fighter']['coordinate_x'] - $currentFighter['Fighter']['skill_sight'],
-                                                        'Fighter.coordinate_x <' => $currentFighter['Fighter']['coordinate_x'] + $currentFighter['Fighter']['skill_sight'],
-                                                        'Fighter.coordinate_x <' => $currentFighter['Fighter']['coordinate_x'] + $currentFighter['Fighter']['skill_sight'],
+                                                        'Fighter.coordinate_y <' => $currentFighter['Fighter']['coordinate_y'] + $currentFighter['Fighter']['skill_sight'],
+                                                        'Fighter.coordinate_y >' => $currentFighter['Fighter']['coordinate_y'] - $currentFighter['Fighter']['skill_sight'],
                                                             )
                                             )
                              ));
@@ -182,6 +182,20 @@ class ArenasController extends AppController
             }
 
         }
+        
+        //Affichage des données           
+        $this->set('name', $currentFighter['Fighter']['name']);
+        $this->set('level', $currentFighter['Fighter']['level']);
+        $this->set('xp', $currentFighter['Fighter']['xp']);
+        $this->set('coordinate_x', $currentFighter['Fighter']['coordinate_x']);
+        $this->set('coordinate_y', $currentFighter['Fighter']['coordinate_y']);
+        $this->set('force', $currentFighter['Fighter']['skill_strength']);
+        $this->set('vision', $currentFighter['Fighter']['skill_sight']);
+        $this->set('vie', $currentFighter['Fighter']['skill_health']);
+
+        //Affichage des informations utilisateur
+        $this->set('email', $user);
+
 
 
     }
