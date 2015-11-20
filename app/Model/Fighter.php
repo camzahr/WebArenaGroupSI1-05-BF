@@ -19,6 +19,14 @@ class Fighter extends AppModel {
 
    );
     
+ public $validate = array(
+    'name' => array(
+        array(
+            'rule' => 'isUnique',
+            'message' => 'Pseudo déjà existant',
+
+        )));
+    
 
     
 //FONCTIONS DO MOVE    
@@ -363,6 +371,17 @@ public function generate($id,$name) {
     $this->create();
     $this->save($newData);
 }
+
+public function joinGuild($fighterId, $guildId) {
+    debug($guildId);
+        //récupérer la position et fixer l'id de travail
+        $datas = $this->read(null, $fighterId);
+        
+        $newData = array(
+            'guild_id'             => $guildId);
+        
+        $this->save($newData);
+    }
 
 
 }
