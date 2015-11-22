@@ -9,7 +9,7 @@ App::uses('AppController', 'Controller');
  */
 class ArenasController extends AppController
 {
-    public $uses = array('User', 'Fighter', 'Event', 'Message', 'Guild');
+    public $uses = array('User', 'Fighter', 'Event', 'Message', 'Guild', 'Tool');
     
     var $playerIdActual;
 
@@ -24,10 +24,6 @@ class ArenasController extends AppController
     public function index()
     {
        //$this->set('myname', "Jérémy Camilleri");
-       if ($this->request->is('post'))       
-        {            
-           pr($this->request->data);        
-        }
         
         $playerIdActual = $this->Session->read('Auth.User.id');
         $playerActual = $this->User->findById($playerIdActual);
@@ -74,6 +70,24 @@ class ArenasController extends AppController
         if($this->request->data('Fightercreate'))
         {
             $this->Fighter->generate($playerIdActual,$this->request->data['Fightercreate']['name']);
+            
+            $dataTool = array();
+            
+            $random = rand(1,3);
+            
+            if($random == 1){
+                $dataTool['type'] = 'strength';
+            }
+            Elseif($random == 2){
+                $dataTool['type'] = 'sight';
+            }
+            Else {
+                $dataTool['type'] = 'life';
+            }
+            
+            $dataTool['bonus'] = rand(1,3);
+            
+            $this->Tool->add($dataTool);
         }
         
         //Si on demande la création d'un nouveau personnage.
@@ -81,6 +95,8 @@ class ArenasController extends AppController
         {
             $this->Session->write('Fighter.id',$this->request->data['Fighterchoice']['fighter']);
             $fighterIdActual = $this->Session->read('Fighter.id');
+            
+           
         }
         
         //Si on demande un nouvel avatar
@@ -95,6 +111,8 @@ class ArenasController extends AppController
             $this->Fighter->newAvatar($fighterIdActual, $this->request->data['Fighternewavatar']);
             
         }
+       
+        
 
         $currentFighter = $this->Fighter->find('first' , array('conditions'=> array(
                                                         'Fighter.id' => $fighterIdActual
@@ -107,10 +125,10 @@ class ArenasController extends AppController
         
         
         $this->set('othersFighters',$this->Fighter->find('all' , array('conditions'=> array(
-                                                        'Fighter.coordinate_x <' => $currentFighter['Fighter']['coordinate_x'] + $currentFighter['Fighter']['skill_sight'],
-                                                        'Fighter.coordinate_x >' => $currentFighter['Fighter']['coordinate_x'] - $currentFighter['Fighter']['skill_sight'],
-                                                        'Fighter.coordinate_y <' => $currentFighter['Fighter']['coordinate_y'] + $currentFighter['Fighter']['skill_sight'],
-                                                        'Fighter.coordinate_y >' => $currentFighter['Fighter']['coordinate_y'] - $currentFighter['Fighter']['skill_sight'],
+                                                        'Fighter.coordinate_x <=' => $currentFighter['Fighter']['coordinate_x'] + $currentFighter['Fighter']['skill_sight'],
+                                                        'Fighter.coordinate_x >=' => $currentFighter['Fighter']['coordinate_x'] - $currentFighter['Fighter']['skill_sight'],
+                                                        'Fighter.coordinate_y <=' => $currentFighter['Fighter']['coordinate_y'] + $currentFighter['Fighter']['skill_sight'],
+                                                        'Fighter.coordinate_y >=' => $currentFighter['Fighter']['coordinate_y'] - $currentFighter['Fighter']['skill_sight'],
                                                         'Fighter.id !='          => $fighterIdActual
                                                             )
                                             )
@@ -126,6 +144,28 @@ class ArenasController extends AppController
                                             )
                              ));
         
+        $toolsCurrent = $this->Tool->find('all', array(
+            'conditions'    =>  array(
+                'Tool.coordinate_x' => $currentFighter['Fighter']['coordinate_x'],
+                'Tool.coordinate_y' => $currentFighter['Fighter']['coordinate_y']
+                
+            )
+        ));
+        
+        $this->set('tool',$toolsCurrent);
+        
+        $toolList = array();
+
+        foreach($toolsCurrent as $tool){
+            $toolList[$tool['Tool']['id']] = $tool['Tool']['type']." ".$tool['Tool']['bonus'];
+        }
+        $this->set('toolList',$toolList);
+        
+        //Si on demande la création d'un nouveau personnage.
+        if($this->request->data('Toolpickup'))
+        {
+            $this->Fighter->ramasserWeapon($fighterIdActual, $this->request->data['Toolpickup']['toolChoice']);
+        }
         
             //Si c'est une action de mouvement
         if($this->request->data('Fightermove'))
@@ -158,6 +198,9 @@ class ArenasController extends AppController
     {
         $playerIdActual = $this->Session->read('Auth.User.id');
         $fighterIdActual = $this->Session->read('Fighter.id');
+        $playerActual = $this->User->findById($playerIdActual);
+        $this->set('email', $playerActual['User']['email']);
+
         
         $this->set('fighterId',$fighterIdActual);
         
@@ -176,11 +219,7 @@ class ArenasController extends AppController
             
         }
         $this->set('fighterList',$fightersUser);
-        
-        if ($this->request->is('post'))       
-        {            
-            pr($this->request->data);        
-        }
+    
         
         $this->set('raw',$this->Fighter->find('all' , array('conditions'=> array(
                                                         'Fighter.id' => $fighterIdActual
@@ -192,6 +231,25 @@ class ArenasController extends AppController
         if($this->request->data('Fightercreate'))
         {
             $this->Fighter->generate($playerIdActual,$this->request->data['Fightercreate']['name']);
+            
+            //Création d'une nouvelle arme
+            $dataTool = array();
+            
+            $random = rand(1,3);
+            
+            if($random == 1){
+                $dataTool['type'] = 'strength';
+            }
+            Elseif($random == 2){
+                $dataTool['type'] = 'sight';
+            }
+            Else {
+                $dataTool['type'] = 'life';
+            }
+            
+            $dataTool['bonus'] = rand(1,3);
+            
+            $this->Tool->add($dataTool);
         }
         
         //Si on demande la création d'un nouveau personnage.
@@ -236,14 +294,11 @@ class ArenasController extends AppController
      */
     public function sight()
     {
-        if ($this->request->is('post'))       
-        {            
-            pr($this->request->data);  
-            
-
-        }
+ 
         $playerIdActual = $this->Session->read('Auth.User.id');
         $fighterIdActual = $this->Session->read('Fighter.id');
+        $playerActual = $this->User->findById($playerIdActual);
+        $this->set('email', $playerActual['User']['email']);
         
         $this->set('fighterId',$fighterIdActual);
 
@@ -284,6 +339,25 @@ class ArenasController extends AppController
         if($this->request->data('Fightercreate'))
         {
             $this->Fighter->generate($playerIdActual,$this->request->data['Fightercreate']['name']);
+            
+            //Création d'une nouvelle arme
+            $dataTool = array();
+            
+            $random = rand(1,3);
+            
+            if($random == 1){
+                $dataTool['type'] = 'strength';
+            }
+            Elseif($random == 2){
+                $dataTool['type'] = 'sight';
+            }
+            Else {
+                $dataTool['type'] = 'life';
+            }
+            
+            $dataTool['bonus'] = rand(1,3);
+            
+            $this->Tool->add($dataTool);
         }
         
         //Si on demande la création d'un nouveau personnage.
@@ -327,7 +401,7 @@ class ArenasController extends AppController
         }
         
         //Affichage des données           
-        $this->set('name', $currentFighter['Fighter']['name']);
+        $this->set('fv', $currentFighter['Fighter']['name']);
         $this->set('level', $currentFighter['Fighter']['level']);
         $this->set('xp', $currentFighter['Fighter']['xp']);
         $this->set('coordinate_x', $currentFighter['Fighter']['coordinate_x']);
@@ -353,6 +427,9 @@ class ArenasController extends AppController
         $playerIdActual = $this->Session->read('Auth.User.id');
         $fighterIdActual = $this->Session->read('Fighter.id');
         $this->set('fighterId',$fighterIdActual);
+        
+        $playerActual = $this->User->findById($playerIdActual);
+        $this->set('email', $playerActual['User']['email']);
 
         
         $fightersActual = $this->Fighter->find('all',array(
@@ -374,6 +451,25 @@ class ArenasController extends AppController
         if($this->request->data('Fightercreate'))
         {
             $this->Fighter->generate($playerIdActual,$this->request->data['Fightercreate']['name']);
+            
+            //Création d'une nouvelle arme
+            $dataTool = array();
+            
+            $random = rand(1,3);
+            
+            if($random == 1){
+                $dataTool['type'] = 'strength';
+            }
+            Elseif($random == 2){
+                $dataTool['type'] = 'sight';
+            }
+            Else {
+                $dataTool['type'] = 'life';
+            }
+            
+            $dataTool['bonus'] = rand(1,3);
+            
+            $this->Tool->add($dataTool);
         }
         
         //Si on demande la création d'un nouveau personnage.
@@ -415,6 +511,9 @@ class ArenasController extends AppController
         $playerIdActual = $this->Session->read('Auth.User.id');
         $fighterIdActual = $this->Session->read('Fighter.id');
         
+        $playerActual = $this->User->findById($playerIdActual);
+        $this->set('email', $playerActual['User']['email']);
+        
         $fightersActual = $this->Fighter->find('all',array(
                 'conditions' => array(
                     'Fighter.player_id' => $playerIdActual
@@ -438,6 +537,25 @@ class ArenasController extends AppController
         if($this->request->data('Fightercreate'))
         {
             $this->Fighter->generate($playerIdActual,$this->request->data['Fightercreate']['name']);
+            
+            //Création d'une nouvelle arme
+            $dataTool = array();
+            
+            $random = rand(1,3);
+            
+            if($random == 1){
+                $dataTool['type'] = 'strength';
+            }
+            Elseif($random == 2){
+                $dataTool['type'] = 'sight';
+            }
+            Else {
+                $dataTool['type'] = 'life';
+            }
+            
+            $dataTool['bonus'] = rand(1,3);
+            
+            $this->Tool->add($dataTool);
         }
         
         //Si on demande la création d'un nouveau personnage.
@@ -527,6 +645,9 @@ class ArenasController extends AppController
         $playerIdActual = $this->Session->read('Auth.User.id');
         $fighterIdActual = $this->Session->read('Fighter.id');
         
+        $playerActual = $this->User->findById($playerIdActual);
+        $this->set('email', $playerActual['User']['email']);
+        
         $fightersActual = $this->Fighter->find('all',array(
                 'conditions' => array(
                     'Fighter.player_id' => $playerIdActual
@@ -559,6 +680,25 @@ class ArenasController extends AppController
         if($this->request->data('Fightercreate'))
         {
             $this->Fighter->generate($playerIdActual,$this->request->data['Fightercreate']['name']);
+            
+            //Création d'une nouvelle arme
+            $dataTool = array();
+            
+            $random = rand(1,3);
+            
+            if($random == 1){
+                $dataTool['type'] = 'strength';
+            }
+            Elseif($random == 2){
+                $dataTool['type'] = 'sight';
+            }
+            Else {
+                $dataTool['type'] = 'life';
+            }
+            
+            $dataTool['bonus'] = rand(1,3);
+            
+            $this->Tool->add($dataTool);
         }
         
         //Si on demande la création d'un nouveau personnage.
