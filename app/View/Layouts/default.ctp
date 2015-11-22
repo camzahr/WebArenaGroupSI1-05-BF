@@ -195,6 +195,19 @@ $('.popover-markup>.trigger').popover({
         return $(this).parent().find('.content').html();
     }
 });
+
+
+var $select = $('#FightermoveDirection');
+$('a[href="#m"]').click(function () {
+    $select.val( $(this).data('select') );
+    $( "#FightermoveIndexForm" ).submit();
+});
+
+var $select2 = $('#FighterattackDirection');
+$('a[href="#a"]').click(function () {
+    $select.val( $(this).data('select') );
+    $( "#FighterattackIndexForm" ).submit();
+});
 </script>
 	
 	</body>

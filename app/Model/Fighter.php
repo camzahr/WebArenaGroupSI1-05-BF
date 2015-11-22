@@ -150,11 +150,12 @@ public function doMove($fighterId, $direction){
             //Empecher de sortir de l'arène
             if($this->verifLimit())
                 {
-                    echo("Mouvement Accepté !");
+                    echo "<script>location.reload();</script>";
+                //    echo("Mouvement Accepté !");
                 }
             else
                 {
-                    echo("Mouvement Invalide");
+                 echo "<script>location.reload();</script>";
                     return false;
                 }
             $this->save();
@@ -163,7 +164,7 @@ public function doMove($fighterId, $direction){
         }
     else
         {
-            echo("Mouvement invalide,case occupée");
+          echo "<script>location.reload();</script>";
             return false;
         }
 }

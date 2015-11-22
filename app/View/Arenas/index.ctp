@@ -7,12 +7,22 @@
       
 
 
-             <div class="col-md-4">     
-   <?php
-echo $myFighter['Fighter']['id'];
- $pic="img/avatars/".$myFighter['Fighter']['id'].".jpg";
+             <div class="col-md-4">    
 
- if (file_exists($pic)) { echo "LOOOL";}
+           <h3>Move</h3>
+            <a href="#m" data-select="west" /><img src="img/west.png" style="width: 70px; height: 70px;"/></a>
+            <a href="#m" data-select="north" /> <img src="img/up.png" style="width: 70px; height: 70px;"/></a>
+            <a href="#m" data-select="south" /><img src="img/down.png" style="width: 70px; height: 70px;"/></a>
+            <a href="#m" data-select="east" /><img src="img/east.png" style="width: 70px; height: 70px;"/></a>
+          <h3>Attack</h3>
+            <a href="#a" data-select="west" /><img src="img/west.png" style="width: 70px; height: 70px;"/></a>
+            <a href="#a" data-select="north" /> <img src="img/up.png" style="width: 70px; height: 70px;"/></a>
+            <a href="#a" data-select="south" /><img src="img/down.png" style="width: 70px; height: 70px;"/></a>
+            <a href="#a" data-select="east" /><img src="img/east.png" style="width: 70px; height: 70px;"/></a>
+         
+   <?php
+echo'<div style="display:none;">';
+
 echo $this->Form->create('Fightermove');
 echo $this->Form->input('direction',array('options' => array('north'=>'north','east'=>'east','south'=>'south','west'=>'west'), 'default' => 'east'));
 echo $this->Form->end('Move');
@@ -20,7 +30,7 @@ echo $this->Form->end('Move');
 echo $this->Form->create('Fighterattack');
 echo $this->Form->input('direction',array('options' => array('north'=>'north','east'=>'east','south'=>'south','west'=>'west'), 'default' => 'east'));
 echo $this->Form->end('Attack');
-
+echo'</div>';
 ?>
              </div>
 
@@ -116,7 +126,7 @@ for (var y = 40; y < 741; y += 70) {
         player$loop.src = '$pic';
         player$loop.onload = function(){
           context.drawImage(player$loop,$x+1,$y+1,69,50);
-        context.fillStyle = 'white';
+
         context.font = '15px Voltaire';
         context.fillText('$name',$x+2,$y+65);
 
