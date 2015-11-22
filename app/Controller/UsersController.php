@@ -97,6 +97,9 @@ class UsersController extends AppController
         $this->set('raw',$this->User->findById($playerIdActual));
         $this->set('playerId',$playerIdActual);
         
+        $playerActual = $this->User->findById($playerIdActual);
+        $this->set('email', $playerActual['User']['email']);
+        
         //Si on demande la création d'un nouveau personnage.
         if($this->request->data('Fightercreate'))
         {

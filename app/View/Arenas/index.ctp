@@ -35,8 +35,8 @@ echo'</div>';
 
 
 echo "Tool you can Pick up : ";
-pr ($tool);
-
+/*pr ($tool);
+*/
 echo $this->Form->create('Toolpickup');
 echo $this->Form->input('toolChoice',array('options' => $toolList));
 echo $this->Form->end('PickUp Tool');
