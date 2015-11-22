@@ -4,10 +4,8 @@ App::uses('AppModel', 'Model');
 
 class Message extends AppModel {
     public function add($id, $data) {
-        debug($id);
-        if(!empty($data))
+        if(!empty($data) AND !empty($id))
         {
-            debug($data);
             $newData = array(
             'title'             => $data['title'],
             'date'              => date("Y-m-d H:i:s"),

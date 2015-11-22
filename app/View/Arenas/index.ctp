@@ -30,7 +30,19 @@ echo $this->Form->end('Move');
 echo $this->Form->create('Fighterattack');
 echo $this->Form->input('direction',array('options' => array('north'=>'north','east'=>'east','south'=>'south','west'=>'west'), 'default' => 'east'));
 echo $this->Form->end('Attack');
+
 echo'</div>';
+
+
+echo "Tool you can Pick up : ";
+pr ($tool);
+
+echo $this->Form->create('Toolpickup');
+echo $this->Form->input('toolChoice',array('options' => $toolList));
+echo $this->Form->end('PickUp Tool');
+
+
+
 ?>
              </div>
 

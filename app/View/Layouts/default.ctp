@@ -87,7 +87,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
     'style' => 'height: 80px;'));?></p>
       </div>
 			 <div class="col-md-3">
-				 <span style=" font-family:'Voltaire',Arial,sans-serif; color: white; font-size: 1.5em;"><?php echo $raw['User']['email'] ?></span>
+				 <span style=" font-family:'Voltaire',Arial,sans-serif; color: white; font-size: 1.5em;"><?php echo $email ?></span>
 <div class="popover-markup"> 
     <a href="#" data-placement="bottom" class="trigger btn btn-default"><i class="fa fa-cogs fa-lg"></i> Edit Profile</a>  
 

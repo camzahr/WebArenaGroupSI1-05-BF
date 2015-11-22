@@ -2,6 +2,7 @@
 
 App::uses('AppModel', 'Model');
 App::uses('Event', 'Model');
+App::uses('Tool', 'Model');
 
 class Fighter extends AppModel {
 
@@ -71,12 +72,12 @@ protected function verifCaseOccupy($fighterId, $direction){
     {
     case 'north':
         $case = array('coordinate_x' => $datas['Fighter']['coordinate_x'],
-    'coordinate_y' => $datas['Fighter']['coordinate_y']+1);        
+    'coordinate_y' => $datas['Fighter']['coordinate_y']-1);        
         break;
 
     case 'south':
         $case = array('coordinate_x' => $datas['Fighter']['coordinate_x'],
-    'coordinate_y' => $datas['Fighter']['coordinate_y']-1);
+    'coordinate_y' => $datas['Fighter']['coordinate_y']+1);
         break;
 
     case 'east':
@@ -128,11 +129,11 @@ public function doMove($fighterId, $direction){
             switch ($direction)
                 {
                 case 'north':
-                    $this->set('coordinate_y', $datas['Fighter']['coordinate_y'] + 1);
+                    $this->set('coordinate_y', $datas['Fighter']['coordinate_y'] - 1);
                     break;
 
                 case 'south':
-                    $this->set('coordinate_y', $datas['Fighter']['coordinate_y'] - 1);
+                    $this->set('coordinate_y', $datas['Fighter']['coordinate_y'] + 1);
                     break;
 
                 case 'east':
@@ -231,6 +232,8 @@ protected function healthControl($fighterId) {
     
     $datas = $this->read(null, $fighterId);
     if ($datas['Fighter']['current_health'] < 1) {
+        $tool = new Tool();
+        $tool->fighterDie($fighterId, $datas['Fighter']['coordinate_x'], $datas['Fighter']['coordinate_y']);
         $this->delete();
     }
     
@@ -256,12 +259,12 @@ public function doAttack($fighterId, $direction){
     {
     case 'north':
         $case = array('coordinate_x' => $datas['Fighter']['coordinate_x'],
-    'coordinate_y' => $datas['Fighter']['coordinate_y']+1);        
+    'coordinate_y' => $datas['Fighter']['coordinate_y']-1);        
         break;
 
     case 'south':
         $case = array('coordinate_x' => $datas['Fighter']['coordinate_x'],
-    'coordinate_y' => $datas['Fighter']['coordinate_y']-1);
+    'coordinate_y' => $datas['Fighter']['coordinate_y']+1);
         break;
 
     case 'east':
@@ -450,6 +453,52 @@ public function joinGuild($fighterId, $guildId) {
                 }
             }
         else debug('NEIN');
+    }
+    
+    public function ramasserWeapon($fighterId, $toolId){
+        
+        $datas = $this->read(null, $fighterId);
+        
+        $tool = new Tool();
+        
+        $toolCurrent = $tool->find('first', array(
+            'conditions'    => array(
+                'Tool.coordinate_x'     => $datas['Fighter']['coordinate_x'],
+                'Tool.coordinate_y'     => $datas['Fighter']['coordinate_y'],
+                'Tool.id'               => $toolId
+            )
+        ));
+        
+        $tool->ramasseTool($toolId,$fighterId);
+        
+        switch ($toolCurrent['Tool']['type']) {
+        case 'strength':
+            $dataChanged =array(
+                'skill_strength' => ($datas['Fighter']['skill_strength'] + $toolCurrent['Tool']['bonus'])
+                );
+            break;
+        
+        case 'sight':
+            $dataChanged =array(
+                'skill_sight'   =>  ($datas['Fighter']['skill_sight'] + + $toolCurrent['Tool']['bonus']),
+                );
+            
+            break;
+        
+        case'life':
+            $dataChanged =array(
+                'skill_health'  =>  ($datas['Fighter']['skill_health'] + + $toolCurrent['Tool']['bonus']),
+                'current_health'=>  ($datas['Fighter']['skill_health'] + + $toolCurrent['Tool']['bonus'])
+                );
+            break;
+
+        default:
+            break;
+    }
+    
+    $this->save($dataChanged);
+        
+        
     }
 
 
