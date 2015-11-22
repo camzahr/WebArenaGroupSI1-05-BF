@@ -96,6 +96,32 @@ class UsersController extends AppController
         $playerIdActual = $this->Session->read('Auth.User.id');
         $this->set('raw',$this->User->findById($playerIdActual));
         $this->set('playerId',$playerIdActual);
+        
+        //Si on demande la création d'un nouveau personnage.
+        if($this->request->data('Fightercreate'))
+        {
+            $this->Fighter->generate($playerIdActual,$this->request->data['Fightercreate']['name']);
+        }
+        
+        //Si on demande la création d'un nouveau personnage.
+        if($this->request->data('Fighterchoice'))
+        {
+            $this->Session->write('Fighter.id',$this->request->data['Fighterchoice']['fighter']);
+            $fighterIdActual = $this->Session->read('Fighter.id');
+        }
+        
+        //Si on demande un nouvel avatar
+        if($this->request->data('Fighternewavatar'))
+        {
+            /*debug($this->request->data['Playernewavatar']);
+            $this->request->data->Player->id = '0c3ebe52-8024-11e5-96f5-5dcadefa4980';
+            if(!$this->Player->save($this->request->data))
+                {
+                debug($this->Player->invalidFields()); die();
+                }*/
+            $this->Fighter->newAvatar($fighterIdActual, $this->request->data['Fighternewavatar']);
+            
+        }
     }
     
     function newPassword() {

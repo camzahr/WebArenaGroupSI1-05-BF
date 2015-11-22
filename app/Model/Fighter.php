@@ -434,6 +434,22 @@ public function joinGuild($fighterId, $guildId) {
         
         $this->save($newData);
     }
+    
+    public function newAvatar($fighterId, $data) {
+        $datas = $this->read(null, $fighterId);
+
+        if(!empty($data['avatar_file']['tmp_name']))
+            {
+                debug("ACCEPTE");
+                $extension = strtolower(pathinfo($data['avatar_file']['name'], PATHINFO_EXTENSION));
+                if(in_array($extension, array('jpg')))
+                {
+                    move_uploaded_file($data['avatar_file']['tmp_name'], IMAGES.'avatars'.DS.$fighterId.'.'.$extension);
+                   
+                }
+            }
+        else debug('NEIN');
+    }
 
 
 }

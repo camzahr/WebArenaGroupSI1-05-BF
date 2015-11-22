@@ -82,7 +82,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
       </div>
       <div class="col-md-2">
         <p class="lead" style="text-align: right;"><?php 
-        echo $this->Html->image('avatars/'.$raw['User']['id'].'.jpg', array(
+        echo $this->Html->image('avatars/'.$fighterId.'.jpg', array(
     'alt' => 'ProfilePicture',
     'style' => 'height: 80px;'));?></p>
       </div>
@@ -104,8 +104,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
     echo $this->Form->input('name');
     echo $this->Form->end('Create');
     
-    echo $this->Form->create('Playernewavatar', array('type' => 'file'));
-    echo $this->Form->input('avatar_file',array('label' => 'Votre avatar (Jpeg ou PNG)', 'type' => 'file'));
+    echo $this->Form->create('Fighternewavatar', array('type' => 'file'));
+    echo $this->Form->input('avatar_file',array('label' => 'Votre avatar (Jpg)', 'type' => 'file'));
     echo $this->Form->end('Send');
     
     pr($fighterList);

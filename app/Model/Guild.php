@@ -23,7 +23,7 @@ class Guild extends AppModel {
         }
     }
     
-    public function join($guildId, $fighterId) {
+     public function join($guildId, $fighterId) {
         //récupérer la position et fixer l'id de travail
         $datas = $this->read(null, $guildId);
         

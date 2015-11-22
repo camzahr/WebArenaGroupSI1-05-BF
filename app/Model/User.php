@@ -47,7 +47,7 @@ class User extends AppModel {
         )
     );
      
-    public function newAvatar($playerId, $data) {
+   /* public function newAvatar($playerId, $data) {
         $datas = $this->read(null, $playerId);
 
         if(!empty($data['avatar_file']['tmp_name']))
@@ -61,7 +61,7 @@ class User extends AppModel {
                 }
             }
         else debug('NEIN');
-    }
+    }*/
     
     
     

@@ -8,12 +8,12 @@
 
 
 //PHP HELPER IMAGE 
-
+/*
 echo $this->Html->image('avatars/'.$playerId.'.jpg', array(
     'alt' => 'ProfilPicture',
     'style' => 'width: 200px;'));
 
-
+*/
  echo $raw['User']['email'];
 
 pr($raw); ?>

@@ -31,7 +31,7 @@ class ArenasController extends AppController
         
         $playerIdActual = $this->Session->read('Auth.User.id');
         $playerActual = $this->User->findById($playerIdActual);
-   
+        
         $this->set('raw',$playerActual);
         $this->set('email', $playerActual['User']['email']);
        
@@ -58,10 +58,17 @@ class ArenasController extends AppController
             
             
         }
-        if(!isset($fighterIdActual))
-        $fighterIdActual = $fightersActual[0]['Fighter']['id'];
-        
         $this->set('fighterList',$fightersUser);
+
+        $fighterIdActual = $this->Session->read('Fighter.id');
+        
+        if(empty($fighterIdActual)){
+        $fighterIdActual = $fightersActual[0]['Fighter']['id'];
+        }
+     
+        
+        $this->set('fighterId',$fighterIdActual);
+       
         
         //Si on demande la création d'un nouveau personnage.
         if($this->request->data('Fightercreate'))
@@ -77,7 +84,7 @@ class ArenasController extends AppController
         }
         
         //Si on demande un nouvel avatar
-        if($this->request->data('Playernewavatar'))
+        if($this->request->data('Fighternewavatar'))
         {
             /*debug($this->request->data['Playernewavatar']);
             $this->request->data->Player->id = '0c3ebe52-8024-11e5-96f5-5dcadefa4980';
@@ -85,7 +92,7 @@ class ArenasController extends AppController
                 {
                 debug($this->Player->invalidFields()); die();
                 }*/
-            $this->User->newAvatar($playerIdActual, $this->request->data['Playernewavatar']);
+            $this->Fighter->newAvatar($fighterIdActual, $this->request->data['Fighternewavatar']);
             
         }
 
@@ -96,6 +103,8 @@ class ArenasController extends AppController
                              );
         
         $this->set('myFighter',$currentFighter);
+        
+        
         
         $this->set('othersFighters',$this->Fighter->find('all' , array('conditions'=> array(
                                                         'Fighter.coordinate_x <' => $currentFighter['Fighter']['coordinate_x'] + $currentFighter['Fighter']['skill_sight'],
@@ -150,6 +159,24 @@ class ArenasController extends AppController
         $playerIdActual = $this->Session->read('Auth.User.id');
         $fighterIdActual = $this->Session->read('Fighter.id');
         
+        $this->set('fighterId',$fighterIdActual);
+        
+        $fightersActual = $this->Fighter->find('all',array(
+                'conditions' => array(
+                    'Fighter.player_id' => $playerIdActual
+                )
+            ));
+        
+        
+        $fightersUser = array();
+
+        foreach($fightersActual as $fighter){
+            $fightersUser[$fighter['Fighter']['id']] = $fighter['Fighter']['name'];
+            
+            
+        }
+        $this->set('fighterList',$fightersUser);
+        
         if ($this->request->is('post'))       
         {            
             pr($this->request->data);        
@@ -160,6 +187,32 @@ class ArenasController extends AppController
                                                             )
                                             )
                              ));
+        
+        //Si on demande la création d'un nouveau personnage.
+        if($this->request->data('Fightercreate'))
+        {
+            $this->Fighter->generate($playerIdActual,$this->request->data['Fightercreate']['name']);
+        }
+        
+        //Si on demande la création d'un nouveau personnage.
+        if($this->request->data('Fighterchoice'))
+        {
+            $this->Session->write('Fighter.id',$this->request->data['Fighterchoice']['fighter']);
+            $fighterIdActual = $this->Session->read('Fighter.id');
+        }
+        
+        //Si on demande un nouvel avatar
+        if($this->request->data('Fighternewavatar'))
+        {
+            /*debug($this->request->data['Playernewavatar']);
+            $this->request->data->Player->id = '0c3ebe52-8024-11e5-96f5-5dcadefa4980';
+            if(!$this->Player->save($this->request->data))
+                {
+                debug($this->Player->invalidFields()); die();
+                }*/
+            $this->Fighter->newAvatar($fighterIdActual, $this->request->data['Fighternewavatar']);
+            
+        }
         
         //Si c'est une action de newLevel
         if($this->request->data('Fighternewlevel'))
@@ -191,11 +244,29 @@ class ArenasController extends AppController
         }
         $playerIdActual = $this->Session->read('Auth.User.id');
         $fighterIdActual = $this->Session->read('Fighter.id');
+        
+        $this->set('fighterId',$fighterIdActual);
+
         $currentFighter = $this->Fighter->find('first' , array('conditions'=> array(
                                                         'Fighter.id' => $fighterIdActual
                                                             )
                                             )
                              );
+        
+         $fightersUser = array();
+         
+         $fightersActual = $this->Fighter->find('all',array(
+                'conditions' => array(
+                    'Fighter.player_id' => $playerIdActual
+                )
+            ));
+        
+        foreach($fightersActual as $fighter){
+            $fightersUser[$fighter['Fighter']['id']] = $fighter['Fighter']['name'];
+            
+            
+        }
+        $this->set('fighterList',$fightersUser);
         
         $this->set('raw',$currentFighter);
         
@@ -208,6 +279,32 @@ class ArenasController extends AppController
                                                             )
                                             )
                              ));
+        
+        //Si on demande la création d'un nouveau personnage.
+        if($this->request->data('Fightercreate'))
+        {
+            $this->Fighter->generate($playerIdActual,$this->request->data['Fightercreate']['name']);
+        }
+        
+        //Si on demande la création d'un nouveau personnage.
+        if($this->request->data('Fighterchoice'))
+        {
+            $this->Session->write('Fighter.id',$this->request->data['Fighterchoice']['fighter']);
+            $fighterIdActual = $this->Session->read('Fighter.id');
+        }
+        
+        //Si on demande un nouvel avatar
+        if($this->request->data('Fighternewavatar'))
+        {
+            /*debug($this->request->data['Playernewavatar']);
+            $this->request->data->Player->id = '0c3ebe52-8024-11e5-96f5-5dcadefa4980';
+            if(!$this->Player->save($this->request->data))
+                {
+                debug($this->Player->invalidFields()); die();
+                }*/
+            $this->Fighter->newAvatar($fighterIdActual, $this->request->data['Fighternewavatar']);
+            
+        }
         
         //Si c'est une action de mouvement
         if($this->request->data('Fightermove'))
@@ -255,6 +352,49 @@ class ArenasController extends AppController
     {
         $playerIdActual = $this->Session->read('Auth.User.id');
         $fighterIdActual = $this->Session->read('Fighter.id');
+        $this->set('fighterId',$fighterIdActual);
+
+        
+        $fightersActual = $this->Fighter->find('all',array(
+                'conditions' => array(
+                    'Fighter.player_id' => $playerIdActual
+                )
+            ));
+        
+         $fightersUser = array();
+
+        foreach($fightersActual as $fighter){
+            $fightersUser[$fighter['Fighter']['id']] = $fighter['Fighter']['name'];
+            
+            
+        }
+        $this->set('fighterList',$fightersUser);
+        
+        //Si on demande la création d'un nouveau personnage.
+        if($this->request->data('Fightercreate'))
+        {
+            $this->Fighter->generate($playerIdActual,$this->request->data['Fightercreate']['name']);
+        }
+        
+        //Si on demande la création d'un nouveau personnage.
+        if($this->request->data('Fighterchoice'))
+        {
+            $this->Session->write('Fighter.id',$this->request->data['Fighterchoice']['fighter']);
+            $fighterIdActual = $this->Session->read('Fighter.id');
+        }
+        
+       //Si on demande un nouvel avatar
+        if($this->request->data('Fighternewavatar'))
+        {
+            /*debug($this->request->data['Playernewavatar']);
+            $this->request->data->Player->id = '0c3ebe52-8024-11e5-96f5-5dcadefa4980';
+            if(!$this->Player->save($this->request->data))
+                {
+                debug($this->Player->invalidFields()); die();
+                }*/
+            $this->Fighter->newAvatar($fighterIdActual, $this->request->data['Fighternewavatar']);
+            
+        }
         
         $event = $this->Event->find('all', array(
                 'conditions' => array(
@@ -275,7 +415,50 @@ class ArenasController extends AppController
         $playerIdActual = $this->Session->read('Auth.User.id');
         $fighterIdActual = $this->Session->read('Fighter.id');
         
+        $fightersActual = $this->Fighter->find('all',array(
+                'conditions' => array(
+                    'Fighter.player_id' => $playerIdActual
+                )
+            ));
+        
         $this->set('playerId',$playerIdActual);
+        $this->set('fighterId',$fighterIdActual);
+
+        
+         $fightersUser = array();
+
+        foreach($fightersActual as $fighter){
+            $fightersUser[$fighter['Fighter']['id']] = $fighter['Fighter']['name'];
+            
+            
+        }
+        $this->set('fighterList',$fightersUser);
+        
+        //Si on demande la création d'un nouveau personnage.
+        if($this->request->data('Fightercreate'))
+        {
+            $this->Fighter->generate($playerIdActual,$this->request->data['Fightercreate']['name']);
+        }
+        
+        //Si on demande la création d'un nouveau personnage.
+        if($this->request->data('Fighterchoice'))
+        {
+            $this->Session->write('Fighter.id',$this->request->data['Fighterchoice']['fighter']);
+            $fighterIdActual = $this->Session->read('Fighter.id');
+        }
+        
+        //Si on demande un nouvel avatar
+        if($this->request->data('Fighternewavatar'))
+        {
+            /*debug($this->request->data['Playernewavatar']);
+            $this->request->data->Player->id = '0c3ebe52-8024-11e5-96f5-5dcadefa4980';
+            if(!$this->Player->save($this->request->data))
+                {
+                debug($this->Player->invalidFields()); die();
+                }*/
+            $this->Fighter->newAvatar($fighterIdActual, $this->request->data['Fighternewavatar']);
+            
+        }
         
         $messages = $this->Message->find('all', array(
                 'conditions' => array(
@@ -344,7 +527,24 @@ class ArenasController extends AppController
         $playerIdActual = $this->Session->read('Auth.User.id');
         $fighterIdActual = $this->Session->read('Fighter.id');
         
+        $fightersActual = $this->Fighter->find('all',array(
+                'conditions' => array(
+                    'Fighter.player_id' => $playerIdActual
+                )
+            ));
+        
+        
         $this->set('playerId',$playerIdActual);
+        $this->set('fighterId',$fighterIdActual);
+        
+        $fightersUser = array();
+
+        foreach($fightersActual as $fighter){
+            $fightersUser[$fighter['Fighter']['id']] = $fighter['Fighter']['name'];
+            
+            
+        }
+        $this->set('fighterList',$fightersUser);
         
         $guilds = $this->Guild->find('all');
         
@@ -353,6 +553,32 @@ class ArenasController extends AppController
         foreach($guilds as $guild){
             $guildsName[$guild['Guild']['id']] = $guild['Guild']['name'];
   
+        }
+        
+        //Si on demande la création d'un nouveau personnage.
+        if($this->request->data('Fightercreate'))
+        {
+            $this->Fighter->generate($playerIdActual,$this->request->data['Fightercreate']['name']);
+        }
+        
+        //Si on demande la création d'un nouveau personnage.
+        if($this->request->data('Fighterchoice'))
+        {
+            $this->Session->write('Fighter.id',$this->request->data['Fighterchoice']['fighter']);
+            $fighterIdActual = $this->Session->read('Fighter.id');
+        }
+        
+        //Si on demande un nouvel avatar
+        if($this->request->data('Fighternewavatar'))
+        {
+            /*debug($this->request->data['Playernewavatar']);
+            $this->request->data->Player->id = '0c3ebe52-8024-11e5-96f5-5dcadefa4980';
+            if(!$this->Player->save($this->request->data))
+                {
+                debug($this->Player->invalidFields()); die();
+                }*/
+            $this->Fighter->newAvatar($fighterIdActual, $this->request->data['Fighternewavatar']);
+            
         }
         
         $this->set('guildsName',$guildsName);

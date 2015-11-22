@@ -4,6 +4,7 @@ App::uses('AppModel', 'Model');
 
 class Message extends AppModel {
     public function add($id, $data) {
+        debug($id);
         if(!empty($data))
         {
             debug($data);
