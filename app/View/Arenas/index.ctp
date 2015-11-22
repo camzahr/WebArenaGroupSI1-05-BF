@@ -1,95 +1,14 @@
 
-<div class="col-md-9">
+<div class="col-md-12">
 
-       <canvas id="c" width="801px" height="741px" ></canvas>
-       
+       <canvas id="c" width="1080px" height="741px" ></canvas>
+       </div>
 
       
 
-                 
-  <div class="container well well-lg">
-    
-    <div class="row">
-            
-        <div class="col-sm-3">
-          <div class="list-group">
-            <a href="#" class="list-group-item">
-              <span class="text-success"><i class="icon-film"></i></span> Carousel</a>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="list-group">
-            <a href="#" class="list-group-item">
-              <span class="text-success"><i class="icon-folder-close-alt"></i></span> Tabs</a>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="list-group">
-            <a href="#" class="list-group-item">
-              <span class="text-success"><i class="icon-credit-card"></i></span> Modal</a>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="list-group">
-            <a href="#" class="list-group-item">
-              <span class="text-success"><i class="icon-reorder"></i></span> Navigation</a>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="list-group">
-            <a href="#" class="list-group-item">
-              <span class="text-success"><i class="icon-mobile-phone"></i></span> Mobile-first</a>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="list-group">
-            <a href="#" class="list-group-item">
-              <span class="text-success"><i class="icon-align-justify"></i></span> Accordion</a>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="list-group">
-            <a href="#" class="list-group-item">
-              <span class="text-success"><i class="icon-list-alt"></i></span> Panel</a>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="list-group">
-            <a href="#" class="list-group-item">
-              <span class="text-success"><i class="icon-check"></i></span> Form</a>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="list-group">
-            <a href="#" class="list-group-item">
-              <span class="text-success"><i class="icon-table"></i></span> Table</a>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="list-group">
-            <a href="#" class="list-group-item">
-              <span class="text-success"><i class="icon-eye-open"></i></span> Icons</a>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="list-group">
-            <a href="#" class="list-group-item">
-              <span class="text-success"><i class="icon-th"></i></span> Responsive Grid</a>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="list-group">
-            <a href="#" class="list-group-item">
-              <span class="text-success"><i class="icon-font"></i></span> Typography</a>
-          </div>
-        </div>      
-    </div>
-  </div>
 
-      </div>
-      <div class="col-md-3">
-
-<?php
+             <div class="col-md-4">     
+   <?php
 
 
 echo $this->Form->create('Fightermove');
@@ -101,6 +20,12 @@ echo $this->Form->input('direction',array('options' => array('north'=>'north','e
 echo $this->Form->end('Attack');
 
 ?>
+             </div>
+
+
+               <div class="col-md-8">
+
+
 
             <div class="commentArea" id="messages" style="overflow-y: scroll; height:400px; background-color: #e7e7e7;" >
         <div class="bubbledRight">
@@ -138,6 +63,10 @@ echo $this->Form->end('Attack');
             
             </div>
 
+  </div>
+
+      </div>
+    
 
 
 <script>
@@ -152,7 +81,7 @@ var img = new Image();
 img.onload = function(){
 context.drawImage(img,0,0);
     
-for (var x = 0.5; x < 801; x += 70) {
+for (var x = 0.5; x < 1081; x += 70) {
   context.moveTo(x, 0);
   context.lineTo(x, 741);
 }
@@ -162,7 +91,7 @@ for (var x = 0.5; x < 801; x += 70) {
   
 for (var y = 40; y < 741; y += 70) {
   context.moveTo(0, y);
-  context.lineTo(800, y);
+  context.lineTo(1080, y);
 }
 
   <?php 
@@ -223,7 +152,7 @@ for (var y = 40; y < 741; y += 70) {
 
 
     context.fillStyle = 'rgba(0,0,0,0.5)';
-    context.fillRect($maxx+70,40,700-$maxx,700);
+    context.fillRect($maxx+70,40,981-$maxx,700);
      context.fillRect(0,$miny,$minx,700);
 
 
@@ -246,7 +175,7 @@ context.stroke();
 };
 
 
-img.src = 'http://thejals.com/~thejals/bootstrap/img/background-png.png';
+img.src = 'img/background-png.png';
 
 
 

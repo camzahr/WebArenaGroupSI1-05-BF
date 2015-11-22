@@ -58,7 +58,7 @@ class ArenasController extends AppController
             
             
         }
-        if(!$fighterIdActual)
+        if(!isset($fighterIdActual))
         $fighterIdActual = $fightersActual[0]['Fighter']['id'];
         
         $this->set('fighterList',$fightersUser);
