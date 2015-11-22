@@ -37,12 +37,7 @@ class ArenasController extends AppController
        
         
         //On affiche la liste des nom de joueurs actuellement dans l'arène
-        $players = $this->Fighter->find('all');
-        echo "Joueurs Actuellement dans l'Arène : ";
-        foreach ($players as $player) 
-        {
-            echo "</br>".$player['Fighter']['name'];
-        }
+       
         
         /*foreach ($Events as $event) 
         {
@@ -93,8 +88,55 @@ class ArenasController extends AppController
             $this->User->newAvatar($playerIdActual, $this->request->data['Playernewavatar']);
             
         }
+
+        $currentFighter = $this->Fighter->find('first' , array('conditions'=> array(
+                                                        'Fighter.id' => $fighterIdActual
+                                                            )
+                                            )
+                             );
+        
+        $this->set('myFighter',$currentFighter);
+        
+        $this->set('othersFighters',$this->Fighter->find('all' , array('conditions'=> array(
+                                                        'Fighter.coordinate_x <' => $currentFighter['Fighter']['coordinate_x'] + $currentFighter['Fighter']['skill_sight'],
+                                                        'Fighter.coordinate_x >' => $currentFighter['Fighter']['coordinate_x'] - $currentFighter['Fighter']['skill_sight'],
+                                                        'Fighter.coordinate_y <' => $currentFighter['Fighter']['coordinate_y'] + $currentFighter['Fighter']['skill_sight'],
+                                                        'Fighter.coordinate_y >' => $currentFighter['Fighter']['coordinate_y'] - $currentFighter['Fighter']['skill_sight'],
+                                                        'Fighter.id !='          => $fighterIdActual
+                                                            )
+                                            )
+                             ));
+
+        $this->set('invisibleFighters',$this->Fighter->find('all' , array('conditions'=> array(
+                                                        'Fighter.coordinate_x >' => $currentFighter['Fighter']['coordinate_x'] + $currentFighter['Fighter']['skill_sight'],
+                                                        'Fighter.coordinate_x <' => $currentFighter['Fighter']['coordinate_x'] - $currentFighter['Fighter']['skill_sight'],
+                                                        'Fighter.coordinate_y >' => $currentFighter['Fighter']['coordinate_y'] + $currentFighter['Fighter']['skill_sight'],
+                                                        'Fighter.coordinate_y <' => $currentFighter['Fighter']['coordinate_y'] - $currentFighter['Fighter']['skill_sight'],
+                                                        'Fighter.id !='          => $fighterIdActual
+                                                            )
+                                            )
+                             ));
         
         
+            //Si c'est une action de mouvement
+        if($this->request->data('Fightermove'))
+        {
+            $this->Fighter->doMove($fighterIdActual, $this->request->data['Fightermove']['direction']);
+        }
+        
+        //Si c'est une action d'attaque
+        Elseif($this->request->data('Fighterattack'))
+        {
+            if ($this->Fighter->doAttack($fighterIdActual, $this->request->data['Fighterattack']['direction']))
+            {
+                
+            }
+            Else
+            {
+                $this->Flash->set("Attaque Ratée !!");
+            }
+
+        }
   
     }
     
