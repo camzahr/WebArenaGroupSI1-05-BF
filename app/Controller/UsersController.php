@@ -31,7 +31,7 @@ class UsersController extends AppController
         if(!empty($this->request->data)){
             if($this->Auth->login())
                 {
-                    return $this->redirect('/Arenas/Index');  
+                    return $this->redirect('/Arenas/index');  
                 }
             Else
                 {
@@ -43,7 +43,7 @@ class UsersController extends AppController
     public function logout()
     {
         $this->Auth->logout();
-        return $this->redirect('/Arenas/Index');    
+        return $this->redirect('/Arenas/index');    
     }
     
     
@@ -144,6 +144,8 @@ class UsersController extends AppController
             
         }
     }
+    
+    
     
     
 }

@@ -19,6 +19,14 @@ class Fighter extends AppModel {
 
    );
     
+ public $validate = array(
+    'name' => array(
+        array(
+            'rule' => 'isUnique',
+            'message' => 'Pseudo déjà existant',
+
+        )));
+    
 
     
 //FONCTIONS DO MOVE    
@@ -162,6 +170,54 @@ public function doMove($fighterId, $direction){
 
 //FONCTIONS DO ATTACK
 
+protected function guildControl($fighterId, $attackerGuildId) {
+
+    $datas = $this->read(null, $fighterId);
+    
+    $west = $this->find('first', array(
+        'conditions' => array(
+            'Fighter.guild_id'      => $attackerGuildId,
+            'Fighter.coordinate_x'  => $datas['Fighter']['coordinate_x'] - 1,
+            'Fighter.coordinate_y'  => $datas['Fighter']['coordinate_y']
+        )
+    ));
+    
+    $est = $this->find('first', array(
+        'conditions' => array(
+            'Fighter.guild_id'      => $attackerGuildId,
+            'Fighter.coordinate_x'  => $datas['Fighter']['coordinate_x'] + 1,
+            'Fighter.coordinate_y'  => $datas['Fighter']['coordinate_y']
+        )
+    ));
+    
+    $south = $this->find('first', array(
+        'conditions' => array(
+            'Fighter.guild_id'      => $attackerGuildId,
+            'Fighter.coordinate_x'  => $datas['Fighter']['coordinate_x'],
+            'Fighter.coordinate_y'  => $datas['Fighter']['coordinate_y'] + 1
+        )
+    ));
+    
+    $north = $this->find('first', array(
+        'conditions' => array(
+            'Fighter.guild_id'      => $attackerGuildId,
+            'Fighter.coordinate_x'  => $datas['Fighter']['coordinate_x'],
+            'Fighter.coordinate_y'  => $datas['Fighter']['coordinate_y'] - 1
+        )
+    ));
+    
+    $result = 0;
+    
+    if($west) $result = $result + 1;
+    if($south) $result = $result + 1;
+    if($est) $result = $result + 1;
+    if($north) $result = $result + 1;
+    
+    //on enleve l'attaquant
+    $result = $result - 1;
+    
+    return $result;
+}
 
 protected function xpIncrease($fighterId, $level) {
 
@@ -255,8 +311,12 @@ public function doAttack($fighterId, $direction){
             {
                 $dataEvent['name'] = $datas['Fighter']['name'] . " Attack " . $ennemy['Fighter']['name'];
                 echo"Attaque Réussie ";
+                
+                $bonusGuild = $this->guildControl($ennemy['Fighter']['id'], $datas['Fighter']['guild_id']);
+                debug("BONUS : ".$bonusGuild);
+                
                 $change = array(
-                    'current_health' => $ennemy['Fighter']['current_health'] - $datas['Fighter']['level']
+                    'current_health' => $ennemy['Fighter']['current_health'] - $datas['Fighter']['skill_strength'] - $bonusGuild
                 );
                 $this->hurt($ennemy['Fighter']['id'], $datas['Fighter']['skill_strength']);
                 //SI DESTRUCTION
@@ -363,6 +423,17 @@ public function generate($id,$name) {
     $this->create();
     $this->save($newData);
 }
+
+public function joinGuild($fighterId, $guildId) {
+    debug($guildId);
+        //récupérer la position et fixer l'id de travail
+        $datas = $this->read(null, $fighterId);
+        
+        $newData = array(
+            'guild_id'             => $guildId);
+        
+        $this->save($newData);
+    }
 
 
 }
