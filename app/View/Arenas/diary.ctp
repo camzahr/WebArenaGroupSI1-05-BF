@@ -1,7 +1,6 @@
 <?php $this->assign('title', 'Diary');
     ?>
 
-//Variable PHP
 <table class="table">
                             <thead>
                                 <tr class="filters">
