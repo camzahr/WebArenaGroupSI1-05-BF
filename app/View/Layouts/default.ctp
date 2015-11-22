@@ -52,7 +52,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <div class="navbar navbar-fixed-top alt" data-spy="affix" data-offset-top="1000">
   <div class="container">
     <div class="navbar-header">
-      <a href="#" class="navbar-brand">Home</a>
+     
       <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -61,7 +61,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
     </div>
     <div class="navbar-collapse collapse" id="navbar">
       <ul class="nav navbar-nav">
-                       <li> <?php echo $this->Html->link('Index', array('controller' => 'Arenas', 'action' => 'index')); ?></li>
+                       <li> <?php echo $this->Html->link('Home', array('controller' => 'Arenas', 'action' => 'index')); ?></li>
                        <li> <?php echo $this->Html->link('Fighter', array('controller' => 'Arenas', 'action' => 'fighter')); ?></li>
                        <li> <?php echo $this->Html->link('Sight', array('controller' => 'Arenas', 'action' => 'sight')); ?></li>
                        <li> <?php echo $this->Html->link('Diary', array('controller' => 'Arenas', 'action' => 'diary')); ?></li>

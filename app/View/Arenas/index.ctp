@@ -9,8 +9,10 @@
 
              <div class="col-md-4">     
    <?php
+echo $myFighter['Fighter']['id'];
+ $pic="img/avatars/".$myFighter['Fighter']['id'].".jpg";
 
-
+ if (file_exists($pic)) { echo "LOOOL";}
 echo $this->Form->create('Fightermove');
 echo $this->Form->input('direction',array('options' => array('north'=>'north','east'=>'east','south'=>'south','west'=>'west'), 'default' => 'east'));
 echo $this->Form->end('Move');
@@ -106,13 +108,15 @@ for (var y = 40; y < 741; y += 70) {
             $x=$player['Fighter']['coordinate_x']*70;
             $y=40+$player['Fighter']['coordinate_y']*70;
             $name=$player['Fighter']['name'];
-            $pic="img/avatars/".$player['Player']['id'].".jpg";
+            $pic="img/avatars/".$player['Fighter']['id'].".jpg";
+              if (!file_exists($pic)) {$pic="img/empty-profile.jpg";}
 
          echo"
                   var player$loop = new Image();  
-        player$loop.src = 'http://thejals.com/~thejals/bootstrap/img/empty-profile.jpg';
+        player$loop.src = '$pic';
         player$loop.onload = function(){
           context.drawImage(player$loop,$x+1,$y+1,69,50);
+        context.fillStyle = 'white';
         context.font = '15px Voltaire';
         context.fillText('$name',$x+2,$y+65);
 
@@ -124,8 +128,9 @@ for (var y = 40; y < 741; y += 70) {
             $x=$myFighter['Fighter']['coordinate_x']*70;
             $y=40+$myFighter['Fighter']['coordinate_y']*70;
             $name=$myFighter['Fighter']['name'];
-            $pic="img/avatars/".$raw['User']['id'].".jpg";
- 
+            $pic="img/avatars/".$myFighter['Fighter']['id'].".jpg";
+            
+            if (!file_exists($pic)) {$pic="img/empty-profile.jpg";}
         
          echo"
                   var players = new Image();   // Crée un nouvel objet Image
