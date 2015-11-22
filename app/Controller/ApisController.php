@@ -7,7 +7,7 @@ App::uses('AppController', 'Controller');
  
 class ApisController extends AppController
 {
-    public $uses = array ('User','Fighter','Event');
+     public $uses = array('User', 'Fighter', 'Event', 'Message', 'Guild');
 
 
   public function fighterview($id)
@@ -40,9 +40,23 @@ $this->set('datas', $this->User->find('all', array(
             'Event.id' => $id
             )
     )));
- 
  }
  
+   public function domoveview($id,$direction)
+ {
+     $this->layout = 'ajax'; 
+     $this->Fighter->doMove($id,$direction);
+     
+    
+ }
+   public function doattackview($id,$direction)
+ {
+     $this->layout = 'ajax'; 
+     $this->Fighter->doAttack($id,$direction);
+     
+    
+ }
+
  
 /* 
  * To change this license header, choose License Headers in Project Properties.
