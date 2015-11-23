@@ -474,21 +474,27 @@ public function joinGuild($fighterId, $guildId) {
         switch ($toolCurrent['Tool']['type']) {
         case 'strength':
             $dataChanged =array(
-                'skill_strength' => ($datas['Fighter']['skill_strength'] + $toolCurrent['Tool']['bonus'])
+                'skill_strength'    => ($datas['Fighter']['skill_strength'] + $toolCurrent['Tool']['bonus'])
                 );
             break;
         
         case 'sight':
             $dataChanged =array(
-                'skill_sight'   =>  ($datas['Fighter']['skill_sight'] + + $toolCurrent['Tool']['bonus']),
+                'skill_sight'       =>  ($datas['Fighter']['skill_sight'] + $toolCurrent['Tool']['bonus']),
                 );
             
             break;
         
-        case'life':
+        case'health':
             $dataChanged =array(
-                'skill_health'  =>  ($datas['Fighter']['skill_health'] + + $toolCurrent['Tool']['bonus']),
-                'current_health'=>  ($datas['Fighter']['skill_health'] + + $toolCurrent['Tool']['bonus'])
+                'skill_health'      =>  ($datas['Fighter']['skill_health'] + $toolCurrent['Tool']['bonus']),
+                'current_health'    =>  ($datas['Fighter']['skill_health'] + $toolCurrent['Tool']['bonus'])
+                );
+            break;
+        
+        case'lifePoints':
+            $dataChanged =array(
+                'current_health'    =>  ($datas['Fighter']['skill_health'])
                 );
             break;
 

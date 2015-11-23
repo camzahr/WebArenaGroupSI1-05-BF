@@ -340,10 +340,10 @@ class ArenasController extends AppController
         {
             $this->Fighter->generate($playerIdActual,$this->request->data['Fightercreate']['name']);
             
-            //Création d'une nouvelle arme
+            //Création d'un nouveau Tool
             $dataTool = array();
             
-            $random = rand(1,3);
+            $random = rand(1,4);
             
             if($random == 1){
                 $dataTool['type'] = 'strength';
@@ -351,8 +351,11 @@ class ArenasController extends AppController
             Elseif($random == 2){
                 $dataTool['type'] = 'sight';
             }
+            Elseif($random == 3) {
+                $dataTool['type'] = 'health';
+            }
             Else {
-                $dataTool['type'] = 'life';
+                $dataTool['type'] = 'lifePoints';
             }
             
             $dataTool['bonus'] = rand(1,3);
@@ -401,14 +404,15 @@ class ArenasController extends AppController
         }
         
         //Affichage des données           
-        $this->set('fv', $currentFighter['Fighter']['name']);
+        $this->set('name', $currentFighter['Fighter']['name']);
         $this->set('level', $currentFighter['Fighter']['level']);
         $this->set('xp', $currentFighter['Fighter']['xp']);
         $this->set('coordinate_x', $currentFighter['Fighter']['coordinate_x']);
         $this->set('coordinate_y', $currentFighter['Fighter']['coordinate_y']);
         $this->set('force', $currentFighter['Fighter']['skill_strength']);
         $this->set('vision', $currentFighter['Fighter']['skill_sight']);
-        $this->set('vie', $currentFighter['Fighter']['skill_health']);
+        $this->set('vieMax', $currentFighter['Fighter']['skill_health']);
+        $this->set('vieActuelle', $currentFighter['Fighter']['current_health']);
 
         //Affichage des informations utilisateur
         $this->set('email', $this->Session->read('Auth.User.email'));
