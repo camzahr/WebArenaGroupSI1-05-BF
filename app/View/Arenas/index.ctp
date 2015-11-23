@@ -8,18 +8,29 @@
 
 
              <div class="col-md-12" style="background: #232134 url('http://www.bootply.com/assets/example/pt_topo.png') repeat center center fixed; position: fixed; bottom: 0; left: 0; z-index: 999; padding-bottom: 20px;">    
-  <div class="col-md-2" style='color: white;   font-family: Voltaire;'>  <h3 style="color: white; font-family: Voltaire;">Your Fighter</h3>
-    Position: <?php 
+  <div class="col-md-2" style='color: white;   font-family: Voltaire;'>  <h3 style="color: white; font-family: Voltaire;">
+<span style="color: #b59100;" > LVL<?php echo $myFighter['Fighter']['level']; ?></span>
+ <?php echo $myFighter['Fighter']['name']; ?></h3>
+    <?php 
     $alpha = array('A','B','C','D','E','F','G','H','I','J','K', 'L','M','N','O','P','Q','R','S','T','U','V','W','X ','Y','Z');
 
-    echo  $alpha[$myFighter['Fighter']['coordinate_x']-1].$myFighter['Fighter']['coordinate_y']; ?>
+     $life_percent=(100*$myFighter['Fighter']['current_health'])/$myFighter['Fighter']['skill_health'];?>
 
-    <div class="progress">
-  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-    Life: 60 / 1000
+    <div class="progress" style="height: 30px; margin-bottom: 5px; margin-top:5px;">
+  <div class="progress-bar progress-bar-success progress-bar-striped active"  role="progressbar" aria-valuenow="<?php echo $myFighter['Fighter']['current_health']; ?>" aria-valuemin="0" aria-valuemax="<?php echo $myFighter['Fighter']['skill_health']; ?>" style="width: <?php echo $life_percent;?>%; font-size: 20px; padding-top: 5px;">
+  <?php echo "  Life: ".$myFighter['Fighter']['current_health']."/ ".$myFighter['Fighter']['skill_health']." "; ?>
+  </div>
+</div>
+<?php $xp_percent=(100*$myFighter['Fighter']['xp'])/4; if($xp_percent>100){$xp_percent=100;} ?>
+ <div class="progress" style="height: 30px; margin-bottom: 5px; margin-top:5px;">
+  <div class="progress-bar progress-bar-warning progress-bar-striped active"  role="progressbar" aria-valuenow="<?php echo $myFighter['Fighter']['current_health']; ?>" aria-valuemin="0" aria-valuemax="4" style="width: <?php echo $xp_percent;?>%; font-size: 20px; padding-top: 5px;">
+  <?php echo "  XP: ".$myFighter['Fighter']['xp']."/ 4 "; ?>
   </div>
 </div>
 
+<?php 
+echo  "Position: ".$alpha[$myFighter['Fighter']['coordinate_x']-1].$myFighter['Fighter']['coordinate_y']; 
+?>
   </div>   
 <div class="col-md-3">   
            <h3 style="color: white; font-family: Voltaire;">Move</h3>
@@ -216,7 +227,8 @@ for (var y = 40; y < 741; y += 70) {
       $minx=$x-$surround;
 
   
-     
+      if ($minx<0) {$minx=0;}
+      if ($miny<0) {$miny=0;}
  echo"
 
 
@@ -224,7 +236,7 @@ for (var y = 40; y < 741; y += 70) {
     context.fillRect($maxx+70,40,981-$maxx,700);
      context.fillRect(0,$miny,$minx,700);
 
-
+ 
        context.fillRect(0,40,$maxx+70,$miny+40-70-10);
 
 
@@ -234,7 +246,7 @@ for (var y = 40; y < 741; y += 70) {
 
 
         
-    ";
+    "; 
 ?>
 
 

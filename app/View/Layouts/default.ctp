@@ -205,14 +205,44 @@ $('a[href="#m"]').click(function () {
 
 var $select2 = $('#FighterattackDirection');
 $('a[href="#a"]').click(function () {
-    $select.val( $(this).data('select') );
+    $select2.val( $(this).data('select') );
     $( "#FighterattackIndexForm" ).submit();
 });
 
 var $select3 = $('#ToolpickupToolChoice');
 $('a[href="#t"]').click(function () {
-    $select.val( $(this).data('select') );
+    $select3.val( $(this).data('select') );
     $( "#ToolpickupIndexForm" ).submit();
+});
+
+$(document).keydown(function(e) {
+    switch(e.which) {
+        case 37: // left
+        var $select = $('#FightermoveDirection');
+         $select.val("west");
+         $( "#FighterattackIndexForm" ).submit();
+        break;
+
+        case 38: // up
+        var $select = $('#FightermoveDirection');
+         $select.val("north");
+         $( "#FighterattackIndexForm" ).submit();
+        break;
+        var $select = $('#FightermoveDirection');
+         $select.val("east");
+         $( "#FighterattackIndexForm" ).submit();
+        case 39: // right
+        break;
+
+        case 40: // down
+        var $select = $('#FightermoveDirection');
+         $select.val("south");
+         $( "#FighterattackIndexForm" ).submit();
+        break;
+
+        default: return; // exit this handler for other keys
+    }
+    e.preventDefault(); // prevent the default action (scroll / move caret)
 });
 </script>
 	
