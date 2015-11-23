@@ -7,19 +7,89 @@
       
 
 
-             <div class="col-md-4">    
+             <div class="col-md-12" style="background: #232134 url('http://www.bootply.com/assets/example/pt_topo.png') repeat center center fixed; position: fixed; bottom: 0; left: 0; z-index: 999; padding-bottom: 20px;">    
+  <div class="col-md-2" style='color: white;   font-family: Voltaire;'>  <h3 style="color: white; font-family: Voltaire;">Your Fighter</h3>
+    Position: <?php 
+    $alpha = array('A','B','C','D','E','F','G','H','I','J','K', 'L','M','N','O','P','Q','R','S','T','U','V','W','X ','Y','Z');
 
-           <h3>Move</h3>
+    echo  $alpha[$myFighter['Fighter']['coordinate_x']-1].$myFighter['Fighter']['coordinate_y']; ?>
+
+    <div class="progress">
+  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+    Life: 60 / 1000
+  </div>
+</div>
+
+  </div>   
+<div class="col-md-3">   
+           <h3 style="color: white; font-family: Voltaire;">Move</h3>
             <a href="#m" data-select="west" /><img src="img/west.png" style="width: 70px; height: 70px;"/></a>
             <a href="#m" data-select="north" /> <img src="img/up.png" style="width: 70px; height: 70px;"/></a>
             <a href="#m" data-select="south" /><img src="img/down.png" style="width: 70px; height: 70px;"/></a>
             <a href="#m" data-select="east" /><img src="img/east.png" style="width: 70px; height: 70px;"/></a>
-          <h3>Attack</h3>
+  </div>
+  <div class="col-md-3">    
+          <h3 style="color: white; font-family: Voltaire;">Attack</h3>
             <a href="#a" data-select="west" /><img src="img/west.png" style="width: 70px; height: 70px;"/></a>
             <a href="#a" data-select="north" /> <img src="img/up.png" style="width: 70px; height: 70px;"/></a>
             <a href="#a" data-select="south" /><img src="img/down.png" style="width: 70px; height: 70px;"/></a>
             <a href="#a" data-select="east" /><img src="img/east.png" style="width: 70px; height: 70px;"/></a>
-         
+    </div>  
+     <div class="col-md-3"> 
+      <h3 style="color: white; font-family: Voltaire;">Pick Up</h3>
+     <?php
+
+
+// Checking if there's any tool available to pick up 
+$tools = array_filter($tool);
+if (!empty($tools)) { //there's some tool in there ! :)
+
+        foreach ($tool as $potion)
+        {
+
+            switch($potion['Tool']['type'])
+            {
+              case "strength":
+
+              echo "<a href='#t' data-select='".$potion['Tool']['type']."' style='text-decoration: none;' > <div style='clear: both;'><img src='img/potion1.png'  style='float: left;'/> <span style='color: white;   font-family: Voltaire;'> 
+              <strong style='color: #b53700'; />Strength Potion </strong><br/>Bonus : +".$potion['Tool']['bonus']." Strength
+              </span>
+
+              </div> </a>
+
+  ";            break;
+              case "sight":
+
+              echo "<a href='#t' data-select='".$potion['Tool']['type']."' style='text-decoration: none;'> <div style='clear: both;'><img src='img/potion2.png' style='float: left;' /> <span style='color: white;  font-family: Voltaire;'>   <strong style='color: #0059b5'; />Sight Potion </strong><br/>Bonus : +".$potion['Tool']['bonus']." Sight</span>
+
+                </div> </a>
+    ";          break; 
+              case "health":
+
+              echo "<a href='#t' data-select='".$potion['Tool']['type']."' style='text-decoration: none;'> <div style='clear: both;'><img src='img/potion3.png' style='float: left;' /> <span style='color: white;  font-family: Voltaire;'>  
+              <strong style='color: #8f0000'; />Strength Potion</strong><br/>Bonus : +".$potion['Tool']['bonus']." Health</span>
+
+
+              </div> </a>
+    ";          break;
+              case "lifePoints":
+
+              echo "<a href='#t' data-select='".$potion['Tool']['type']."' style='text-decoration: none;'> <div style='clear: both;'><img src='img/potion3.png' style='float: left;' /> <span style='color: white;  font-family: Voltaire;'> 
+                <strong style='color: #8f0000'; />Strength Potion </strong><br/>Bonus : +".$potion['Tool']['bonus']." Life Points
+              </span>
+
+
+              </div> </a>";
+
+              break;
+            }
+
+        }
+
+}
+     ?>   
+    </div>
+      </div>  
    <?php
 echo'<div style="display:none;">';
 
@@ -34,13 +104,16 @@ echo $this->Form->end('Attack');
 echo'</div>';
 
 
-echo "Tool you can Pick up : ";
-/*pr ($tool);
-*/
+
+
+
+echo'<div style="display:none;">';
+
 echo $this->Form->create('Toolpickup');
 echo $this->Form->input('toolChoice',array('options' => $toolList));
 echo $this->Form->end('PickUp Tool');
 
+echo'</div>';
 
 
 ?>
@@ -51,39 +124,8 @@ echo $this->Form->end('PickUp Tool');
 
 
 
-            <div class="commentArea" id="messages" style="overflow-y: scroll; height:400px; background-color: #e7e7e7;" >
-        <div class="bubbledRight">
-        Error dicunt theophrastus cu qui. Ad eos simul possit option, adipisci principes sed at. Detracto adolescens pro ea, duo no
-    </div>
-                    <div style="float: right; clear: both; margin-top: 5px;"    >
-                        <img src="portrait.jpg" style="height: 30px; width: 30px;  "/> <i class="fa fa-arrow-right fa-lg"></i> <img src="img/empty-profile.jpg" style="height: 30px; width: 30px;  "/>
-                </div>
-    
-    <div class="bubbledLeft">
-        Lorem ipsum dolor sit amet, ea oblique constituam signiferumque eam. Pri adipisci maluisset te.
-    </div>
-                <div style="float: left; clear: both; margin-top: 5px;" >
-                     <img src="img/empty-profile.jpg" style="height: 30px; width: 30px;  "/> <i class="fa fa-arrow-right fa-lg"></i>    <img src="portrait.jpg" style="height: 30px; width: 30px;  "/>
-                </div>
-            
-                    <div class="bubbledRight">
-        Error dicunt theophrastus cu qui. Ad eos simul possit option, adipisci principes sed at. Detracto adolescens pro ea, duo no
-    </div>
-                    <div style="float: right; clear: both; margin-top: 5px;"    >
-                        <img src="portrait.jpg" style="height: 30px; width: 30px;  "/> <i class="fa fa-arrow-right fa-lg"></i> <img src="img/empty-profile.jpg" style="height: 30px; width: 30px;  "/>
-                </div>
-    
-    <div class="bubbledLeft">
-        Lorem ipsum dolor sit amet, ea oblique constituam signiferumque eam. Pri adipisci maluisset te.
-    </div>
-                <div style="float: left; clear: both; margin-top: 5px;" >
-                     <img src="img/empty-profile.jpg" style="height: 30px; width: 30px;  "/> <i class="fa fa-arrow-right fa-lg"></i>    <img src="portrait.jpg" style="height: 30px; width: 30px;  "/>
-                </div>
-                
-            
-                
-</div>  
-                <input type="text" placeholder="Type Message" style="width: 100%;" />
+           
+             
             
             </div>
 
@@ -147,8 +189,8 @@ for (var y = 40; y < 741; y += 70) {
     
 
      // Drawing the actual fighter 
-            $x=$myFighter['Fighter']['coordinate_x']*70;
-            $y=40+$myFighter['Fighter']['coordinate_y']*70;
+            $x=$myFighter['Fighter']['coordinate_x']*70-70;
+            $y=40+$myFighter['Fighter']['coordinate_y']*70-70;
             $name=$myFighter['Fighter']['name'];
             $pic="img/avatars/".$myFighter['Fighter']['id'].".jpg";
             

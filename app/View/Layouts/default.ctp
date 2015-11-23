@@ -89,26 +89,26 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			 <div class="col-md-3">
 				 <span style=" font-family:'Voltaire',Arial,sans-serif; color: white; font-size: 1.5em;"><?php echo $email ?></span>
 <div class="popover-markup"> 
-    <a href="#" data-placement="bottom" class="trigger btn btn-default"><i class="fa fa-cogs fa-lg"></i> Edit Profile</a>  
+    <a href="#" data-placement="bottom" class="trigger btn btn-default"><i class="fa fa-cogs fa-lg"></i> Settings</a>  
 
 <?php echo $this->Html->link('Logout', array('controller'=> 'Users', 'action'=> 'logout'),array(
     'class' => 'trigger btn btn-primary',
     'role' => 'button'));?>
 
 
-    <div class="head hide">Lorem Ipsum</div>
+    <div class="head hide">Settings</div>
     <div class="content hide">
        <?php 
 
  echo $this->Form->create('Fightercreate');
-    echo $this->Form->input('name');
+    echo "New caracter: <br/>".$this->Form->input('name');
     echo $this->Form->end('Create');
     
     echo $this->Form->create('Fighternewavatar', array('type' => 'file'));
     echo $this->Form->input('avatar_file',array('label' => 'Votre avatar (Jpg)', 'type' => 'file'));
     echo $this->Form->end('Send');
     
-    pr($fighterList);
+  
     echo $this->Form->create('Fighterchoice');
     echo $this->Form->input('fighter',array('options' => $fighterList));
     echo $this->Form->end('Valid');
@@ -207,6 +207,12 @@ var $select2 = $('#FighterattackDirection');
 $('a[href="#a"]').click(function () {
     $select.val( $(this).data('select') );
     $( "#FighterattackIndexForm" ).submit();
+});
+
+var $select3 = $('#ToolpickupToolChoice');
+$('a[href="#t"]').click(function () {
+    $select.val( $(this).data('select') );
+    $( "#ToolpickupIndexForm" ).submit();
 });
 </script>
 	
