@@ -14,6 +14,6 @@ echo $this->Html->image('avatars/'.$playerId.'.jpg', array(
     'style' => 'width: 200px;'));
 
 */
- echo $raw['User']['email'];
+ /*echo $raw['User']['email'];
 
-pr($raw); ?>
+pr($raw); */?>

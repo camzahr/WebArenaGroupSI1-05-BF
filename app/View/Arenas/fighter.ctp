@@ -1,5 +1,5 @@
 <?php $this->assign('title', 'Fighter');
-pr($raw); ?>
+?>
 <?php 
 
 

@@ -2,6 +2,8 @@
 
 /* move special fonts to HTML head for better performance */
 @import url(//fonts.googleapis.com/css?family=Voltaire);
+@import "compass/css3";
+@import url(//fonts.googleapis.com/css?family=Share+Tech+Mono);
 
 html,
 body {
@@ -10,6 +12,15 @@ body {
   font-family:Arial,sans-serif;
 }
 
+svg{
+  width: 600px;
+  height: 80px;
+  display: block;
+  position: relative;
+  overflow: hidden; 
+  margin: 0 0 0 0;
+
+}
 /* fix bs3 horizontal scrollbar bug */
 .row { margin: 0; padding: 0 }
 
@@ -265,5 +276,30 @@ footer {
 }
 
 
-
+@keyframes flickerAnimation {
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+@-o-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+@-moz-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+@-webkit-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+.animate-flicker {
+   -webkit-animation: flickerAnimation 1s infinite;
+   -moz-animation: flickerAnimation 1s infinite;
+   -o-animation: flickerAnimation 1s infinite;
+    animation: flickerAnimation 1s infinite;
+}
 

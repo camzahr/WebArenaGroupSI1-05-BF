@@ -1,0 +1,547 @@
+commit efd19fec80b4ed4fa9f1c79441872c2b965b0374
+Author: camzahr <camiller@ece.fr>
+Date:   Sun Nov 22 21:05:55 2015 +0100
+
+    Bonus Tool + Fix issues
+
+commit 0bf213e735f13d4fda9dba420a8d48b1da9e7135
+Author: Jalil BENAYACHI <contact@thejals.com>
+Date:   Sun Nov 22 19:46:18 2015 +0100
+
+    Fixed Canvas with file_exists
+    
+    Some issues where encountered when no avatar has been uploaded for the
+    fighters. The Canvas drawing was interrupted and left a blank result.
+    The issue is now fixed using Php file_exists() function, which is the
+    only way to find out if an avatar has been picked or not.
+    If no avatar is found, the fighter is being assigned a mock up image
+    « Facebook profile » style
+
+commit a6f01c8d533d667b8fa49c08393c6cbca042bd7d
+Author: camzahr <camiller@ece.fr>
+Date:   Sun Nov 22 18:40:35 2015 +0100
+
+    Plein de changements
+
+commit 581e6f71204705c804d9a75fb21de89026376dc1
+Author: Jalil BENAYACHI <contact@thejals.com>
+Date:   Sun Nov 22 17:57:33 2015 +0100
+
+    Fix playground size - 15x10
+    
+    The canvas and its drawing algorithms were updated to fit the 15x10
+    restriction
+
+commit c2e845a00233ea10491a29792f57f6fb79bdaccc
+Author: Jalil BENAYACHI <contact@thejals.com>
+Date:   Sun Nov 22 17:22:06 2015 +0100
+
+    Commit Layout #Arenas Index
+    
+    Reste à apporter quelques ajustements stylistiques, designer le layout
+    du chat/guilde
+    + à modifier certains aspects du contrôleur pour fonctionner en mode
+    « one page »
+
+commit f307df630b7e759ab43bc35c85002ff4111107b7
+Merge: b1c2b74 6cedba9
+Author: jb <jb.gesnel@hotmail.fr>
+Date:   Sun Nov 22 16:17:56 2015 +0100
+
+    Merge remote-tracking branch 'refs/remotes/origin/JB_NoBug'
+
+commit 6cedba94de3270fd348aee8b5793bc33ac007dfe
+Author: jb <jb.gesnel@hotmail.fr>
+Date:   Sun Nov 22 16:03:26 2015 +0100
+
+    Apis Update
+
+commit 66553f622882f25321c2437f9bc42e04918b5e02
+Author: jb <jb.gesnel@hotmail.fr>
+Date:   Sun Nov 22 15:45:46 2015 +0100
+
+    Apis view
+
+commit bec593aabb331a265b90e915dee052f742fc09b2
+Author: jb <jb.gesnel@hotmail.fr>
+Date:   Sun Nov 22 15:39:10 2015 +0100
+
+    db
+
+commit b1aaff12d467167497b21b54916280829350e63d
+Merge: 36bc540 b1c2b74
+Author: jb <jb.gesnel@hotmail.fr>
+Date:   Sun Nov 22 15:33:53 2015 +0100
+
+    Merge remote-tracking branch 'refs/remotes/origin/master' into JB_NoBug
+
+commit b1c2b74efed0ad67f2213d771ff8a3599eefdbae
+Author: camzahr <camiller@ece.fr>
+Date:   Fri Nov 20 03:58:41 2015 +0100
+
+    Call Me God of the Back End
+
+commit 310836c3961525d5cbf5e9222681936961c909b3
+Author: camzahr <camiller@ece.fr>
+Date:   Fri Nov 20 03:41:41 2015 +0100
+
+    Bonus Guilde + Message + Cri + Layout a jour + other
+
+commit def4a5661ba0eacb7aa3006f428209c70cec9d68
+Author: camzahr <camiller@ece.fr>
+Date:   Fri Nov 20 02:19:01 2015 +0100
+
+    issues
+
+commit 36bc540853ffbef4c7ce97eb33a5fab531751316
+Author: AurelienGuerardSI <aurelienguerard27@gmail.com>
+Date:   Mon Nov 16 18:29:46 2015 +0100
+
+    forgot password 100%  NOT TESTED
+
+commit a6fdfac2bfb7265d147360d00aa63b3d9b479bf0
+Author: AurelienGuerardSI <aurelienguerard27@gmail.com>
+Date:   Mon Nov 16 15:34:09 2015 +0100
+
+    Correction error
+
+commit e07cce0ffed5eb186582fda449f109e8646b1feb
+Author: camzahr <camiller@ece.fr>
+Date:   Mon Nov 16 13:59:30 2015 +0100
+
+    Ajout Diary 24H
+
+commit f00855a869b98d41fef57aa76875657a369e6e89
+Merge: 6569218 ec0b50c
+Author: AurelienGuerardSI <aurelienguerard27@gmail.com>
+Date:   Sun Nov 15 16:16:59 2015 +0100
+
+    password losse 31%
+
+commit 65692183cb4b92dc96d716abc228ede5508890c0
+Author: AurelienGuerardSI <aurelienguerard27@gmail.com>
+Date:   Sun Nov 15 16:06:00 2015 +0100
+
+    manage password losse 30%
+
+commit f1e78795e1c7ae05bf3d1f5541edcca0bed5f81a
+Merge: c4a8a27 1db32c2
+Author: camzahr <camiller@ece.fr>
+Date:   Thu Nov 12 22:22:05 2015 +0100
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #	app/nbproject/private/private.xml
+
+commit c4a8a27ad602797590f6d87395b41cf5551bb1ff
+Author: camzahr <camiller@ece.fr>
+Date:   Thu Nov 12 22:21:13 2015 +0100
+
+    Fix Issues
+
+commit 1db32c26f9c7622ea943f8587d11881c04d419d1
+Author: AurelienGuerardSI <aurelienguerard27@gmail.com>
+Date:   Thu Nov 12 19:00:26 2015 +0100
+
+    manage password losse 20%
+
+commit 4f54e1961c8b2d6d62ecebca3b9c54e1a9ba528a
+Merge: 4df4932 411557d
+Author: camzahr <camiller@ece.fr>
+Date:   Wed Nov 11 17:26:22 2015 +0100
+
+    Merge branch 'Jeremy'
+    
+    Conflicts:
+    	app/nbproject/private/private.xml
+
+commit 4df4932b1b5273223f8137cd4af70f82352ba97f
+Author: camzahr <camiller@ece.fr>
+Date:   Wed Nov 11 17:21:42 2015 +0100
+
+    Fix issues
+
+commit 411557de170ee5e3989a97c754536d5cd62dad2a
+Author: camzahr <camiller@ece.fr>
+Date:   Wed Nov 11 17:21:18 2015 +0100
+
+    Changements level par strength
+
+commit 5cb1919e8ac267f9a5099c017346b9659257efa7
+Author: camzahr <camiller@ece.fr>
+Date:   Wed Nov 11 17:19:34 2015 +0100
+
+    Fix Issues
+
+commit ec0b50cf1ce85ea63aa2ac013edb65a882b861a9
+Author: AurelienGuerardSI <aurelienguerard27@gmail.com>
+Date:   Tue Nov 10 17:52:29 2015 +0100
+
+    start mot de passe oublié
+    
+    Début du traitemnt de mot de passe oublié par email
+
+commit 7d6203708aca458760296fc3bfcf7bb6218e8c11
+Author: Jalil BENAYACHI <contact@thejals.com>
+Date:   Tue Nov 10 17:26:34 2015 +0100
+
+    New Interface - Prototype
+    
+    New UI prototype - HTML5 with use of BOOTSTRAP
+    
+    Home Made Canvas MAP
+
+commit aaa371f7750b6dfd86fab71651215217137e28b7
+Author: camzahr <camiller@ece.fr>
+Date:   Tue Nov 10 16:22:24 2015 +0100
+
+    SELECTION FIGHTER QUI MARCHE
+
+commit d51365bc4ced44c62bebb1db2b1c4110c5efdd09
+Merge: 738b543 f647e83
+Author: AurelienGuerardSI <aurelienguerard27@gmail.com>
+Date:   Tue Nov 10 16:01:44 2015 +0100
+
+    Merge remote-tracking branch 'refs/remotes/origin/AurelienBranch'
+
+commit f647e83c2af9cf742d1c21f8aa8fcd402be535db
+Author: AurelienGuerardSI <aurelienguerard27@gmail.com>
+Date:   Tue Nov 10 15:57:58 2015 +0100
+
+    manage suscribe/login/logout
+    
+    Show subscribe in login page
+    Show login in subscribe page
+    Show logout, figthers, my profil etc in the rest
+
+commit 6496ff32f1f6b938237c85e1cf1483327442ebd5
+Merge: 402af5b 738b543
+Author: AurelienGuerardSI <aurelienguerard27@gmail.com>
+Date:   Mon Nov 9 16:48:07 2015 +0100
+
+    Merge remote-tracking branch 'refs/remotes/origin/master' into AurelienBranch
+
+commit 738b543db915adc169b31910e28f4058c7e5e1f7
+Author: Jalil BENAYACHI <contact@thejals.com>
+Date:   Mon Nov 9 08:36:28 2015 +0100
+
+    HTML Layout committed
+    
+    Commit - HTML Template - Awaiting implementation in CakePHP Layout
+    System
+
+commit 402af5b482908574aad5302c884f51562f441d1f
+Merge: 0ee8596 234cdf7
+Author: AurelienGuerardSI <aurelienguerard27@gmail.com>
+Date:   Mon Nov 9 16:45:43 2015 +0100
+
+    Merge remote-tracking branch 'refs/remotes/origin/master' into AurelienBranch
+
+commit 234cdf7d62a9fa7630f859447597ba0247c1e6c7
+Merge: 01ab461 ef92013
+Author: camzahr <camiller@ece.fr>
+Date:   Mon Nov 9 16:02:18 2015 +0100
+
+    Merge branch 'Jeremy'
+
+commit ef92013ecb9d0dd3783bdb5b024566ef364018a1
+Merge: e4f3e38 a142341
+Author: camzahr <camiller@ece.fr>
+Date:   Mon Nov 9 16:01:33 2015 +0100
+
+    Merge branch 'Test-Merge' into Jeremy
+
+commit a142341a9583eb41834198df250449bce8c66aaf
+Author: camzahr <camiller@ece.fr>
+Date:   Mon Nov 9 15:59:55 2015 +0100
+
+    Integration Code Login Logout avec back
+
+commit 708185deceeda31a2897eca7ea8965413aebdfb0
+Author: camzahr <camiller@ece.fr>
+Date:   Mon Nov 9 15:17:29 2015 +0100
+
+    Fix issues
+
+commit 42aba4f2eba4d701e526c8470b23c24e485c025a
+Merge: e4f3e38 0ee8596
+Author: camzahr <camiller@ece.fr>
+Date:   Mon Nov 9 14:55:20 2015 +0100
+
+    Merge branch 'AurelienBranch' into Test-Merge
+    
+    Conflicts:
+    	app/nbproject/private/private.xml
+
+commit e4f3e387c57eaa95657f1e5196669c444ada4206
+Author: camzahr <camiller@ece.fr>
+Date:   Mon Nov 9 14:52:46 2015 +0100
+
+    Essai Validate Login
+
+commit 0ee859603ee20c7b77b6df87eb39a47e8718c591
+Author: AurelienGuerardSI <aurelienguerard27@gmail.com>
+Date:   Mon Nov 9 14:50:44 2015 +0100
+
+    Login + Logout 100%
+
+commit 1eabdd2777d380e86bf139b37a784580dff893fc
+Merge: 5b3957f bbeb01d
+Author: AurelienGuerardSI <aurelienguerard27@gmail.com>
+Date:   Mon Nov 9 11:20:30 2015 +0100
+
+    Merge remote-tracking branch 'refs/remotes/origin/Jeremy' into AurelienBranch
+    
+    Conflicts:
+    	app/Controller/ArenasController.php
+    	app/Model/fighter.php
+    	app/nbproject/private/private.xml
+
+commit 5b3957f18740b7e8ce91fcc511c04f971e097a56
+Author: AurelienGuerardSI <aurelienguerard27@gmail.com>
+Date:   Mon Nov 9 10:27:50 2015 +0100
+
+    add login.ctp, ApisController.php
+    
+    add login.ctp, ApisController.php in private.xml
+
+commit bbeb01da4994aebfb03806ae05bf230064b8602d
+Author: camzahr <camiller@ece.fr>
+Date:   Sun Nov 8 22:41:39 2015 +0100
+
+    DO ATTACK 100%
+
+commit 9cd0fb14b794942b1b972662be727d761dac9143
+Author: camzahr <camiller@ece.fr>
+Date:   Sun Nov 8 20:48:17 2015 +0100
+
+    Do Attack A 90%, XP control, XP Increase, Link avec les events
+
+commit 195da027c213b09bcc0688dec982ca40e6d9dac0
+Author: AurelienGuerardSI <aurelienguerard27@gmail.com>
+Date:   Sun Nov 8 20:43:16 2015 +0100
+
+    sup text
+    
+    sup text
+
+commit 8187cbde41d46f78f3554b0d4eceb22a1fadc243
+Author: camzahr <camiller@ece.fr>
+Date:   Sun Nov 8 19:10:12 2015 +0100
+
+    Change doAttack
+
+commit 1251c8768947623b5a12bed5273d4e7b046e40f0
+Author: camzahr <camiller@ece.fr>
+Date:   Sun Nov 8 11:45:24 2015 +0100
+
+    COMMIT DE L'ESPOIR
+
+commit f32c7de1099b72090a7b4e2a1f37b3bcdbbfa7fc
+Merge: 8d5a97b 01ab461
+Author: AurelienGuerardSI <aurelienguerard27@gmail.com>
+Date:   Thu Nov 5 19:17:15 2015 +0100
+
+    Merge remote-tracking branch 'refs/remotes/origin/master' into AurelienBranch
+    
+    Conflicts:
+    	app/nbproject/private/private.xml
+
+commit 8d5a97b72629c18072d74bf4eef2c1cd752fecd1
+Author: AurelienGuerardSI <aurelienguerard27@gmail.com>
+Date:   Thu Nov 5 19:15:40 2015 +0100
+
+    modif login
+    
+    modif login html code
+
+commit 79986de16f9e31b47c7fd576e829dba9f1560cb4
+Author: AurelienGuerardSI <aurelienguerard27@gmail.com>
+Date:   Tue Nov 3 17:04:16 2015 +0100
+
+    login html
+    
+    Add the login html code
+
+commit 1671f95a08f78ee9100c25dd6925a6ce31fd4b00
+Merge: 4a7d57b 578d2de
+Author: AurelienGuerardSI <aurelienguerard27@gmail.com>
+Date:   Tue Nov 3 14:54:56 2015 +0100
+
+    Merge remote-tracking branch 'refs/remotes/origin/Jbbranch' into AurelienBranch
+    
+    Conflicts:
+    	app/View/Arenas/index.ctp
+    	app/nbproject/private/private.xml
+
+commit 4a7d57bd7d6a32f6342e6ef95093fdf3f35552fa
+Merge: e9f008f 872f415
+Author: AurelienGuerardSI <aurelienguerard27@gmail.com>
+Date:   Tue Nov 3 14:50:08 2015 +0100
+
+    Merge remote-tracking branch 'refs/remotes/origin/master' into AurelienBranch
+    
+    Conflicts:
+    	app/Controller/ArenasController.php
+    	app/Model/Fighter.php
+    	app/View/Arenas/fighter.ctp
+    	app/View/Arenas/index.ctp
+    	app/nbproject/private/private.xml
+
+commit 01ab461d615a2cfbec790b06b1d4a57b422ade23
+Author: AurelienGuerardSI <aurelienguerard27@gmail.com>
+Date:   Tue Nov 3 14:47:56 2015 +0100
+
+    os
+
+commit e9f008ffebba5e24ae370779119fc268f7129bf0
+Author: AurelienGuerardSI <aurelienguerard27@gmail.com>
+Date:   Mon Nov 2 16:26:32 2015 +0100
+
+    merging
+    
+    try merge
+
+commit 578d2de82391e327239046caf0affce1dadc6f67
+Merge: d999bd6 872f415
+Author: jb <jb.gesnel@hotmail.fr>
+Date:   Mon Nov 2 09:44:46 2015 +0100
+
+    Merge remote-tracking branch 'refs/remotes/origin/master' into Jbbranch
+    
+    Conflicts:
+    	app/Controller/ArenasController.php
+    	app/Model/fighter.php
+    	app/View/Arenas/fighter.ctp
+    	app/View/Arenas/index.ctp
+    	app/nbproject/private/private.xml
+
+commit 872f415a3349adb2acc9096611a7165330258d94
+Merge: e0ea035 8ad8a37
+Author: jb <jb.gesnel@hotmail.fr>
+Date:   Sun Nov 1 21:33:43 2015 +0100
+
+    Merge remote-tracking branch 'refs/remotes/origin/Jbbranch'
+    
+    Conflicts:
+    	app/Controller/ArenasController.php
+    	app/View/Arenas/fighter.ctp
+    	app/nbproject/private/private.xml
+
+commit e0ea035931583178c9e64a5335b9f87b71348cc6
+Merge: 579323a 4b8375e
+Author: camzahr <jc.camzahr@gmail.com>
+Date:   Sun Nov 1 20:10:03 2015 +0100
+
+    Merge pull request #5 from camzahr/Jeremy
+    
+    Jeremy
+
+commit 4b8375ea1084228cd2843c47574ba8bcc3fd190e
+Author: camzahr <camiller@ece.fr>
+Date:   Sun Nov 1 20:01:41 2015 +0100
+
+    Upload Avatar + Fix Issues
+
+commit d999bd6842885a4b03410065fbee4c9a0a598677
+Author: jb <jb.gesnel@hotmail.fr>
+Date:   Sun Nov 1 17:03:48 2015 +0100
+
+    Private xml
+    
+    Aucun changement
+
+commit 1857eea22799d816328aa5cde062ce566155b058
+Author: jb <jb.gesnel@hotmail.fr>
+Date:   Sun Nov 1 17:02:40 2015 +0100
+
+    Lab Views Layout API
+    
+    Pas fini : Charte graphique / 2nd part of API /
+
+commit 5010acc9cfc90d5fa47b8e13262df49d7614b5d0
+Merge: 24356f8 579323a
+Author: jb <jb.gesnel@hotmail.fr>
+Date:   Sun Nov 1 17:00:08 2015 +0100
+
+    Merge remote-tracking branch 'refs/remotes/origin/master' into Jbbranch
+
+commit 9d0d8e1761069ac7cf21461fe417dcb9d5268521
+Author: AurelienGuerardSI <aurelienguerard27@gmail.com>
+Date:   Sun Nov 1 12:06:33 2015 +0100
+
+    css start
+    
+    Add webarena.css + define in default.ctp
+
+commit 24356f8be26ab375c3b6e7dbad41894f16b764a6
+Merge: 8ad8a37 e3fc9c8
+Author: jb <jb.gesnel@hotmail.fr>
+Date:   Fri Oct 30 11:59:16 2015 +0100
+
+    Merge remote-tracking branch 'refs/remotes/origin/Jeremy' into Jbbranch
+    
+    Conflicts:
+    	app/Controller/ArenasController.php
+    	app/View/Arenas/fighter.ctp
+    	app/nbproject/private/private.xml
+
+commit e3fc9c83f34e44d24e7e38c7d1fc73a6351878e6
+Author: camzahr <camiller@ece.fr>
+Date:   Mon Oct 26 14:44:36 2015 +0100
+
+    Verification si case occupée + Amelioration move
+
+commit 4b4b5253e65c62ed2e5c0c2c4e350bd229fead0b
+Author: camzahr <camiller@ece.fr>
+Date:   Mon Oct 26 05:50:39 2015 +0100
+
+    Index affiche liste noms + Début montée de niveau + Commentaires
+
+commit d8102c3fce2b88beade2e529418769999093c5fb
+Author: camzahr <camiller@ece.fr>
+Date:   Mon Oct 26 05:03:03 2015 +0100
+
+    Fonction doAttack fonctionnelle + Verif Limite Terrain + generate
+
+commit be571227846bd09cfba24462022216a73f4de6d8
+Author: camzahr <camiller@ece.fr>
+Date:   Mon Oct 26 01:25:51 2015 +0100
+
+    Move Commit + Begin Attack
+
+commit 557e6aca816041653a233b873b74d184ff4aee93
+Author: camzahr <camiller@ece.fr>
+Date:   Wed Oct 21 00:52:58 2015 +0200
+
+    Function MOVE
+
+commit 8ad8a3748a8fd9ec0a6d38e5df02800cf86e02c4
+Author: jb <jb.gesnel@hotmail.fr>
+Date:   Tue Oct 20 16:16:48 2015 +0200
+
+    Prmodel
+    
+    pb
+
+commit 579323a480ad17d2233f76b6b9b807941fa0afb1
+Merge: a6c0a0f 873402b
+Author: camzahr <jc.camzahr@gmail.com>
+Date:   Tue Oct 20 15:39:11 2015 +0200
+
+    Merge pull request #1 from camzahr/Jeremy
+    
+    Merge Branch Jeremy
+
+commit 873402b8fb33baeee37a63456a50ad13970fd862
+Author: camzahr <camiller@ece.fr>
+Date:   Tue Oct 20 15:34:18 2015 +0200
+
+    First Model + Connection Local Database
+
+commit a6c0a0ff34ef9f286954cbd921ec3f5bb88fc4ca
+Author: camzahr <camiller@ece.fr>
+Date:   Tue Oct 20 14:08:29 2015 +0200
+
+    1st Commit

@@ -6,27 +6,32 @@
             <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/Controller/AppController.php</file>
             <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/Controller/UsersController.php</file>
             <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/View/Users/login.ctp</file>
-            <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/webroot/css/bootstrap.css.map</file>
+            <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/Model/Tool.php</file>
+            <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/View/Layouts/error.ctp</file>
             <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/Controller/ArenasController.php</file>
             <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/View/Arenas/sight.ctp</file>
             <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/View/Arenas/home.ctp</file>
+            <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/View/Arenas/guild.ctp</file>
             <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/Model/AppModel.php</file>
             <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/webroot/css/bootstrap.min.css</file>
             <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/View/Arenas/fighter.ctp</file>
             <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/Model/Event.php</file>
             <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/View/Users/logout.ctp</file>
-            <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/webroot/css/cake.generic.css</file>
+            <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/View/Layouts/unlogged.ctp</file>
             <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/View/Users/display.ctp</file>
             <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/Config/database.php</file>
             <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/Controller/PagesController.php</file>
             <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/View/Users/subscribe.ctp</file>
-            <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/webroot/css/bootstrap.css</file>
+            <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/View/Layouts/js/default.ctp</file>
+            <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/Model/Message.php</file>
+            <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/Model/Fighter.php</file>
+            <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/Model/Guild.php</file>
             <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/Controller/ApisController.php</file>
             <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/View/Layouts/default.ctp</file>
-            <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/Model/fighter.php</file>
             <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/View/Arenas/index.ctp</file>
-            <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/webroot/css/webarena.css</file>
             <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/View/Arenas/diary.ctp</file>
+            <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/webroot/js/canvas.js</file>
+            <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/View/Arenas/message.ctp</file>
             <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/View/Users/password.ctp</file>
             <file>file:/Applications/MAMP/htdocs/WebArenaGroupSI1-05-BF/app/Model/User.php</file>
         </group>

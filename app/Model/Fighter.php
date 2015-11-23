@@ -36,26 +36,26 @@ protected function verifLimit(){
     debug($this->data['Fighter']['coordinate_y']);
     if($this->data['Fighter']['coordinate_y']> 10)
     {
-        echo("You pass the limits");
+        //echo("You pass the limits");
         $this->set('coordinate_y', 10); 
         return false;
     }
     elseif($this->data['Fighter']['coordinate_y']< 1)
     {
-        echo("You pass the limits");
+        //echo("You pass the limits");
         $this->set('coordinate_y', 1); 
         return false;
     }
     
     if($this->data['Fighter']['coordinate_x']> 15)
     {
-        echo("You pass the limits");
+        //echo("You pass the limits");
         $this->set('coordinate_x', 15);
         return false;
     }
     elseif($this->data['Fighter']['coordinate_x']< 1)
     {
-        echo("You pass the limits");
+        //echo("You pass the limits");
         $this->set('coordinate_x', 1);
         return false;
     }
@@ -67,7 +67,7 @@ protected function verifCaseOccupy($fighterId, $direction){
     $datas = $this->read(null, $fighterId);
     $case = array('coordinate_x' => $datas['Fighter']['coordinate_x'],
                   'coordinate_y' => $datas['Fighter']['coordinate_y']);
-    
+     
     switch ($direction)
     {
     case 'north':
@@ -91,9 +91,9 @@ protected function verifCaseOccupy($fighterId, $direction){
         break;
 
     default:
-        echo "Direction inconnue";
+        //echo "Direction inconnue";
     }
-    echo "You want to move to $case[coordinate_x] / $case[coordinate_y]";
+    //echo "You want to move to $case[coordinate_x] / $case[coordinate_y]";
 
     //On cherche l'ennemy sur la case attaquée
     $ennemy = $this->find('all' , array('conditions'=> array(
@@ -106,13 +106,12 @@ protected function verifCaseOccupy($fighterId, $direction){
     //On vérifie que l'ennemy existe
     if( empty ($ennemy) )
     {
-        echo" Nobody is currently at this position !!!!";
+        //echo" Nobody is currently at this position !!!!";
         return true;
     }
     //Si oui, on l'attaque
     else 
     {
-        echo" Case occupied by someone else";
         return false;
     }
 
@@ -151,13 +150,13 @@ public function doMove($fighterId, $direction){
             //Empecher de sortir de l'arène
             if($this->verifLimit())
                 {
-                    echo "<script>location.reload();</script>";
+                    echo "<script>window.location = window.location.href;</script>";
                 //    echo("Mouvement Accepté !");
                 }
             else
                 {
-                 echo "<script>location.reload();</script>";
-                    return false;
+                 echo "<script>window.location = window.location.href;</script>";
+                   return false;
                 }
             $this->save();
             return true;
@@ -165,8 +164,8 @@ public function doMove($fighterId, $direction){
         }
     else
         {
-          echo "<script>location.reload();</script>";
-            return false;
+          echo "<script>window.location = window.location.href;</script>";
+                  return false;
         }
 }
 
@@ -278,9 +277,9 @@ public function doAttack($fighterId, $direction){
         break;
 
     default:
-        echo "Direction inconnue";
+        //echo "Direction inconnue";
     }
-    echo "Gonna attack : $case[coordinate_x] / $case[coordinate_y]";
+    //echo "Gonna attack : $case[coordinate_x] / $case[coordinate_y]";
     
     $ennemy = new Fighter();     
     //On cherche l'ennemy sur la case attaquée
@@ -295,12 +294,12 @@ public function doAttack($fighterId, $direction){
     //On vérifie que l'ennemy existe
     if( empty ($ennemy) )
     {
-        echo" Nobody is currently at this position !!!!";
+        //echo" Nobody is currently at this position !!!!";
     }
     //Si oui, on l'attaque
     else 
     {
-        echo"  You will Attack :  {$ennemy['Fighter']['name']} ";
+        //echo"  You will Attack :  {$ennemy['Fighter']['name']} ";
         //$ennemyFighter = read()
         $result = (10 - $datas['Fighter']['level'] + $ennemy['Fighter']['level']);
         
@@ -314,7 +313,7 @@ public function doAttack($fighterId, $direction){
         if (rand(1,20) > $result)
             {
                 $dataEvent['name'] = $datas['Fighter']['name'] . " Attack " . $ennemy['Fighter']['name'];
-                echo"Attaque Réussie ";
+                //echo"Attaque Réussie ";
                 
                 $bonusGuild = $this->guildControl($ennemy['Fighter']['id'], $datas['Fighter']['guild_id']);
                 debug("BONUS : ".$bonusGuild);
@@ -325,7 +324,7 @@ public function doAttack($fighterId, $direction){
                 $this->hurt($ennemy['Fighter']['id'], $datas['Fighter']['skill_strength']);
                 //SI DESTRUCTION
                 if ($change['current_health'] < 1){
-                    echo "DETRUIT";
+                    //echo "DETRUIT";
                     $dataEvent['name'] = $datas['Fighter']['name'] . " Kills " . $ennemy['Fighter']['name'];
                 
                     $this->xpIncrease($fighterId, $ennemy['Fighter']['level']);
@@ -346,17 +345,18 @@ public function doAttack($fighterId, $direction){
                 $dataEvent['name'] = $datas['Fighter']['name'] . " Miss " . $ennemy['Fighter']['name'];
                 $event->add($dataEvent);
                 
-                echo"Attaque Ratée !!!";
+                //echo"Attaque Ratée !!!";
                 return false;
             }
         /*$ennemy[0]->Fighter->set('current_health',$ennemy[0]['Fighter']['current_health']-1);*/
         
-            debug("   Your ennemy remains : {$ennemy['Fighter']['current_health']} Life Points");
+            //debug("   Your ennemy remains : {$ennemy['Fighter']['current_health']} Life Points");
         
     }
 
     $this->save();
-    
+    echo "<script>window.location = window.location.href;</script>";
+            
     return true;
 }
 
@@ -474,21 +474,27 @@ public function joinGuild($fighterId, $guildId) {
         switch ($toolCurrent['Tool']['type']) {
         case 'strength':
             $dataChanged =array(
-                'skill_strength' => ($datas['Fighter']['skill_strength'] + $toolCurrent['Tool']['bonus'])
+                'skill_strength'    => ($datas['Fighter']['skill_strength'] + $toolCurrent['Tool']['bonus'])
                 );
             break;
         
         case 'sight':
             $dataChanged =array(
-                'skill_sight'   =>  ($datas['Fighter']['skill_sight'] + + $toolCurrent['Tool']['bonus']),
+                'skill_sight'       =>  ($datas['Fighter']['skill_sight'] + $toolCurrent['Tool']['bonus']),
                 );
             
             break;
         
-        case'life':
+        case'health':
             $dataChanged =array(
-                'skill_health'  =>  ($datas['Fighter']['skill_health'] + + $toolCurrent['Tool']['bonus']),
-                'current_health'=>  ($datas['Fighter']['skill_health'] + + $toolCurrent['Tool']['bonus'])
+                'skill_health'      =>  ($datas['Fighter']['skill_health'] + $toolCurrent['Tool']['bonus']),
+                'current_health'    =>  ($datas['Fighter']['skill_health'] + $toolCurrent['Tool']['bonus'])
+                );
+            break;
+        
+        case'lifePoints':
+            $dataChanged =array(
+                'current_health'    =>  ($datas['Fighter']['skill_health'])
                 );
             break;
 
