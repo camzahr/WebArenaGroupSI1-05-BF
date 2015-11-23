@@ -182,7 +182,7 @@ class ArenasController extends AppController
             }
             Else
             {
-                $this->Flash->set("Attaque Ratée !!");
+                echo"<script>alert('You missed your target. Try again !');</script>";
             }
 
         }
@@ -281,7 +281,7 @@ class ArenasController extends AppController
             }
             Else
             {
-                $this->Flash->set("Pas de points à utiliser !!");
+               echo"<script>alert('You don't have enough points!');</script>";
             }
         } 
          
@@ -398,7 +398,7 @@ class ArenasController extends AppController
             }
             Else
             {
-                $this->Flash->set("Attaque Ratée !!");
+                echo"<script>alert('You missed your target. Try again !');</script>";
             }
 
         }

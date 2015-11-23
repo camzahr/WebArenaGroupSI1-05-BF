@@ -67,7 +67,7 @@ protected function verifCaseOccupy($fighterId, $direction){
     $datas = $this->read(null, $fighterId);
     $case = array('coordinate_x' => $datas['Fighter']['coordinate_x'],
                   'coordinate_y' => $datas['Fighter']['coordinate_y']);
-    
+     
     switch ($direction)
     {
     case 'north':
@@ -112,7 +112,6 @@ protected function verifCaseOccupy($fighterId, $direction){
     //Si oui, on l'attaque
     else 
     {
-        //echo" Case occupied by someone else";
         return false;
     }
 
@@ -151,13 +150,13 @@ public function doMove($fighterId, $direction){
             //Empecher de sortir de l'arène
             if($this->verifLimit())
                 {
-                    echo "<script>location.reload();</script>";
+                    echo "<script>window.location = window.location.href;</script>";
                 //    echo("Mouvement Accepté !");
                 }
             else
                 {
-                 echo "<script>location.reload();</script>";
-                    return false;
+                 echo "<script>window.location = window.location.href;</script>";
+                   return false;
                 }
             $this->save();
             return true;
@@ -165,8 +164,8 @@ public function doMove($fighterId, $direction){
         }
     else
         {
-          echo "<script>location.reload();</script>";
-            return false;
+          echo "<script>window.location = window.location.href;</script>";
+                  return false;
         }
 }
 
@@ -356,7 +355,8 @@ public function doAttack($fighterId, $direction){
     }
 
     $this->save();
-    
+    echo "<script>window.location = window.location.href;</script>";
+            
     return true;
 }
 
