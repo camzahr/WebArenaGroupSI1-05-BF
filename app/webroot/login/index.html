@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Lab 1 - Resume</title>
+	<link href='style.css' rel='stylesheet' type='text/css'>
+	<link href='//fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type='text/css'>
+
+</head>
+
+<body>
+	<header id="headframe">
+		<section class="centered">
+			<img src="portrait.jpg" id="rounded" alt="Jalil Benayachi" />
+			<h1>
+			Hi ! I'm Jalil Benayachi.
+		</h1> 
+			<p id="subtitle-big">
+				Information Systems Engineer and creative web developer.
+			</p>
+			<p>
+				<i class="fa fa-sort-desc"></i>
+				Scroll down to learn more about me
+				<i class="fa fa-sort-desc"></i>
+			</p>
+		</section>
+
+	</header>
+	<nav id="navmenu">
+		<ul>
+			<li><a href="#education">Education</a>
+			</li>
+			<li><a href="#work">Work/Portfolio</a>
+			</li>
+			<li><a href="#contact">Contact</a>
+			</li>
+		</ul>
+	</nav>
+	<main>
+		<section id="education" class="verticalcentered">
+			<h2>
+			 Education Timeline
+		</h2>
+
+			<aside id="education-display">
+				<article id="eduipsum">
+					<h3>
+					Education timeline
+					</h3>
+					<p>
+						<img src="img/edu.png" alt="Education" />Simply mouse over the education timeline to view details about its elements
+					</p>
+				</article>
+				<article id="ece" style="display: none;">
+					<h3>
+					ECE Paris Engineering School
+					</h3>
+					<p>
+						<img src="img/ece.png" alt="ECE Paris" />
+					</p>
+				</article>
+				<article id="cpe" style="display: none;">
+					<h3>
+					 Institution des Chartreux
+					</h3>
+					<p>
+						<img src="img/cpe.png" alt="Institution des Chartreux" />
+					</p>
+				</article>
+
+				<article id="lyautey" style="display: none;">
+					<h3>
+					Lycée Lyautey
+					</h3>
+					<p>
+						<img src="img/lyautey.png" alt="Lycee Lyautey" />
+					</p>
+				</article>
+
+				<article id="jth" style="display: none;">
+					<h3>
+					Jönköping Engineering School
+					</h3>
+					<p>
+						<img src="img/jth.png" alt="JTH Jönköping" />
+					</p>
+				</article>
+
+			</aside>
+
+
+			<article class="medium" onmouseover="educationShowmore('ece'); return false;">
+				<time>2017</time>
+				<h3>
+			    ECE Paris Ecole d'Ingénieurs
+		  		</h3>
+				Information Systems (International Option)
+				
+					<dl>
+					<dt>2013 / ING2 </dt><dd> Second year preparatory cycle: High-Tech speciality (Robotics and Web development) </dd>
+					<dt>2014 / ING3 </dt><dd> Exchange semester in Sweden (more information above) </dd>
+					<dt>2015 / ING4 </dt><dd> Information Systems (Mineure Métiers du conseil)</dd>
+					<dt>Graduation year: </dt><dd> 2017</dd>
+				</dl> 
+			</article>
+
+			<article class="medium" onmouseover="educationShowmore('cpe', 'text1', this); return false;">
+				<time>2012</time>
+				<h3>
+			    Classes Préparatoires - Institution des Chartreux
+		   		</h3>
+				Preparatory Classes
+				<ul>
+					<li>2011 / SUP (MP/PCSI)</li>
+					<li>2012 / SPE (PCSI)</li>
+				</ul>
+					 
+				
+			</article>
+
+			<article class="medium" onmouseover="educationShowmore('lyautey'); return false;">
+				<time>2011</time>
+				<h3>
+			    Lycée Lyautey, Casablanca
+		  		</h3>
+				French Scientific Baccalauréat, Specialized in Physics, with honors (14.05)
+				<ol>
+					<li>English (LV1)</li>
+					<li>Spanish (LV2)</li>
+					<li>Arabic (LV3)</li>
+				</ol>
+			</article>
+
+			<article class="medium" onmouseover="educationShowmore('jth'); return false;">
+				<time>2014</time>
+				<h3>
+			    University of Jönköping (JTH), Sweden
+		   		</h3>
+				Exchange semester
+				<dl>
+					<dt>Applied Web Architecture</dt><dd> (Php/Database) including a group project. </dd>
+					<dt>Multimedia with HTML5: </dt><dd> an introduction to all the new web 2.0 tools such as HTML5, CSS3, JQuery.  </dd>
+					<dt>Swedish Language, culture and Society:</dt><dd> an introduction to the swedes’ way of life and language. </dd>
+					<dt>Intercultural Communication: </dt><dd>Learning to deal with cultural struggles that we may encounter in our future workplaces with foreign business associates. </dd>
+				</dl>
+			</article>
+
+
+
+
+		</section>
+
+
+
+		<section id="work">
+			<h2>
+			Profesionnal Experience
+		</h2>
+
+			<aside id="portfolio-display">
+				<article id="workipsum">
+					<h3>
+					Working experience timeline
+					</h3>
+					<p>
+						<img src="img/work.png" alt="Education" />Simply mouse over the work timeline to view details about its elements
+					</p>
+				</article>
+
+				<article id="pdf" style="display: none;">
+					<h3>
+					Patrimoine de France
+					</h3>
+					<p>
+						<img src="img/pdf.png" alt="Patrimoine de France" />
+					</p>
+				</article>
+
+				<article id="ram" style="display: none;">
+					<h3>
+					Royal Air Maroc
+					</h3>
+					<p>
+						<img src="img/ram.png" alt="Royal Air Maroc" />
+					</p>
+				</article>
+
+				<article id="ana" style="display: none;">
+					<h3>
+					Anjou Aéronautique
+					</h3>
+					<p>
+						<img src="img/ana.png" alt="Anjou Aero" />
+					</p>
+				</article>
+
+
+				<form id="expform" style="display: none;">
+
+					<fieldset>
+						<legend><i class="fa fa-plus"></i> Add a professional experience</legend>
+						Year:
+						<input type="text" placeholder="2015" id="fmyear">Company:
+						<input type="text" placeholder="Apple Inc." id="fmcompany">Description:
+						<textarea placeholder="Description (Technologies used, missions)" id="fmdesc"></textarea>
+					</fieldset>
+				</form>
+			</aside>
+
+			<article class="medium" onmouseover="workShowmore('pdf'); return false;">
+				<time>2015</time>
+				<h3>
+				  Patrimoine de France.fr
+			   </h3>
+				Freelance Web Developper
+				<p>
+					Start to scratch website renew SPIP conversion to tailor-made CMS Webdesign
+				</p>
+			</article>
+
+			<article class="medium" onmouseover="workShowmore('ram'); return false;">
+				<time>2015</time>
+				<h3>
+			   Royal Air Maroc
+		   </h3>
+				Technical Department / Aircraft Maintenance
+				<p>
+					Six week Internship in the Technical Department of Royal Air Maroc (airliner)
+				</p>
+			</article>
+
+			<article class="medium" onmouseover="workShowmore('ana'); return false;">
+				<time>2014</time>
+				<h3>
+			   Anjou Aeronautics
+		   </h3>
+				Aircraft interior manufacturer
+				<p>
+					1 month internship Redesigning Anjou Aeronautique website, considering the old one wasn't up to date concerning the new HTML standards.
+				</p>
+			</article>
+
+			<article class="medium" onmouseover="workShowmore('expform'); return false;">
+				<h4 id="dispyear"><i class="fa fa-plus fa-lg"></i> Add</h4>
+				<h3 id="dispcompany">
+			   Submit a professional experience
+		   </h3>
+				<p id="dispdesc">
+					Use the javascript form: Simply mouse over this timeline empty event to display the form and add a professional experience.
+				</p>
+			</article>
+
+
+
+
+
+		</section>
+	</main>
+
+	<section id="contact">
+		<h2>
+			Contact
+		</h2>
+
+		<aside id="contact-display">
+			<article id="contactipsum">
+				<h3>
+		Where to find me ?
+		</h3>
+
+				<iframe style="border:0; width:100%; height: 40vh;" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyB0qujj1vZpFojRIwf3BefNyIYZq5FBhE8&amp;q=ECE+Paris+Ecole+Ingenieur" allowfullscreen>
+				</iframe>
+				<p>L’ECE Paris (anciennement École centrale d’électronique) est l'une des 210 écoles d'ingénieurs françaises habilitées à délivrer un diplôme d'ingénieur. Située dans le 15e arrondissement à Paris en France, elle appartient au groupe Laureate Education.
+				</p>
+			</article>
+
+
+		</aside>
+
+		<article class="medium">
+			<h4><i class="fa fa-phone"></i> Phone </h4>
+			<h3>
+			 06 22 14 40 31
+		   </h3>
+			9:00 am - 8:00 pm
+		</article>
+		<article class="medium">
+			<h4><i class="fa fa-envelope"></i> Email </h4>
+			<h3>
+			 contact@thejals.com 
+		   </h3>
+			<a id="mailme"><i class="fa fa-sort-desc"></i> Send me one !</a>
+			<form id="contactform" style="display:none; return false;">
+				<fieldset>
+					<legend><i class="fa fa-plus"></i>Send an email</legend>
+					Subject:
+					<input type="text" placeholder="Freelance developper requested">
+					Your email:
+					<input type="text" placeholder="danielfaraday@tesla.com">
+					Content:
+					<textarea placeholder="Hello Jalil, ..."></textarea>
+					<input type="submit" />
+				</fieldset>
+			</form>
+		</article>
+		<article class="medium">
+			<h4><i class="fa fa-facebook"></i> Facebook </h4>
+			<h3>
+			 <a href="https://facebook.com/thejals">facebook.com/thejals</a>
+		   </h3>
+
+
+
+		</article>
+
+
+
+
+
+
+	</section>
+
+
+
+
+
+
+	<script type="text/javascript" src="script.js"></script>
+</body>
+
+</html>

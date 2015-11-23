@@ -1,3 +1,5 @@
+
+
 <?php
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
@@ -14,65 +16,43 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
+$cakeDescription = __d('cake_dev', 'MDR');
 $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 ?>
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-	<?php echo $this->Html->charset(); ?>
-	<title>
-		<?php echo $cakeDescription ?>:
-		<?php echo $this->fetch('Project Web Arena'); ?>
-	</title>
-	<?php
-		echo $this->Html->meta('icon');
-
-		echo $this->Html->css('cake.generic');
-		echo $this->Html->css('boostrap');
-		echo $this->Html->css('boostra.responsive');
-
-		echo $this->fetch('meta');
-		echo $this->fetch('css');
-		echo $this->fetch('script');
-	?>
+    <meta charset="utf-8">
+    <title>ECE Web Arena</title>
+    
+    <link href='//fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type='text/css'>
+  <?php
+    echo $this->Html->meta('icon');
+    echo $this->Html->css('login');
+  ?>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="login/pwdwidget.js"></script>
 </head>
-<body>
-	<div id="container">
-		<div id="header">
-			<h1>Bienvenue dans WebArena !</h1>
-                        <?php //echo $this->Html->link('Index', array('controller' => 'Arenas', 'action' => 'index')); ?>
-                        <?php //echo $this->Html->link('Fighter', array('controller' => 'Arenas', 'action' => 'fighter')); ?>
-                        <?php //echo $this->Html->link('Sight', array('controller' => 'Arenas', 'action' => 'sight')); ?>
-                        <?php //echo $this->Html->link('Diary', array('controller' => 'Arenas', 'action' => 'diary')); ?>
-                        <?php //echo $this->Html->link('My Profil', array('controller' => 'Users', 'action' => 'display')); ?>
-                        <?php // if ($this->$long==false)
-                                //echo $this->Html->link('Subscribe', array('controller' => 'Users', 'action' => 'subscribe'));
-                              //if ($this->$long==true)
-                                //echo $this->Html->link('Login', array('controller' => 'Users', 'action' => 'login'));
-                                //echo $this->Html->link('Subscribe', array('controller' => 'Users', 'action' => 'subscribe'));
-                                        ?>
-                        <?php //echo $this->Html->link('Logout', array('controller'=> 'Users', 'action'=> 'logout'));?>
-		</div>
-		<div id="content">
 
+<body>
+   
 			<?php echo $this->Flash->render(); ?>
                 	<?php echo $this->fetch('content'); ?>
-		</div>
-		<div id="footer">
-			<?php echo $this->Html->link(
-					$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
-					'http://www.cakephp.org/',
-					array('target' => '_blank', 'escape' => false, 'id' => 'cake-powered')
-				);
-			?>
-			<p>
-				<?php echo $cakeVersion; 
-                                        echo "Project Web Arena BF by Jeremy CAMILLERI, Jalil BENAYACHI, Aurelien GUERARD, Jean-Baptiste GESNEL"
-                                ?>
-			</p>
-		</div>
-	</div>
-	<?php echo $this->element('sql_dump'); ?>
+
+    <script type="text/javascript" src="login/script.js"></script>
+    <script>
+$("#EmailAddress").keyup(function(){
+    $("#UserEmail").val(this.value);
+});
+
+$("#Pwd").keyup(function(){
+    $("#UserPassword").val(this.value);
+});
+    </script>
+    <?php echo $this->element('sql_dump'); ?>
 </body>
+
 </html>

@@ -187,7 +187,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
     <a href="#" data-placement="bottom" class="trigger btn btn-default"><i class="fa fa-cogs fa-lg"></i> Settings</a>  
 
 <?php echo $this->Html->link('Logout', array('controller'=> 'Users', 'action'=> 'logout'),array(
-    'class' => 'trigger btn btn-primary',
+    'class' => 'btn btn-primary',
     'role' => 'button'));?>
 
 
@@ -208,7 +208,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
     echo $this->Form->input('fighter',array('options' => $fighterList));
     echo $this->Form->end('Valid');
 
-    
+
 
 ?>
     </div>
