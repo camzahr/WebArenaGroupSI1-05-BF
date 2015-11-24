@@ -273,7 +273,13 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
           <li><i class="icon-pinterest icon-2x"></i></li>
         </ul>
         <hr>
-        <p>Built with <i class="fa fa-heart"></i> at <a href="http://ece.fr">ECE Paris</a> School of engineering</p>
+        <p>
+        WebArenaGroupSI1-05-BF
+Options : A B D F / <?php echo $this->Html->link('Git log', '/files/git.log', array(
+                                    'target' => '_blank')); 
+                            ?> / <a href="https://thejals.com/ECE/webarena/">Online version</a>
+
+</p>
       </div>
     </div>
   </div>
