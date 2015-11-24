@@ -62,8 +62,14 @@ class User extends AppModel {
             }
         else debug('NEIN');
     }*/
-    
-    
+    public function changePassword($playerId, $data) {
+        $datas = $this->read(null, $playerId);
+        
+        $newData = array(
+            'password'             => $data['password']);
+        
+        $this->save($newData);
+    }
     
 }
 

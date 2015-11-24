@@ -128,6 +128,20 @@ class UsersController extends AppController
             $this->Fighter->newAvatar($fighterIdActual, $this->request->data['Fighternewavatar']);
             
         }
+        
+        //Si on demande la création d'un nouveau personnage.
+        if($this->request->data('Changepassword'))
+        {
+            //$oldPassword = $this->request->data['Fighternewavatar']['passwordOld'];
+            $newPassword = $this->request->data['Fighternewavatar']['passwordNew'];
+            
+            $data = array(
+                    'password'  => $this->Auth->password($password)
+                );
+            
+            $this->User->changePassword($this->Session->read('Auth.User.id'), $data);
+            
+        }
     }
     
     function newPassword() {
@@ -156,12 +170,11 @@ class UsersController extends AppController
                 'conditions'=> array('email'=>$u['email'])
             ));
             $password = $this->newPassword();
-            debug($password);
             
             $datas = array(
                     'password'  => $this->Auth->password($password)
                 );
-            $this->User->save($datas);
+            $this->User->changePassword($user['User']['id'], $datas);
             //$link = array('controller'=>'users', 'action'=>'password', 'token'=>$user['User']['id'].'-'.md5($user['User']['password']));
             $email = New CakeEmail('default');
             $email->to($user['User']['email']);

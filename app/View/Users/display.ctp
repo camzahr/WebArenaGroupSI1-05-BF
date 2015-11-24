@@ -14,6 +14,18 @@ echo $this->Html->image('avatars/'.$playerId.'.jpg', array(
     'style' => 'width: 200px;'));
 
 */
- /*echo $raw['User']['email'];
+ /*$raw['User']['email'];
 
 pr($raw); */?>
+
+<div class="col-md-4">
+    <h3><?php echo $raw['User']['email']; ?> </h3>
+</div>
+
+<div class="col-md-6">
+    <?php
+            echo $this->Form->create("Changepassword");
+            echo $this->Form->input("passwordNew", array("placeholder" => "Password", "label" => "New Password"));
+            echo $this->Form->end("Change");
+    ?>
+</div>
