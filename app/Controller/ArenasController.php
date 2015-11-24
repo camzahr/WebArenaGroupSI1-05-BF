@@ -15,6 +15,12 @@ class ArenasController extends AppController
 
     var $fighterIdActual;
 
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $this->Auth->allow('home', 'wallOfFame');
+
+         
+    }
     
     /**
      * index method : first page
@@ -780,6 +786,19 @@ class ArenasController extends AppController
         $fightersAll = $this->Fighter->find('all');
         debug($fightersAll);
         $this->set('raw',$fightersAll);
+        $playerIdActual = $this->Session->read('Auth.User.id');
+        $this->set('isConnected',$playerIdActual);
+    }
+    
+    /**
+     * wallOfFame method : first page
+     *
+     * @return void
+     */
+    public function wallOfFame()
+    {
+        $playerIdActual = $this->Session->read('Auth.User.id');
+        $this->set('isConnected',$playerIdActual);
     }
 
 }
