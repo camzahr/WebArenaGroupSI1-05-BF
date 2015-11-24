@@ -69,7 +69,7 @@ class ArenasController extends AppController
         //Si on demande la création d'un nouveau personnage.
         if($this->request->data('Fightercreate'))
         {
-            $this->Fighter->generate($playerIdActual,$this->request->data['Fightercreate']['name']);
+            $message = $this->Fighter->generate($playerIdActual,$this->request->data['Fightercreate']['name']);
             
             $dataTool = array();
             
@@ -87,7 +87,8 @@ class ArenasController extends AppController
             
             $dataTool['bonus'] = rand(1,3);
             
-            $this->Tool->add($dataTool);
+            $message = $message . " " . $this->Tool->add($dataTool);
+            $this->set('messages',$message);
         }
         
         //Si on demande la création d'un nouveau personnage.
@@ -96,7 +97,7 @@ class ArenasController extends AppController
             $this->Session->write('Fighter.id',$this->request->data['Fighterchoice']['fighter']);
             $fighterIdActual = $this->Session->read('Fighter.id');
             
-           
+           $this->set('messages',"You change your character !");
         }
         
         //Si on demande un nouvel avatar
@@ -108,8 +109,8 @@ class ArenasController extends AppController
                 {
                 debug($this->Player->invalidFields()); die();
                 }*/
-            $this->Fighter->newAvatar($fighterIdActual, $this->request->data['Fighternewavatar']);
-            
+            $message = $this->Fighter->newAvatar($fighterIdActual, $this->request->data['Fighternewavatar']);
+            $this->set('messages',$message);
         }
        
         
@@ -164,29 +165,24 @@ class ArenasController extends AppController
         //Si on demande la création d'un nouveau personnage.
         if($this->request->data('Toolpickup'))
         {
-            $this->Fighter->ramasserWeapon($fighterIdActual, $this->request->data['Toolpickup']['toolChoice']);
+            $message = $this->Fighter->ramasserWeapon($fighterIdActual, $this->request->data['Toolpickup']['toolChoice']);
+            $this->set('messages',$message);
         }
         
             //Si c'est une action de mouvement
         if($this->request->data('Fightermove'))
         {
-            
-            
-            $this->Fighter->doMove($fighterIdActual, $this->request->data['Fightermove']['direction']);
+            $message = $this->Fighter->doMove($fighterIdActual, $this->request->data['Fightermove']['direction']);
+            $this->set('messages',$message);
 
         }
         
         //Si c'est une action d'attaque
         Elseif($this->request->data('Fighterattack'))
         {
-            if ($this->Fighter->doAttack($fighterIdActual, $this->request->data['Fighterattack']['direction']))
-            {
-                
-            }
-            Else
-            {
-                echo"<script>alert('You missed your target. Try again !');</script>";
-            }
+            $message = $this->Fighter->doAttack($fighterIdActual, $this->request->data['Fighterattack']['direction']);
+            $this->set('messages',$message);
+            
 
         }
   
@@ -396,14 +392,9 @@ class ArenasController extends AppController
         //Si c'est une action d'attaque
         Elseif($this->request->data('Fighterattack'))
         {
-            if ($this->Fighter->doAttack($fighterIdActual, $this->request->data['Fighterattack']['direction']))
-            {
-                
-            }
-            Else
-            {
-                echo"<script>alert('You missed your target. Try again !');</script>";
-            }
+            $message = $this->Fighter->doAttack($fighterIdActual, $this->request->data['Fighterattack']['direction']);
+            
+             $this->set('messages',$message);
 
         }
         

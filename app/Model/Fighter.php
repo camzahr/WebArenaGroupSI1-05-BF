@@ -147,6 +147,7 @@ public function doMove($fighterId, $direction){
 
                 default:
                     $messages = "Wrong direction";
+                    return $messages;
                 }
                 
             //Empecher de sortir de l'arène
@@ -248,7 +249,7 @@ protected function hurt($fighterId, $strength) {
     $this->set('current_health', $datas['Fighter']['current_health'] - $strength);
     $this->save();
     
-    $this->healthControl($fighterId);
+    
     
     return $this->healthControl($fighterId) . " You hurt the ennemy !";
     
@@ -259,6 +260,8 @@ public function doAttack($fighterId, $direction){
     $datas = $this->read(null, $fighterId);
     $case = array('coordinate_x' => $datas['Fighter']['coordinate_x'],
                   'coordinate_y' => $datas['Fighter']['coordinate_y']);
+    
+    $messages;
     
     switch ($direction)
     {
@@ -283,6 +286,8 @@ public function doAttack($fighterId, $direction){
         break;
 
     default:
+        $messages = "Wrong Direction";
+        return $messages;
         //echo "Direction inconnue";
     }
     //echo "Gonna attack : $case[coordinate_x] / $case[coordinate_y]";
@@ -301,6 +306,8 @@ public function doAttack($fighterId, $direction){
     if( empty ($ennemy) )
     {
         //echo" Nobody is currently at this position !!!!";
+        $messages = "Nobody is currently at this position !";
+        return $messages;
     }
     //Si oui, on l'attaque
     else 
@@ -335,6 +342,9 @@ public function doAttack($fighterId, $direction){
                 
                     $this->xpIncrease($fighterId, $ennemy['Fighter']['level']);
                     $event->add($dataEvent);
+                    
+                    $messages = $messages . " " ."You killed Someone !";
+                    return $messages;
                     //$ennemy->save($change);
                 }
                 else
@@ -342,6 +352,9 @@ public function doAttack($fighterId, $direction){
                     $this->set('xp', $datas['Fighter']['xp'] + 1);
                     $this->save();
                     $event->add($dataEvent);
+                    
+                    $messages = $messages . " " . " You Hurt Your Ennemy !";
+                    return $messages;
                     
                 }
                
@@ -352,7 +365,8 @@ public function doAttack($fighterId, $direction){
                 $event->add($dataEvent);
                 
                 //echo"Attaque Ratée !!!";
-                return false;
+                $messages = $messages . " " . " Attaque Ratée !";
+                return $messages;
             }
         /*$ennemy[0]->Fighter->set('current_health',$ennemy[0]['Fighter']['current_health']-1);*/
         
@@ -363,7 +377,7 @@ public function doAttack($fighterId, $direction){
     $this->save();
     echo "<script>window.location = window.location.href;</script>";
             
-    return true;
+    return $messages;
 }
 
 //FONCTIONS AUTRES
@@ -407,11 +421,11 @@ public function increaseLevel($fighterId, $skill){
 
     $this->save($dataChanged);
 
-    return true;
+    return "You pass a level !";
     }
     else
     {
-        return false;
+        return "You don't have enough XPs";
     }
     
 }
@@ -432,10 +446,11 @@ public function generate($id,$name) {
     );
     $this->create();
     $this->save($newData);
+    
+    return ("Welcome $name");
 }
 
 public function joinGuild($fighterId, $guildId) {
-    debug($guildId);
         //récupérer la position et fixer l'id de travail
         $datas = $this->read(null, $fighterId);
         
@@ -443,6 +458,7 @@ public function joinGuild($fighterId, $guildId) {
             'guild_id'             => $guildId);
         
         $this->save($newData);
+        return'Welcome to your new Guild !';
     }
     
     public function newAvatar($fighterId, $data) {
@@ -450,15 +466,17 @@ public function joinGuild($fighterId, $guildId) {
 
         if(!empty($data['avatar_file']['tmp_name']))
             {
-                debug("ACCEPTE");
+                
                 $extension = strtolower(pathinfo($data['avatar_file']['name'], PATHINFO_EXTENSION));
                 if(in_array($extension, array('jpg')))
                 {
                     move_uploaded_file($data['avatar_file']['tmp_name'], IMAGES.'avatars'.DS.$fighterId.'.'.$extension);
                    
                 }
+                
+                return "Nouvel Avatar Accepté";
             }
-        else debug('NEIN');
+        return "Avatar Non Valide";
     }
     
     public function ramasserWeapon($fighterId, $toolId){
@@ -510,6 +528,7 @@ public function joinGuild($fighterId, $guildId) {
     
     $this->save($dataChanged);
         
+    return "You have a new Weapon !";
         
     }
 
