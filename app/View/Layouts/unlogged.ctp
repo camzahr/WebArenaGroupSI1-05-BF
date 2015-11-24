@@ -35,9 +35,26 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
   ?>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/javascript" src="login/pwdwidget.js"></script>
+    
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
+    
+    
+<div class="navbar navbar-fixed-top alt" data-spy="affix" data-offset-top="1000">
+  <div class="container">
+    
+    <div class="navbar-collapse collapse" id="navbar">
+      <ul class="nav navbar-nav">
+                       <li> <?php echo $this->Html->link('Home', array('controller' => 'Arenas', 'action' => 'home')); ?></li>
+                       <li> <?php echo $this->Html->link('Login', array('controller' => 'Users', 'action' => 'login')); ?></li>
+                       
+      </ul>
+    </div>
+   </div>
+</div>
    
 			<?php echo $this->Flash->render(); ?>
                 	<?php echo $this->fetch('content'); ?>

@@ -70,8 +70,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
     </div>
     <div class="navbar-collapse collapse" id="navbar">
       <ul class="nav navbar-nav">
-                       <li> <?php echo $this->Html->link('Accueil', array('controller' => 'Arenas', 'action' => 'accueil')); ?></li>
-                       <li> <?php echo $this->Html->link('Home / Sight', array('controller' => 'Arenas', 'action' => 'index')); ?></li>
+                       <li> <?php echo $this->Html->link('Home', array('controller' => 'Arenas', 'action' => 'home')); ?></li>
+                       <li> <?php echo $this->Html->link('Index / Sight', array('controller' => 'Arenas', 'action' => 'index')); ?></li>
                        <li> <?php echo $this->Html->link('Fighter', array('controller' => 'Arenas', 'action' => 'fighter')); ?></li>
                        <li> <?php echo $this->Html->link('Diary', array('controller' => 'Arenas', 'action' => 'diary')); ?></li>
                        <li> <?php echo $this->Html->link('My Profile', array('controller' => 'Users', 'action' => 'display')); ?></li>

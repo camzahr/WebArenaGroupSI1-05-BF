@@ -771,11 +771,11 @@ class ArenasController extends AppController
     }
     
     /**
-     * accueil method : first page
+     * home method : first page
      *
      * @return void
      */
-    public function accueil()
+    public function home()
     {
         $fightersAll = $this->Fighter->find('all');
         debug($fightersAll);

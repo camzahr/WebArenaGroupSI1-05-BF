@@ -16,6 +16,7 @@ class Message extends AppModel {
         );
         $this->create();
         $this->save($newData);
+        echo "<script>window.location = window.location.href;</script>";  
         }
     }
     

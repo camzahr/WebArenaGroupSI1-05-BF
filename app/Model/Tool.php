@@ -48,6 +48,7 @@ class Tool extends AppModel {
         
     );
     $this->save($newData);
+    echo "<script>window.location = window.location.href;</script>";  
     }
     
     function fighterDie($fighterId, $x ,$y){
@@ -61,6 +62,7 @@ class Tool extends AppModel {
         foreach ($tools as $tool) {
             $this->drop($tool['Tool']['id'],$x ,$y);
         }
+        echo "<script>window.location = window.location.href;</script>";  
     }
 }
 
