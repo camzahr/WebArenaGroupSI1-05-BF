@@ -1,4 +1,4 @@
-    <?php
+<?php
 
 App::uses('AppModel', 'Model');
 App::uses('Event', 'Model');
@@ -120,10 +120,12 @@ protected function verifCaseOccupy($fighterId, $direction){
 public function doMove($fighterId, $direction){
     //récupérer la position et fixer l'id de travail
     $datas = $this->read(null, $fighterId);
+    
+    $messages;
     // Empecher d'entrer sur une zone occupée
     if($this->verifCaseOccupy($fighterId, $direction))
         {
-            echo("Free case");
+            
             
             switch ($direction)
                 {
@@ -144,30 +146,28 @@ public function doMove($fighterId, $direction){
                     break;
 
                 default:
-                    echo "Direction inconnue";
+                    $messages = "Wrong direction";
                 }
                 
             //Empecher de sortir de l'arène
             if($this->verifLimit())
                 {
-                    echo "<script>window.location = window.location.href;</script>";
-
+                 
                 //    echo("Mouvement Accepté !");
                 }
             else
                 {
-                  
-                 echo "<script>window.location = window.location.href;</script>";
-                   return false;
+                  $messages = $messages . " " . "You try to quit the Arena !";
+                   return $messages;
                 }
             $this->save();
-            return true;
+            return $messages;
                 
         }
     else
         {
-          echo "<script>window.location = window.location.href;</script>";
-                  return false;
+          $messages = $messages . " " . "Case Occupied !";
+                  return $messages;
         }
 }
 
@@ -227,6 +227,8 @@ protected function xpIncrease($fighterId, $level) {
     $datas = $this->read(null, $fighterId);
     $this->set('xp', $datas['Fighter']['xp'] + $level);
     $this->save();
+    
+    return "You Earn XPs";
 }
 
 protected function healthControl($fighterId) {
@@ -236,8 +238,8 @@ protected function healthControl($fighterId) {
         $tool = new Tool();
         $tool->fighterDie($fighterId, $datas['Fighter']['coordinate_x'], $datas['Fighter']['coordinate_y']);
         $this->delete();
+        return "You destroy an Ennemy !";
     }
-    
 }
 
 protected function hurt($fighterId, $strength) {
@@ -247,6 +249,8 @@ protected function hurt($fighterId, $strength) {
     $this->save();
     
     $this->healthControl($fighterId);
+    
+    return $this->healthControl($fighterId) . " You hurt the ennemy !";
     
 }
 
