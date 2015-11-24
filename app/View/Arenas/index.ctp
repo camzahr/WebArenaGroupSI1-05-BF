@@ -25,7 +25,7 @@
 </div>
 <?php $xp_percent=(100*$myFighter['Fighter']['xp'])/4; if($xp_percent>100){$xp_percent=100;} ?>
  <div class="progress" style="height: 30px; margin-bottom: 5px; margin-top:5px;">
-  <div class="progress-bar progress-bar-warning progress-bar-striped active"  role="progressbar" aria-valuenow="<?php echo $myFighter['Fighter']['current_health']; ?>" aria-valuemin="0" aria-valuemax="4" style="width: <?php echo $xp_percent;?>%; font-size: 20px; padding-top: 5px;">
+  <div class="progress-bar progress-bar-warning progress-bar-striped active"  role="progressbar" aria-valuenow="<?php echo $myFighter['Fighter']['current_health']; ?>" aria-valuemin="0" aria-valuemax="4" style="width: <?php echo $xp_percent;?>%; min-width: 30%; font-size: 20px; padding-top: 5px;">
   <?php echo "  XP: ".$myFighter['Fighter']['xp']."/ 4 "; ?>
   </div>
 </div>
