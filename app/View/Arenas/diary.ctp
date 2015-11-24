@@ -1,11 +1,11 @@
 <?php $this->assign('title', 'Diary');
     ?>
 
-<table class="table">
+<table class="table" id="myTable">
                             <thead>
                                 <tr class="filters">
-                                    <th><input type="text" class="form-control" placeholder="Evènement" disabled></th>
-                                    <th><input type="text" class="form-control" placeholder="Date" disabled></th>
+                                    <th>Event</th>
+                                    <th>Date</th>
                                 </tr>
                              </thead>
                             <tbody>
@@ -22,3 +22,9 @@
                                  <?php endforeach; ?>
                             </tbody>
                         </table>
+
+<script>
+$(document).ready(function(){
+    $('#myTable').DataTable();
+});
+</script>

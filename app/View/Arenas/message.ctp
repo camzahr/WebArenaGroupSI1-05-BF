@@ -25,7 +25,7 @@
 
 <div class="col-md-8">
 <h1>Message Received</h1>
-    <table class="table">
+    <table class="table" id="received">
                             <thead>
                                 <tr class="filters">
                                     <th><input type="text" class="form-control" placeholder="Title" disabled></th>
@@ -59,7 +59,7 @@
 
 
 <h1>Message Sent</h1>
-    <table class="table">
+    <table class="table" id="sent">
                             <thead>
                                 <tr class="filters">
                                     <th><input type="text" class="form-control" placeholder="Title" disabled></th>
@@ -92,3 +92,14 @@
                         </table>
 
 </div>
+
+<script>
+$(document).ready(function(){
+    $('#sent').DataTable();
+});
+
+$(document).ready(function(){
+    $('#received').DataTable();
+});
+
+</script>

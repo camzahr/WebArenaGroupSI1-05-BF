@@ -42,7 +42,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" ></script>
-
+ <script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js" ></script>
     <?php  echo $this->Html->script('scripts'); ?>
 
 
@@ -50,6 +50,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" rel="stylesheet">
 		<!--[if lt IE 9]>
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->

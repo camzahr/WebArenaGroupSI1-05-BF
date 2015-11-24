@@ -34,7 +34,7 @@
 echo  "Position: ".$alpha[$myFighter['Fighter']['coordinate_x']-1].$myFighter['Fighter']['coordinate_y']; 
 ?>
   </div>   
-<div class="col-md-3">   
+<div class="col-md-3" style='color: white; font-family: Voltaire;'>   
            <h3 style="color: white; font-family: Voltaire;">Move</h3>
             <a href="#m" data-select="west" /><img src="img/west.png" style="width: 70px; height: 70px;"/></a>
             <a href="#m" data-select="north" /> <img src="img/up.png" style="width: 70px; height: 70px;"/></a>
@@ -144,9 +144,11 @@ else
 
 ?>
   <div class="row" ><div class="col-md-6" style="font-size: 100%; margin-top: 5px;">
-    <?php echo "<img src='".$pic."' style='height:30px; width:30px; margin-right: 3px;'/>".$player['Fighter']['name']; ?>
+    <?php echo "<img src='".$pic."' style='height:30px; width:30px; margin-right: 3px;'/>";
+if($player['Fighter']['current_health']<$myFighter['Fighter']['skill_strength']){ $deadly=true; echo "<img src='img/skull.gif' width='20' height='20' style='float: right; margin-top:5px; margin-right: 5px;' />"; } 
+   echo $player['Fighter']['name']; ?>
 </div> <div class="col-md-6" style="margin: 0 0 0 0;">
-               <div class="progress" style="height: 30px; margin-bottom: 5px; margin-top:5px;"><?php if($player['Fighter']['current_health']<$myFighter['Fighter']['skill_strength']){ $deadly=true; echo "<img src='img/skull.gif' width='20' height='20' style='float: right; margin-top:5px; margin-right: 5px;' />"; } ?>
+               <div class="progress" style="height: 30px; margin-bottom: 5px; margin-top:5px;">
  
               <div class="progress-bar progress-bar-<?php echo $style;?> progress-bar-striped active"  role="progressbar" aria-valuenow="<?php echo $player['Fighter']['current_health']; ?>" aria-valuemin="0" aria-valuemax="<?php echo $player['Fighter']['skill_health']; ?>" style="width: <?php echo $life_percent;?>%; min-width: 40%; font-size: 15px; padding-top: 7px;">
               <?php echo $player['Fighter']['current_health']."/ ".$player['Fighter']['skill_health']." "; ?>
