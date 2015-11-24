@@ -37,6 +37,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
     <script type="text/javascript" src="login/pwdwidget.js"></script>
     
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    
 </head>
 
 <body>

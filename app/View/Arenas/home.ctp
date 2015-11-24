@@ -103,60 +103,12 @@ if (empty($isConnected)) {
                 </svg></center>
         <?php } ?>
         <h1 style="margin-top:25px;">
-            Inside the Arena, now 
+
         </h1> 
 
+        <iframe src="http://thejals.com/~thejals/prezbanner/" width="1000" height="400" style="border: 0px;"></iframe>
 
-
-        <div style="margin-top:25px;"> <!-- A changer Jalil-->
-            <div class="container">
-                <div id="carousel1" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <?php
-                        $i = 0;
-                        foreach ($raw as $fighter) {
-
-
-                            $pic = "./img/avatars/" . $fighter['Fighter']['id'] . ".jpg";
-
-                            if (file_exists($pic)) {
-                                if ($i == 0) {
-                                    ?>
-                                    <div class="item active">
-                                        <div class="col-md-6">
-                                            <img alt="<?php echo $fighter['Fighter']['name'] ?>" src="<?php echo $this->webroot; ?>/img/avatars/<?php echo $fighter['Fighter']['id'] ?>.jpg" class="img-circle" style="height: 300px; width: 300px;">  
-                                                <h3 class="align-center"> <?php echo $fighter['Fighter']['name'] ?> </h3>
-                                        </div>
-                                    </div>
-                                    <?php
-                                } else {
-                                    ?>
-
-                                    <div class="item">
-                                        <img src="<?php echo $this->webroot; ?>/img/avatars/<?php echo $fighter['Fighter']['id'] ?>.jpg" class="img-circle" style="height: 300px; width: 300px;"> 
-                                            <h3 class="align-center"> <?php echo $fighter['Fighter']['name'] ?> </h3>
-                                    </div>
-
-
-
-                                    <?php
-                                }
-
-                                $i = $i + 1;
-                            }
-                        }
-                        ?>
-
-                        </ul>
-
-
-
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
+        
 
     </section>
 
