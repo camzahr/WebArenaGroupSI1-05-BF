@@ -274,14 +274,8 @@ class ArenasController extends AppController
         //Si c'est une action de newLevel
         if($this->request->data('Fighternewlevel'))
         {
-            if($this->Fighter->increaseLevel($fighterIdActual, $this->request->data['Fighternewlevel']['skill']))
-            {
-                
-            }
-            Else
-            {
-               echo"<script>alert('You don't have enough points!);</script>";
-            }
+            $message = $this->Fighter->increaseLevel($fighterIdActual, $this->request->data['Fighternewlevel']['skill']);
+            $this->set("messages",$message);
         } 
          
     }

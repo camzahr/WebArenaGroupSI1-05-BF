@@ -147,6 +147,7 @@ public function doMove($fighterId, $direction){
 
                 default:
                     $messages = "Wrong direction";
+                    echo "<script>window.location = window.location.href;</script>";
                     return $messages;
                 }
                 
@@ -159,16 +160,19 @@ public function doMove($fighterId, $direction){
             else
                 {
                   $messages = $messages . " " . "You try to quit the Arena !";
-                   return $messages;
+                  echo "<script>window.location = window.location.href;</script>";
+                  return $messages;
                 }
             $this->save();
+            echo "<script>window.location = window.location.href;</script>";
             return $messages;
                 
         }
     else
         {
           $messages = $messages . " " . "Case Occupied !";
-                  return $messages;
+          echo "<script>window.location = window.location.href;</script>";
+          return $messages;
         }
 }
 
@@ -287,6 +291,8 @@ public function doAttack($fighterId, $direction){
 
     default:
         $messages = "Wrong Direction";
+        echo "<script>window.location = window.location.href;</script>";
+    
         return $messages;
         //echo "Direction inconnue";
     }
@@ -305,8 +311,10 @@ public function doAttack($fighterId, $direction){
     //On vérifie que l'ennemy existe
     if( empty ($ennemy) )
     {
+        die('t');
         //echo" Nobody is currently at this position !!!!";
         $messages = "Nobody is currently at this position !";
+        echo "<script>window.location = window.location.href;</script>";
         return $messages;
     }
     //Si oui, on l'attaque
@@ -344,6 +352,8 @@ public function doAttack($fighterId, $direction){
                     $event->add($dataEvent);
                     
                     $messages = $messages . " " ."You killed Someone !";
+                    echo "<script>window.location = window.location.href;</script>";
+    
                     return $messages;
                     //$ennemy->save($change);
                 }
@@ -354,6 +364,8 @@ public function doAttack($fighterId, $direction){
                     $event->add($dataEvent);
                     
                     $messages = $messages . " " . " You Hurt Your Ennemy !";
+                    echo "<script>window.location = window.location.href;</script>";
+    
                     return $messages;
                     
                 }
@@ -366,6 +378,7 @@ public function doAttack($fighterId, $direction){
                 
                 //echo"Attaque Ratée !!!";
                 $messages = $messages . " " . " Attaque Ratée !";
+                echo "<script>window.location = window.location.href;</script>";
                 return $messages;
             }
         /*$ennemy[0]->Fighter->set('current_health',$ennemy[0]['Fighter']['current_health']-1);*/
