@@ -1,8 +1,258 @@
+commit a4476e37c5d10aa8757454635ca1d5b58e8d68c8
+Author: camzahr <camiller@ece.fr>
+Date:   Tue Nov 24 23:08:54 2015 +0100
+
+    Final
+
+commit 88f2ae58e28bdfb924a9a095129de52859e227a0
+Author: Jalil BENAYACHI <contact@thejals.com>
+Date:   Tue Nov 24 23:12:52 2015 +0100
+
+    LAST COMMIT - Added contributors name in the footer
+    
+    LAST COMMIT
+
+commit f92d2b9b5bc38944fd5e03d39105a44d0d70a37d
+Author: camzahr <camiller@ece.fr>
+Date:   Tue Nov 24 23:05:51 2015 +0100
+
+    FINAL FINAL ?
+
+commit 36a5b65164d47f18ed43935d8ebdce007ae5c06d
+Author: Jalil BENAYACHI <contact@thejals.com>
+Date:   Tue Nov 24 22:41:29 2015 +0100
+
+    Deleted Wall of fame
+
+commit 0055355ae4a773b762f0f3aea353820782f7dbc5
+Author: Jalil BENAYACHI <contact@thejals.com>
+Date:   Tue Nov 24 22:39:26 2015 +0100
+
+    Minor Layout improvement
+
+commit d3b451f3cf5dd8f65ef3c00f629cf96ea76bb054
+Author: Jalil BENAYACHI <contact@thejals.com>
+Date:   Tue Nov 24 22:22:03 2015 +0100
+
+    Footer update - showing relevant project information
+
+commit 3d39030bfdf3e4f1cbe3fce1262556008d2cf73e
+Author: Jalil BENAYACHI <contact@thejals.com>
+Date:   Tue Nov 24 22:17:54 2015 +0100
+
+    Removed: Useless carousel - fixed some stuff in homepage
+    
+    The html banner presenting the game had to be imported using an iframe
+
+commit 7474efb709731eb403a3f5be84153fe9ea558d44
+Author: camzahr <camiller@ece.fr>
+Date:   Tue Nov 24 22:01:22 2015 +0100
+
+    passwordChanges
+
+commit 9005d7f207fe0394083b29da8ab635e8cc11b8d8
+Merge: 13c7b8e 3fedb9e
+Author: Jalil BENAYACHI <contact@thejals.com>
+Date:   Tue Nov 24 21:43:49 2015 +0100
+
+    Merge remote-tracking branch 'origin/master'
+    
+    Conflicts:
+    	app/View/Layouts/unlogged.ctp
+
+commit 13c7b8eca587f2bc73e8fecd9fec73d3868c6498
+Author: Jalil BENAYACHI <contact@thejals.com>
+Date:   Tue Nov 24 21:42:52 2015 +0100
+
+    Fix: Login & Subscribe Screens
+
+commit 3fedb9e0480ff580f4afd0430bcaee71752997e9
+Author: camzahr <camiller@ece.fr>
+Date:   Tue Nov 24 21:40:48 2015 +0100
+
+    Final 1.3
+
+commit a6dd7c4fb2b30ee596eeac9701e4047f65a08cc5
+Author: camzahr <camiller@ece.fr>
+Date:   Tue Nov 24 21:27:55 2015 +0100
+
+    WallOfFame begin
+
+commit 89701977113b1760ddcbc2cf7eba3199723780e0
+Author: camzahr <camiller@ece.fr>
+Date:   Tue Nov 24 20:52:20 2015 +0100
+
+    Final 2.0
+
+commit 353d58d19b54de76c0167415ec03eceb0fc3e587
+Author: camzahr <camiller@ece.fr>
+Date:   Tue Nov 24 20:21:03 2015 +0100
+
+    Avatar + Accueil Page
+
+commit 0bdabec2ed1e8a1beed9c78f85009689dee13e92
+Author: Jalil BENAYACHI <contact@thejals.com>
+Date:   Tue Nov 24 19:29:43 2015 +0100
+
+    Layout Bonus
+    
+    Use of Datatable Library
+    Be careful, as I forgot to mention that on previous commits: to avoid
+    overloading the project ZIP release, some Javascripts and CSS are using
+    CDN distant repositories. YOU MUST have an internet connection in order
+    to use every layout feature.
+
+commit 64a837c0429ffcdf56373251957aa16797296dfd
+Author: camzahr <camiller@ece.fr>
+Date:   Tue Nov 24 19:15:29 2015 +0100
+
+    Final 1.0
+
+commit b1c6959488830a9f616df41fd0383fd00640fd6f
+Author: Jalil BENAYACHI <contact@thejals.com>
+Date:   Tue Nov 24 18:52:23 2015 +0100
+
+    Layout finalisation :)
+    
+    The project is now very close to its final release. Back up issues
+    where fixed, while layout has been dramatically improved.
+    
+    Fixed PHYSICAL move feature :) You can now perfectly use the arrow keys
+    of YOUR PHYSICAL KEYBOARD to make some moves with your player :)
+
+commit 1e3bdf2797efc537b767ce3016f843866dc55b95
+Author: camzahr <camiller@ece.fr>
+Date:   Tue Nov 24 18:27:20 2015 +0100
+
+    Trad id par name + refresh all function
+
+commit f2296c4528eded3594512150c804466733ce825b
+Author: camzahr <camiller@ece.fr>
+Date:   Tue Nov 24 17:39:24 2015 +0100
+
+    Change Raw Fighter
+
+commit 7bd20690ae3bc2ca93edf1bf4bbfdf14b6030d4a
+Author: camzahr <camiller@ece.fr>
+Date:   Tue Nov 24 17:32:38 2015 +0100
+
+    Commit Message
+
+commit 380666b534df47c2891faf164ca08f7521258be2
+Author: camzahr <camiller@ece.fr>
+Date:   Tue Nov 24 17:08:23 2015 +0100
+
+    Messages
+
+commit 1337e3c6897c08110830c31a5c3abba64a527eb6
+Author: camzahr <camiller@ece.fr>
+Date:   Tue Nov 24 16:25:53 2015 +0100
+
+    Test Message DoMove
+
+commit 5041f297e300c4554d619fe10882a5b37783dec7
+Author: Jalil BENAYACHI <contact@thejals.com>
+Date:   Tue Nov 24 16:17:19 2015 +0100
+
+    Latest layout improvements & Controller Updates
+    
+    Some features were corrected meanwhile the layout style was updated
+    
+    +unlogged view
+
+commit 2c9747bf129e281d3c8b0a01978591d820c4b391
+Author: Jalil BENAYACHI <contact@thejals.com>
+Date:   Mon Nov 23 20:09:57 2015 +0100
+
+    Layout updates
+
+commit 9221c3717939c599afff0f870531ec11c9ad7d67
+Merge: bdc5488 0cb9a1c
+Author: jb <jb.gesnel@hotmail.fr>
+Date:   Mon Nov 23 19:01:27 2015 +0100
+
+    Merge branch 'master' of https://github.com/camzahr/WebArenaGroupSI1-05-BF
+
+commit 0cb9a1c7096c78a37b5935e969459e623022491d
+Author: Jalil BENAYACHI <contact@thejals.com>
+Date:   Mon Nov 23 18:56:38 2015 +0100
+
+    Major Layout improvements & Cake Debug mode Deactivated
+    
+    Final release coming soon
+
+commit 10fb8a3eb3fdec3e42cd82ec3aafebff00ebfe1e
+Author: Jalil BENAYACHI <contact@thejals.com>
+Date:   Mon Nov 23 16:13:55 2015 +0100
+
+    Layout & Debugs
+
+commit 55806da3d3aeaed85057e2456402fc5e29aab234
+Author: Jalil BENAYACHI <contact@thejals.com>
+Date:   Mon Nov 23 15:22:08 2015 +0100
+
+    Layout work
+
+commit e27cf7ab8af760bd9932631e7d3210d52d3b3014
+Author: camzahr <camiller@ece.fr>
+Date:   Mon Nov 23 15:11:58 2015 +0100
+
+    Changes New tool + New variable vie
+
+commit bdc54885899500ee88b8623a6a6b0d3e43d12ea2
+Merge: 973254e 8972f70
+Author: jb <jb.gesnel@hotmail.fr>
+Date:   Sun Nov 22 23:06:42 2015 +0100
+
+    Merge remote-tracking branch 'refs/remotes/origin/JB_NoBug'
+
+commit a1ec6ee110bf85550da68f7c2e5158e1a8c227a7
+Author: camzahr <camiller@ece.fr>
+Date:   Sun Nov 22 22:53:22 2015 +0100
+
+    Fix issues
+
+commit 973254e597cb077ac555157eb0ba23a2c594aff3
+Merge: d6a7a6a efd19fe
+Author: Jalil BENAYACHI <contact@thejals.com>
+Date:   Sun Nov 22 21:37:59 2015 +0100
+
+    Merge remote-tracking branch 'origin/master'
+    
+    Conflicts:
+    	app/View/Arenas/index.ctp
+
+commit 8972f70bd0f3ba7bc3f6bae5b37f3038365a0acb
+Merge: 73c3cb8 efd19fe
+Author: jb <jb.gesnel@hotmail.fr>
+Date:   Sun Nov 22 21:31:37 2015 +0100
+
+    Merge remote-tracking branch 'refs/remotes/origin/master' into JB_NoBug
+
+commit d6a7a6a158da0d041647e5a2edcd1648d1daaeeb
+Author: Jalil BENAYACHI <contact@thejals.com>
+Date:   Sun Nov 22 21:27:30 2015 +0100
+
+    Layout improvements
+
+commit 73c3cb8a79847b357c6964e026d3e21667491056
+Merge: 6e7f1b4 0bf213e
+Author: jb <jb.gesnel@hotmail.fr>
+Date:   Sun Nov 22 21:11:49 2015 +0100
+
+    Merge remote-tracking branch 'refs/remotes/origin/master' into JB_NoBug
+
 commit efd19fec80b4ed4fa9f1c79441872c2b965b0374
 Author: camzahr <camiller@ece.fr>
 Date:   Sun Nov 22 21:05:55 2015 +0100
 
     Bonus Tool + Fix issues
+
+commit 6e7f1b4adf02c69fb6603831dada280653c4ec72
+Author: jb <jb.gesnel@hotmail.fr>
+Date:   Sun Nov 22 20:49:14 2015 +0100
+
+    Api complete
 
 commit 0bf213e735f13d4fda9dba420a8d48b1da9e7135
 Author: Jalil BENAYACHI <contact@thejals.com>
