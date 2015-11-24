@@ -49,8 +49,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
             <li> <?php echo $this->Html->link('Login', array('controller' => 'Users', 'action' => 'login')); ?></li>
             <li><?php  echo $this->Html->link('Sign up', array('controller' => 'Users', 'action' => 'subscribe')); ?>
                 </li>
-            <li> <?php echo $this->Html->link('Wall of Fame', array('controller' => 'Arenas', 'action' => 'wallOfFame')); ?></li>
-        </ul>
+         </ul>
     </nav>
 
 
