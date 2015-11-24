@@ -769,6 +769,18 @@ class ArenasController extends AppController
         
         
     }
+    
+    /**
+     * accueil method : first page
+     *
+     * @return void
+     */
+    public function accueil()
+    {
+        $fightersAll = $this->Fighter->find('all');
+        debug($fightersAll);
+        $this->set('raw',$fightersAll);
+    }
 
 }
 ?>
