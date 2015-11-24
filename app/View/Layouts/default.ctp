@@ -71,7 +71,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
       <ul class="nav navbar-nav">
                        <li> <?php echo $this->Html->link('Home / Sight', array('controller' => 'Arenas', 'action' => 'index')); ?></li>
                        <li> <?php echo $this->Html->link('Fighter', array('controller' => 'Arenas', 'action' => 'fighter')); ?></li>
-                       <li> <?php echo $this->Html->link('Sight', array('controller' => 'Arenas', 'action' => 'sight')); ?></li>
                        <li> <?php echo $this->Html->link('Diary', array('controller' => 'Arenas', 'action' => 'diary')); ?></li>
                        <li> <?php echo $this->Html->link('My Profile', array('controller' => 'Users', 'action' => 'display')); ?></li>
                        <li><?php echo $this->Html->link('My Messages', array('controller' => 'Arenas', 'action' => 'message')); ?></li>

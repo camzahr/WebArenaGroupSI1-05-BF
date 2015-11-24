@@ -1,3 +1,5 @@
+<div class="col-md-4">
+
 <?php
 
 /* 
@@ -5,18 +7,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-    echo " Send a message : ";
+    echo " <h4> Send a message  </h4>";
     echo $this->Form->create('MessageCreate');
     echo $this->Form->input('title');
     echo $this->Form->input('messageField');
     echo $this->Form->input('fighter_id',array('options' => $fightersName));
     echo $this->Form->end('Send');
     
-    echo " Scream : ";
+    echo "<br/><br/>";
+ 
+    echo "<h4> Scream  </h4>";
     echo $this->Form->create('Crier');
     echo $this->Form->input('name');
     echo $this->Form->end('Crier');
  ?>   
+</div>
+
+<div class="col-md-8">
 <h1>Message Received</h1>
     <table class="table">
                             <thead>
@@ -83,3 +90,5 @@
                                  <?php endforeach; ?>
                             </tbody>
                         </table>
+
+</div>

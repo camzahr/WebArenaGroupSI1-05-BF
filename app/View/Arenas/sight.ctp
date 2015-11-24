@@ -1,5 +1,6 @@
 <head><?php $this->assign('title', 'Acceuil');?></head>
         
+<div class="col-md-4">
 <?php
 /*
 pr($raw);
@@ -15,3 +16,5 @@ echo $this->Form->end('Attack');
 
 
 ?>
+
+</div>

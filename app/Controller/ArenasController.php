@@ -98,6 +98,7 @@ class ArenasController extends AppController
             $fighterIdActual = $this->Session->read('Fighter.id');
             
            $this->set('messages',"You change your character !");
+           echo "<script>window.location = window.location.href;</script>";  
         }
         
         //Si on demande un nouvel avatar
@@ -256,6 +257,8 @@ class ArenasController extends AppController
         {
             $this->Session->write('Fighter.id',$this->request->data['Fighterchoice']['fighter']);
             $fighterIdActual = $this->Session->read('Fighter.id');
+            
+            echo "<script>window.location = window.location.href;</script>";  
         }
         
         //Si on demande un nouvel avatar
@@ -361,6 +364,7 @@ class ArenasController extends AppController
         {
             $this->Session->write('Fighter.id',$this->request->data['Fighterchoice']['fighter']);
             $fighterIdActual = $this->Session->read('Fighter.id');
+            echo "<script>window.location = window.location.href;</script>";  
         }
         
         //Si on demande un nouvel avatar
@@ -471,6 +475,7 @@ class ArenasController extends AppController
         {
             $this->Session->write('Fighter.id',$this->request->data['Fighterchoice']['fighter']);
             $fighterIdActual = $this->Session->read('Fighter.id');
+            echo "<script>window.location = window.location.href;</script>";  
         }
         
        //Si on demande un nouvel avatar
@@ -557,6 +562,7 @@ class ArenasController extends AppController
         {
             $this->Session->write('Fighter.id',$this->request->data['Fighterchoice']['fighter']);
             $fighterIdActual = $this->Session->read('Fighter.id');
+            echo "<script>window.location = window.location.href;</script>";  
         }
         
         //Si on demande un nouvel avatar
@@ -684,6 +690,23 @@ class ArenasController extends AppController
   
         }
         
+        $currentFighter = $this->Fighter->find('first',array(
+                'conditions' => array(
+                    'Fighter.id' => $fighterIdActual
+                )
+            ));
+        
+        if($currentFighter['Fighter']['guild_id'] != NULL){
+            
+            $guildActual = $this->Guild->find('first',array(
+                'conditions'        => array(
+                    'Guild.id'  => $currentFighter['Fighter']['guild_id']
+                )
+            ));
+            
+            $this->set('guildName',$guildActual['Guild']['name']);
+        }
+        
         //Si on demande la création d'un nouveau personnage.
         if($this->request->data('Fightercreate'))
         {
@@ -714,6 +737,7 @@ class ArenasController extends AppController
         {
             $this->Session->write('Fighter.id',$this->request->data['Fighterchoice']['fighter']);
             $fighterIdActual = $this->Session->read('Fighter.id');
+            echo "<script>window.location = window.location.href;</script>";  
         }
         
         //Si on demande un nouvel avatar
