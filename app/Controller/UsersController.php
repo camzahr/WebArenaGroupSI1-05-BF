@@ -10,6 +10,7 @@ App::uses('AppController', 'Controller');
 class UsersController extends AppController
 {
     //public $uses = array('Player');
+    public $uses = array('User','Fighter');
     
     public function beforeFilter() {
         parent::beforeFilter();
@@ -73,7 +74,7 @@ class UsersController extends AppController
 
                 if($this->User->save($datas))
                 {
-                    
+                    return $this->redirect('/Users/login'); 
                 }
                 Else
                 {
@@ -93,6 +94,9 @@ class UsersController extends AppController
      */
     public function display()
     {
+        $fightersAll = $this->Fighter->find('all');
+        $this->set('rawAll',$fightersAll);
+        
         $playerIdActual = $this->Session->read('Auth.User.id');
         $this->set('raw',$this->User->findById($playerIdActual));
         $this->set('playerId',$playerIdActual);
@@ -133,12 +137,14 @@ class UsersController extends AppController
         if($this->request->data('Changepassword'))
         {
             //$oldPassword = $this->request->data['Fighternewavatar']['passwordOld'];
-            $newPassword = $this->request->data['Fighternewavatar']['passwordNew'];
+            $newPassword = $this->request->data['Changepassword']['passwordNew'];
             
             $data = array(
-                    'password'  => $this->Auth->password($password)
+                    'password'  => $this->Auth->password($newPassword)
                 );
             
+            //die($newPassword . " / " .$this->Auth->password($newPassword));
+
             $this->User->changePassword($this->Session->read('Auth.User.id'), $data);
             
         }
@@ -171,10 +177,13 @@ class UsersController extends AppController
             ));
             $password = $this->newPassword();
             
-            $datas = array(
+            $data = array(
                     'password'  => $this->Auth->password($password)
                 );
-            $this->User->changePassword($user['User']['id'], $datas);
+            
+            $this->User->changePassword($user['User']['id'], $data);
+            
+            $this->set('passwordN',$password);
             //$link = array('controller'=>'users', 'action'=>'password', 'token'=>$user['User']['id'].'-'.md5($user['User']['password']));
             $email = New CakeEmail('default');
             $email->to($user['User']['email']);
