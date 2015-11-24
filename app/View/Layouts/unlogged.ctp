@@ -50,6 +50,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
       <ul class="nav navbar-nav">
                        <li> <?php echo $this->Html->link('Home', array('controller' => 'Arenas', 'action' => 'home')); ?></li>
                        <li> <?php echo $this->Html->link('Login', array('controller' => 'Users', 'action' => 'login')); ?></li>
+                       <li> <?php echo $this->Html->link('Wall of Fame', array('controller' => 'Arenas', 'action' => 'wallOfFame')); ?></li>
                        
       </ul>
     </div>

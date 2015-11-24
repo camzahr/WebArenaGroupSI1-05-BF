@@ -75,8 +75,10 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                        <li> <?php echo $this->Html->link('Fighter', array('controller' => 'Arenas', 'action' => 'fighter')); ?></li>
                        <li> <?php echo $this->Html->link('Diary', array('controller' => 'Arenas', 'action' => 'diary')); ?></li>
                        <li> <?php echo $this->Html->link('My Profile', array('controller' => 'Users', 'action' => 'display')); ?></li>
-                       <li><?php echo $this->Html->link('My Messages', array('controller' => 'Arenas', 'action' => 'message')); ?></li>
-                       <li><?php echo $this->Html->link('My Guild', array('controller' => 'Arenas', 'action' => 'guild')); ?></li>
+                       <li> <?php echo $this->Html->link('My Messages', array('controller' => 'Arenas', 'action' => 'message')); ?></li>
+                       <li> <?php echo $this->Html->link('My Guild', array('controller' => 'Arenas', 'action' => 'guild')); ?></li>
+                       <li> <?php echo $this->Html->link('Wall of Fame', array('controller' => 'Arenas', 'action' => 'wallOfFame')); ?></li>
+
       </ul>
     </div>
    </div>
