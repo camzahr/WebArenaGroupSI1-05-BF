@@ -170,7 +170,10 @@ class ArenasController extends AppController
             //Si c'est une action de mouvement
         if($this->request->data('Fightermove'))
         {
+            
+            
             $this->Fighter->doMove($fighterIdActual, $this->request->data['Fightermove']['direction']);
+
         }
         
         //Si c'est une action d'attaque
@@ -281,7 +284,7 @@ class ArenasController extends AppController
             }
             Else
             {
-               echo"<script>alert('You don't have enough points!');</script>";
+               echo"<script>alert('You don't have enough points!);</script>";
             }
         } 
          

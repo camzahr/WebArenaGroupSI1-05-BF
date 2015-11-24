@@ -151,10 +151,12 @@ public function doMove($fighterId, $direction){
             if($this->verifLimit())
                 {
                     echo "<script>window.location = window.location.href;</script>";
+
                 //    echo("Mouvement Accepté !");
                 }
             else
                 {
+                  
                  echo "<script>window.location = window.location.href;</script>";
                    return false;
                 }

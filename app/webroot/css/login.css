@@ -25,7 +25,7 @@ svg{
 #headframe {
 	width: 100%;
 	min-height: 100vh;
-	background-image: url('https://thejals.com/~thejals/HTML5-TP1/img/padded-clearblue.png');
+	background: #222334 url('http://www.bootply.com/assets/example/pt_topo_l.png') repeat center center fixed;
 	margin: 0 0 0 0;
 	padding: 0 0 0 0;
 	color: #fff;
@@ -264,7 +264,7 @@ textarea {
 }
 
 
-.styled-button-1 {
+input[type="submit"] {
 	-webkit-box-shadow:rgba(0,0,0,0.2) 0 1px 0 0;
 	-moz-box-shadow:rgba(0,0,0,0.2) 0 1px 0 0;
 	box-shadow:rgba(0,0,0,0.2) 0 1px 0 0;
@@ -279,6 +279,7 @@ textarea {
 	font-weight:700;
 	height:36px;
 	padding:4px 16px;
+	width: 15vw;
 	text-shadow:#FE6 0 1px 0
 }
 

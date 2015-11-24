@@ -14,7 +14,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
+$cakeDescription = __d('cake_dev', 'Web Arena - The Ultimate Student Simulator');
 $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 ?>
 
@@ -38,6 +38,14 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
     echo $this->fetch('css');
     echo $this->fetch('script');
   ?>
+    <!-- script references -->
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+ <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" ></script>
+
+    <?php  echo $this->Html->script('scripts'); ?>
+
+    
 		<meta name="generator" content="Bootply" />
 	
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
@@ -61,7 +69,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
     </div>
     <div class="navbar-collapse collapse" id="navbar">
       <ul class="nav navbar-nav">
-                       <li> <?php echo $this->Html->link('Home', array('controller' => 'Arenas', 'action' => 'index')); ?></li>
+                       <li> <?php echo $this->Html->link('Home / Sight', array('controller' => 'Arenas', 'action' => 'index')); ?></li>
                        <li> <?php echo $this->Html->link('Fighter', array('controller' => 'Arenas', 'action' => 'fighter')); ?></li>
                        <li> <?php echo $this->Html->link('Sight', array('controller' => 'Arenas', 'action' => 'sight')); ?></li>
                        <li> <?php echo $this->Html->link('Diary', array('controller' => 'Arenas', 'action' => 'diary')); ?></li>
@@ -198,7 +206,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
  echo $this->Form->create('Fightercreate');
     echo "New caracter: <br/>".$this->Form->input('name');
     echo $this->Form->end('Create');
-    
+    echo '<img id="image-holder" src="http://placehold.it/150x150" alt="profile preview" width="150" height="150"/>';
     echo $this->Form->create('Fighternewavatar', array('type' => 'file'));
     echo $this->Form->input('avatar_file',array('label' => 'Votre avatar (Jpg)', 'type' => 'file'));
     echo $this->Form->end('Send');
@@ -275,14 +283,10 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
   <li><a href="#" title="Scroll to top"><i class="icon-chevron-up icon-3x"></i></a></li>
 </ul>
 
-	<!-- script references -->
 
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" ></script>
-
-    <?php  echo $this->Html->script('scripts'); ?>
     
 <script>
+    
 $('.popover-markup>.trigger').popover({
     html: true,
     title: function () {
@@ -341,6 +345,26 @@ $(document).keydown(function(e) {
     }
     e.preventDefault(); // prevent the default action (scroll / move caret)
 });
+
+
+function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#image-holder').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#FighternewavatarAvatarFile").change(function () {
+        readURL(this);
+    });
+
+
+
 </script>
 	
 	</body>

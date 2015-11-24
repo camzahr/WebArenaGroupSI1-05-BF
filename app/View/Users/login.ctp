@@ -97,19 +97,21 @@
   <text x="0" y="100">ECE WebArena</text>
 </g>
 </svg></center>
-            <h1>
+            <h1 style="margin-top:15px;">
             Log in
         </h1> 
             
             <div style="width: 15vw; min-width: 250px; margin: auto; text-align: center;">
-                <input type="text" placeholder="e-mail address" id="EmailAddress" required/>
-            
-                <input type="password"  placeholder="password" required/>
-                <input type="submit" value="Log in" class="styled-button-1" style="width: 15vw;"/>
+               <?php
+                    echo $this->Form->create("User");
+                    echo $this->Form->input("email" , array("placeholder"=> "E-Mail address", "label"=> ""));
+                    echo $this->Form->input("password" , array("placeholder"=> "Password", "label"=> ""));
+                    echo $this->Form->end("Login");
+                    echo $this->html->link('I forgot my Password', array('controller'=> 'users', 'action'=> 'password')); ?>
             </div>
             <p>
             
-                Don't have an account yet ? <a href="#signup">Sign up now for free</a>
+                Don't have an account yet ? <?php  echo $this->Html->link('Sign up for free', array('controller' => 'Users', 'action' => 'subscribe')); ?>
                 
             </p>
         </section>
@@ -125,12 +127,9 @@
  * and open the template in the editor.
  */
     $this->layout = 'unlogged';
-    echo $this->Html->link('Subscribe', array('controller' => 'Users', 'action' => 'subscribe'));
-    echo $this->Form->create("User");
-    echo $this->Form->input("email" , array("label"=> "E-Mail"));
-    echo $this->Form->input("password");
-    echo $this->html->link('Mot de passe oublié ?', array('controller'=> 'users', 'action'=> 'password'));
-    echo $this->Form->end("Login");
+   
+  
+
     
 
 ?> 

@@ -51,6 +51,12 @@ $("#EmailAddress").keyup(function(){
 $("#Pwd").keyup(function(){
     $("#UserPassword").val(this.value);
 });
+
+
+$('#submit_login').click(function () {
+  
+    $( "#UserLoginForm" ).submit();
+});
     </script>
     <?php echo $this->element('sql_dump'); ?>
 </body>

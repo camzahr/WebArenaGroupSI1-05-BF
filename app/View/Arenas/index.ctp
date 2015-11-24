@@ -1,10 +1,12 @@
 
 <div class="col-md-12" style="margin-bottom: 0px;">
+        <div id="ccontainer">
+               <canvas id="c" width="1080px" height="741px" ></canvas>
+        </div>
+</div>
 
-       <canvas id="c" width="1080px" height="741px" ></canvas>
-       </div>
 
-      
+     
 
 
              <div class="col-md-12" style="background: #232134 url('http://www.bootply.com/assets/example/pt_topo.png') repeat center center fixed; position: fixed; bottom: 0; left: 0; z-index: 999; padding-bottom: 20px;">    
@@ -38,6 +40,7 @@ echo  "Position: ".$alpha[$myFighter['Fighter']['coordinate_x']-1].$myFighter['F
             <a href="#m" data-select="north" /> <img src="img/up.png" style="width: 70px; height: 70px;"/></a>
             <a href="#m" data-select="south" /><img src="img/down.png" style="width: 70px; height: 70px;"/></a>
             <a href="#m" data-select="east" /><img src="img/east.png" style="width: 70px; height: 70px;"/></a>
+            <div id="deadly" style="margin-top:5px;"></div>
   </div>
   <div class="col-md-3" style='color: white; font-family: Voltaire;'>    
           <h3 style="color: white; font-family: Voltaire;">Attack</h3>
@@ -45,8 +48,11 @@ echo  "Position: ".$alpha[$myFighter['Fighter']['coordinate_x']-1].$myFighter['F
             <a href="#a" data-select="north" /> <img src="img/up.png" style="width: 70px; height: 70px;"/></a>
             <a href="#a" data-select="south" /><img src="img/down.png" style="width: 70px; height: 70px;"/></a>
             <a href="#a" data-select="east" /><img src="img/east.png" style="width: 70px; height: 70px;"/></a>
+            <div id="alert-message" style="margin-top:5px;" class="animate-flicker">
 
-            <div id="deadly" style="margin-top:5px;"></div>
+            <?php if(isset($_GET['alert'])){echo $_GET['alert'];} ?>
+            
+            </div>
     </div>  
      <div class="col-md-2"> 
       <h3 style="color: white; font-family: Voltaire;">Pick Up</h3>
@@ -308,3 +314,4 @@ img.src = 'img/background-png.png';
 
 
 </script>
+
