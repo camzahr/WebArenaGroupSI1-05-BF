@@ -784,7 +784,6 @@ class ArenasController extends AppController
     public function home()
     {
         $fightersAll = $this->Fighter->find('all');
-        debug($fightersAll);
         $this->set('raw',$fightersAll);
         $playerIdActual = $this->Session->read('Auth.User.id');
         $this->set('isConnected',$playerIdActual);
@@ -797,6 +796,8 @@ class ArenasController extends AppController
      */
     public function wallOfFame()
     {
+        $fightersAll = $this->Fighter->find('all');
+        $this->set('raw',$fightersAll);
         $playerIdActual = $this->Session->read('Auth.User.id');
         $this->set('isConnected',$playerIdActual);
     }
