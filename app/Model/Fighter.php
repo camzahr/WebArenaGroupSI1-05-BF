@@ -311,7 +311,6 @@ public function doAttack($fighterId, $direction){
     //On vérifie que l'ennemy existe
     if( empty ($ennemy) )
     {
-        die('t');
         //echo" Nobody is currently at this position !!!!";
         $messages = "Nobody is currently at this position !";
         echo "<script>window.location = window.location.href;</script>";
@@ -433,11 +432,12 @@ public function increaseLevel($fighterId, $skill){
     $this->set('current_health',  $datas['Fighter']['skill_health']);
 
     $this->save($dataChanged);
-
+echo "<script>window.location = window.location.href;</script>";
     return "You pass a level !";
     }
     else
     {
+        echo "<script>window.location = window.location.href;</script>";
         return "You don't have enough XPs";
     }
     
@@ -459,7 +459,7 @@ public function generate($id,$name) {
     );
     $this->create();
     $this->save($newData);
-    
+    echo "<script>window.location = window.location.href;</script>";
     return ("Welcome $name");
 }
 
@@ -471,6 +471,7 @@ public function joinGuild($fighterId, $guildId) {
             'guild_id'             => $guildId);
         
         $this->save($newData);
+        echo "<script>window.location = window.location.href;</script>";
         return'Welcome to your new Guild !';
     }
     
@@ -486,9 +487,10 @@ public function joinGuild($fighterId, $guildId) {
                     move_uploaded_file($data['avatar_file']['tmp_name'], IMAGES.'avatars'.DS.$fighterId.'.'.$extension);
                    
                 }
-                
+                echo "<script>window.location = window.location.href;</script>";
                 return "Nouvel Avatar Accepté";
             }
+            echo "<script>window.location = window.location.href;</script>";
         return "Avatar Non Valide";
     }
     
@@ -540,7 +542,7 @@ public function joinGuild($fighterId, $guildId) {
     }
     
     $this->save($dataChanged);
-        
+    echo "<script>window.location = window.location.href;</script>";    
     return "You have a new Weapon !";
         
     }

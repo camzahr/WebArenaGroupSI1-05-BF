@@ -517,7 +517,7 @@ class ArenasController extends AppController
         $this->set('fighterId',$fighterIdActual);
 
         
-         $fightersUser = array();
+        $fightersUser = array();
 
         foreach($fightersActual as $fighter){
             $fightersUser[$fighter['Fighter']['id']] = $fighter['Fighter']['name'];
@@ -580,14 +580,28 @@ class ArenasController extends AppController
                 'conditions' => array(
                     'Message.fighter_id_from'    => $fighterIdActual),
                 'order' => array('Message.date DESC'), ));
-        /*
-        foreach($messages as $message){
-            $message['Message']['fighter_id_from'] = $this->Fighter->find('first',array(
-                'conditions' => array(
-                    'Message.fighter_id_from'    => $message['Message']['fighter_id_from'])));
-        }*/
         
-        //@TODO : Changer les id par les noms
+//TRADUCTION ID TO NAME
+        $i=0;
+        foreach($messages as $message){
+            $fighterActual = $this->Fighter->find('first',array(
+                'conditions' => array(
+                    'Fighter.id'    => $message['Message']['fighter_id_from'])));
+            $messages[$i]['Message']['fighter_id_from'] = $fighterActual['Fighter']['name'];
+            
+            $i = $i +1 ;
+        }
+        
+        $i=0;
+        foreach($messagesSent as $message){
+            $fighterActual = $this->Fighter->find('first',array(
+                'conditions' => array(
+                    'Fighter.id'    => $message['Message']['fighter_id'])));
+            $messagesSent[$i]['Message']['fighter_id'] = $fighterActual['Fighter']['name'];
+            
+            $i = $i +1 ;
+        }
+        
         
         $fighters = $this->Fighter->find('all',array(
                 'conditions' => array(
