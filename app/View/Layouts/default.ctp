@@ -277,7 +277,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
         WebArenaGroupSI1-05-BF
 Options : A B D F / <?php echo $this->Html->link('Git log', '/files/git.log', array(
                                     'target' => '_blank')); 
-                            ?> / <a href="https://thejals.com/ECE/webarena/">Online version</a>
+                            ?> / <a href="https://thejals.com/ECE/webarena/">Online version</a> - BENAYACHI / CAMILLERI / GESNEL / GUERARD
 
 </p>
       </div>
