@@ -50,9 +50,12 @@ echo  "Position: ".$alpha[$myFighter['Fighter']['coordinate_x']-1].$myFighter['F
             <a href="#a" data-select="east" /><img src="img/east.png" style="width: 70px; height: 70px;"/></a>
             <div id="alert-message" style="margin-top:5px;" class="animate-flicker">
 
+
             <?php if(isset($messages)){echo $messages;}
             ?>
             
+
+          
             </div>
     </div>  
      <div class="col-md-2"> 

@@ -45,7 +45,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
     <?php  echo $this->Html->script('scripts'); ?>
 
-    
+
 		<meta name="generator" content="Bootply" />
 	
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
@@ -317,32 +317,36 @@ $('a[href="#t"]').click(function () {
 });
 
 $(document).keydown(function(e) {
+  var $select = $('#FightermoveDirection');
     switch(e.which) {
         case 37: // left
-        var $select = $('#FightermoveDirection');
-         $select.val("west");
-         $( "#FighterattackIndexForm" ).submit();
+          $select.val("west");
+         
         break;
 
         case 38: // up
-        var $select = $('#FightermoveDirection');
+        
          $select.val("north");
-         $( "#FighterattackIndexForm" ).submit();
+        
         break;
-        var $select = $('#FightermoveDirection');
-         $select.val("east");
-         $( "#FighterattackIndexForm" ).submit();
+      
+        
+         
         case 39: // right
+
+         $select.val("east");
+
         break;
 
         case 40: // down
-        var $select = $('#FightermoveDirection');
+     
          $select.val("south");
-         $( "#FighterattackIndexForm" ).submit();
+         
         break;
 
         default: return; // exit this handler for other keys
     }
+   $( "#FightermoveIndexForm" ).submit();
     e.preventDefault(); // prevent the default action (scroll / move caret)
 });
 
@@ -359,13 +363,16 @@ function readURL(input) {
         }
     }
 
-    $("#FighternewavatarAvatarFile").change(function () {
+    $("#newavatarblabla").change(function () {
         readURL(this);
     });
+
+    
 
 
 
 </script>
 	
+
 	</body>
 </html>

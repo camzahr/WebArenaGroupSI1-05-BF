@@ -305,6 +305,7 @@ footer {
 }
 
 
+
 input {
   width: 100%;
   clear: both;
@@ -315,7 +316,20 @@ input {
   vertical-align: middle;
   text-align: center;
   margin-bottom: 5px;
+  color: black;
 
+}
+
+.featurette input[type="text"]{
+     color: #000;
+}
+
+.featurette-item select{
+     color: #000;
+}
+
+input[type="text"]{
+     color: #000;
 }
 
 textarea {
@@ -327,6 +341,7 @@ textarea {
   font-weight: 300;
   vertical-align: middle;
   text-align: center;
+    color: black;
 }
 
 

@@ -381,6 +381,7 @@ class ArenasController extends AppController
         {
             $message = $this->Fighter->doMove($fighterIdActual, $this->request->data['Fightermove']['direction']);
             $this->set('messages',$message);
+            
         }
         
         //Si c'est une action d'attaque
