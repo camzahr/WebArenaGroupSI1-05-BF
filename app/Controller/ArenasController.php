@@ -221,7 +221,7 @@ class ArenasController extends AppController
     
         
         $this->set('raw',$this->Fighter->find('all' , array('conditions'=> array(
-                                                        'Fighter.id' => $fighterIdActual
+                                                        'Fighter.player_id' => $playerIdActual
                                                             )
                                             )
                              ));
