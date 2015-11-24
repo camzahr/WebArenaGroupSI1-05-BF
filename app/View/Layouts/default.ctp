@@ -70,8 +70,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
     </div>
     <div class="navbar-collapse collapse" id="navbar">
       <ul class="nav navbar-nav">
-                       <li> <?php echo $this->Html->link('Home', array('controller' => 'Arenas', 'action' => 'home')); ?></li>
-                       <li> <?php echo $this->Html->link('Index / Sight', array('controller' => 'Arenas', 'action' => 'index')); ?></li>
+                       <li> <?php echo $this->Html->link('Home / Sight', array('controller' => 'Arenas', 'action' => 'index')); ?></li>
                        <li> <?php echo $this->Html->link('Fighter', array('controller' => 'Arenas', 'action' => 'fighter')); ?></li>
                        <li> <?php echo $this->Html->link('Diary', array('controller' => 'Arenas', 'action' => 'diary')); ?></li>
                        <li> <?php echo $this->Html->link('My Profile', array('controller' => 'Users', 'action' => 'display')); ?></li>
@@ -188,9 +187,11 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
       </div>
       <div class="col-md-2">
         <p class="lead" style="text-align: right;"><?php 
-        echo $this->Html->image('avatars/'.$fighterId.'.jpg', array(
+       echo $this->Html->image('empty-profile.jpg', array(
     'alt' => 'ProfilePicture',
-    'style' => 'height: 80px;'));?></p>
+    'style' => 'height: 80px;'));
+       ?>
+        </p>
       </div>
 			 <div class="col-md-3">
 				 <span style=" font-family:'Voltaire',Arial,sans-serif; color: white; font-size: 1.5em;"><?php echo $email ?></span>
