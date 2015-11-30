@@ -28,8 +28,8 @@ class UsersController extends AppController
     public function login()
     {
         //$this->loadModel('Player');
-        
-        if(!empty($this->request->data)){
+        $data = $this->request->data;
+        if(!empty($data)){
             if($this->Auth->login())
                 {
                     return $this->redirect('/Arenas');  
@@ -63,7 +63,8 @@ class UsersController extends AppController
         //Si c'est une action de subscribe
         if($this->request->data('Playersubscribe'))
         {
-            if(!empty($this->request->data('Playersubscribe')))
+            $data = $this->request->data('Playersubscribe');
+            if(!empty($data))
             {
                 $this->User->create();
 
